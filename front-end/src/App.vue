@@ -1,0 +1,84 @@
+<template>
+
+  <div id="app">
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a href="/" class="navbar-brand" style="font-family:  Microsoft JhengHei;font-weight:  bolder;">
+        <img src='./assets/Storelogo.png' width="34" height="34">永盛堂中藥行
+        
+        </a>
+        <div id='shopping-cart'>
+          <router-link class="nav-link" to="/main/cart">
+            <img src='./assets/img/shopping_cart.png' width="20" height="20">({{getShoppingCartTotal}})</router-link>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
+              <router-link class="nav-link" to="/">首頁</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/main/news">最新消息</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/main/about">關於我們</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/main/guide">購物指南</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/main/catalog">產品目錄</router-link>
+            </li>
+
+            <li class="nav-item">
+              <router-link class="nav-link" to="/main/cart">購物車 ({{getShoppingCartTotal}})
+              </router-link>
+            </li>
+
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+
+    <router-view></router-view>
+
+  </div>
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+export default {
+  name: "App",
+  computed: {
+    ...mapGetters(["getShoppingCartTotal"])
+  }
+};
+</script>
+
+<style>
+#app {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+#shopping-cart a {
+  color: white;
+  display: none;
+}
+@media (max-width: 575.98px) {
+  #shopping-cart a {
+    display: initial;
+  }
+}
+</style>
