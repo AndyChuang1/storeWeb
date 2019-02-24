@@ -1,6 +1,5 @@
-﻿<template>
-  <div id="cart">
-    <main-banner></main-banner>
+<template>
+  <div id="cart" class="col-12">
     <main-header title="您的購物車"></main-header>
     <div class="cart-block mb-3">
       <div class="row">
@@ -130,7 +129,7 @@
           </div>
         </div>
         <main-header title="收件人資料"></main-header>
-        <div class="container pt-2">
+        <div class="container pt-2 mb-5">
           <div class="form-row">
             <div class="col-md-12 mb-3">
               <span>資料是否同上 :</span>
@@ -235,42 +234,36 @@
                 <option value="3">17:00~20:00</option>
               </select>
             </div>
+             <button class="btn btn-primary" type="submit">送出訂單</button>
           </div>
         </div>
-        <button class="btn btn-primary" type="submit">送出訂單</button>
+       
       </form>
     </div>
-
-    <Footer></Footer>
   </div>
 </template>
 <script>
-import MainBanner from "@/components/MainBanner.vue";
-import Footer from "@/components/footer.vue";
 import MainHeader from "@/components/mainheader";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "cart",
+  layout: "main-content",
   data() {
-    return {
-      msg: "Cart"
-    };
+    return {};
   },
   components: {
-    MainBanner,
-    Footer,
     MainHeader
   },
   computed: {
     ...mapGetters({
-      CartList: "getShoppingCart",
-      total: "getCartPriceTotal"
+      CartList: "shop/getShoppingCart",
+      total: "shop/getCartPriceTotal"
     })
   },
   methods: {
     ...mapActions({
-      cancel: "cancelCart",
-      changeQun: "addQun"
+      cancel: "shop/cancelCart",
+      changeQun: "shop/addQun"
     }),
     QunChange(event, title) {
       const num = parseInt(event.target.value);
@@ -283,8 +276,7 @@ export default {
   }
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 #cancle {
   cursor: pointer;
 }
@@ -292,3 +284,4 @@ export default {
   border-bottom: 1px solid gray;
 }
 </style>
+

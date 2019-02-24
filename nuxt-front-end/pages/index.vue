@@ -92,11 +92,11 @@
         <heading Head="保健小妙方"
           Pcontents="枸杞茶：枸杞十幾粒，加熱水沖泡，早餐與晚餐前各喝一杯，連續喝三個月。枸杞子，能滋腎、強壯筋骨，養肝、明目、潤肺生精，幫助記憶"
           :img="require('@/assets/me.jpg')"
-          link="/#/main/recipe"></heading>
+          link="/recipe"></heading>
         <heading Head="Maps"
           Pcontents="想要親訪店裡來購買您所需的中藥材或保健食品嗎?請點擊詳細資訊，就可得知店裡所在位置哦!我們誠摯的歡迎你的光臨，不吝指教!也歡迎來電詢問~"
           :img="require('@/assets/maps.png')"
-          link="/#/main/about"></heading>
+          link="/about"></heading>
       </div>
     </div><!-- /.row -->
     <!-- <footer class="container"

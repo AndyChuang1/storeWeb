@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+ 
     <div class="col-12">
       <div class="maintop">
         <main-header title="關於我們"></main-header>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-  </div>
+  
 </template>
 <script>
 import MainHeader from "@/components/mainheader";

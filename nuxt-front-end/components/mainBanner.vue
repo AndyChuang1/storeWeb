@@ -14,8 +14,7 @@
 import "@/assets/css/carousel.css";
 import "@/assets/css/animate.css";
 
-// import "@/assets/javascripts/jquery.lettering.js";
-// import textillate from "@/plugins/libs/jquery.textillate.js";
+
 
 export default {
   name: "mainbanner",

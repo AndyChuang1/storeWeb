@@ -2,7 +2,7 @@
 
   <footer class="container"
       id="main-footer">
-      <p>&copy; 永盛堂中藥行版權所有 &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      <span>&copy; 永盛堂中藥行版權所有 &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></span>
     </footer>
 
 </template>

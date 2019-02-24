@@ -1,11 +1,11 @@
 <template>
-  <div class="row">
-    <div class="col">
+  
+    <div class="col-12">
       <main-header title="最新消息"></main-header>
       <div class="content">
         <div class="news">
           <div class="row">
-            <div class="col-md">
+            <div class="col-auto">
               <h2>永盛堂中藥行官方網站全面更新</h2>
             </div>
             <div class="col-md align-self-end">
@@ -13,7 +13,7 @@
             </div>
           </div>
           <ul>
-            <li>【永盛堂中藥行官方網站開幕】<img :src="require('../assets/news.gif')"
+            <li>【永盛堂中藥行官方網站開幕】<img :src="require('@/assets/news.gif')"
                 height="42"
                 width="60" /></li>
             <li> ~ 我們提供給您最專業諮詢服務與品質~</li>
@@ -42,7 +42,7 @@
 
       </div>
     </div>
-  </div>
+  
 </template>
 <script>
 import MainHeader from "@/components/mainheader";

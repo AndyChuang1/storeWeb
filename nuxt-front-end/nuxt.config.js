@@ -41,6 +41,8 @@ module.exports = {
     "~plugins/bootstrap.js",
     {src:'~/plugins/libs/jquery.textillate.js',ssr:false},
     {src:'~/plugins/libs/jquery.lettering.js',ssr:false},
+    {src:"~plugins/vue-pagination-2.js",ssr:false},
+    
   ],
 
   /*
@@ -57,7 +59,7 @@ module.exports = {
    ** You can extend webpack config here
    */
 
-    vendor: ['jquery', 'bootstrap','textillate','lettering'],
+    vendor: ['jquery', 'bootstrap','textillate','lettering','vue-pagination-2'],
     plugins: [
       // set shortcuts as global for bootstrap
       new webpack.ProvidePlugin({
