@@ -10,9 +10,9 @@
           </div>
         </div>
       </div>
+    <mainfooter></mainfooter>
     </div>
 
-    <mainfooter></mainfooter>
   </div>
 </template>
 <script>

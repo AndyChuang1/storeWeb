@@ -11,65 +11,74 @@ const state = ()=> ({
         {
             name: "敏瑞靈 益生菌",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞靈 益生",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞靈 益",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞靈",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞靈 益生菌1",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞靈 益生菌2",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         },
         {
             name: "敏瑞靈 益生菌3",
             price: 150,
-            filter: "health",
-            imag: require("@/assets/img/Product/getThumb.jpg"),
-            content: "含有10種對人體具有特定功能的益生菌。"
+            types: "health",
+            path: require("@/assets/img/Product/getThumb.jpg"),
+            detail: "含有10種對人體具有特定功能的益生菌。",
+            unit:'50包/盒'
         }
     ],
     shoppingCart: []

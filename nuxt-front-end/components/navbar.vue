@@ -29,7 +29,7 @@
               <router-link class="nav-link" to="/guide">購物指南</router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/products">產品目錄</router-link>
+              <router-link class="nav-link" to="/products/">產品目錄</router-link>
             </li>
 
             <li class="nav-item">

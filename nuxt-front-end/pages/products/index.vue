@@ -1,12 +1,12 @@
 <template>
-  <div class="products col-12">
-    <main-header title="產品目錄">
+  <div>
+    <!-- <main-header title="產品目錄">
       <ul class="nav">
         <li class="nav-item" v-for="(category,index) in catalogList" :key="index">
-          <router-link class="nav-link" :to="'/main/catalog/'+category.url">{{category.product}}</router-link>
+          <router-link class="nav-link" :to="'/products/'+category.url">{{category.product}}</router-link>
         </li>
       </ul>
-    </main-header>
+    </main-header> -->
     <div class="row">
       <div
         class="col-lg-3 col-md-6 mb-4 mt-2"
@@ -15,99 +15,110 @@
       >
         <div class="card h-100">
           <div class="hover">
-            <img class="card-img-top" :src="product.imag" alt>
+            <img class="card-img-top" :src="product.path" alt>
             <div class="overlay">
               <button type="button" class="btn btn-primary" @click="addCart(product.name)">加到購物車</button>
             </div>
           </div>
           <div class="card-body">
-            <h4 class="card-title">
-              <a href="#">{{product.name}}</a>
+            <h4 class="card-title d-flex justify-content-between">
+              <span>{{product.name}}</span>
+              <span>{{product.unit}}</span>
             </h4>
             <h5>NT{{product.price}}元</h5>
-            <p class="card-text">{{product.content}}</p>
+            <p class="card-text">{{product.detail}}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-auto">
+      <div class="col-auto mb-5">
         <no-ssr>
-           <pagination :records="productList.length" :per-page="8" :page=page @paginate="setPage"></pagination>
+          <pagination
+            :records="productList.length"
+            :per-page="8"
+            :page="page"
+            @paginate="setPage"
+            :options="pageTexts"
+          ></pagination>
         </no-ssr>
-       
       </div>
     </div>
   </div>
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
-import {Pagination} from "vue-pagination-2";
+import { Pagination } from "vue-pagination-2";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "products",
-  layout: "main-content",
+  layout: "product-content",
   data() {
     return {
       page: 1,
       countOfPage: 8,
       catalogList: [
-        { product: "所有產品", url: "all" },
+        { product: "所有產品", url: "" },
         { product: "特價商品", url: "sales" },
-        { product: "養生食材區", url: "all" },
-        { product: "藥膳燉包區", url: "all" },
-        { product: "養生飲品區", url: "all" },
-        { product: "沖泡式五穀", url: "all" },
-        { product: "生物科技類", url: "all" },
-        { product: "GMP產品", url: "all" },
-        { product: "坐月子藥膳", url: "all" },
-        { product: "蜜餞食品區", url: "all" },
-        { product: "南北什貨曲", url: "all" },
-        { product: "香料滷包類", url: "all" },
-        { product: "周邊商品區", url: "all" },
-        { product: "外用商品區", url: "all" },
-        { product: "代工服務區", url: "all" }
-      ]
+        { product: "養生食材區", url: "health" },
+        { product: "藥膳燉包區", url: "healthp" },
+        { product: "養生飲品區", url: "healthd" },
+        { product: "沖泡式五穀", url: "grain" },
+        { product: "生物科技類", url: "bio" },
+        { product: "GMP產品", url: "gmp" },
+        { product: "坐月子藥膳", url: "pm" },
+        { product: "蜜餞食品區", url: "succade" },
+        { product: "南北什貨曲", url: "goods" },
+        { product: "香料滷包類", url: "pouch" },
+        { product: "周邊商品區", url: "accessory" },
+        { product: "外用商品區", url: "external" },
+        { product: "代工服務區", url: "oem" }
+      ],
+      pageTexts: {
+        texts: {
+          count: "",
+          first: "First",
+          last: "Last"
+        }
+      }
     };
   },
   components: {
-    MainHeader,
+    MainHeader
     // Pagination
   },
-  methods:{
-      setPage: function(page) {
+  methods: {
+    setPage: function(page) {
       this.page = page;
     },
     ...mapActions({
-      addCart:'shop/addCart'
+      addCart: "shop/addCart"
     })
   },
-  computed:{
-      pageStart() {
+  computed: {
+    pageStart() {
       return (this.page - 1) * this.countOfPage;
     },
     ...mapGetters({
       productList: "shop/getProducts"
     })
-  },
-
+  }
 };
 </script>
 <style lang="scss" scoped>
 .hover {
   position: relative;
-  
 }
 .overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color:rgba(197, 197, 209, 0.76);;
+  background-color: rgba(197, 197, 209, 0.76);
   overflow: hidden;
   width: 100%;
   height: 0%;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 .btn {
   color: white;
@@ -119,10 +130,9 @@ export default {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
-  opacity:1;
-  
+  opacity: 1;
 }
-.hover:hover .overlay  {
+.hover:hover .overlay {
   height: 100%;
 }
 </style>
