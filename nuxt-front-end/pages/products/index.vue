@@ -15,7 +15,7 @@
       >
         <div class="card h-100">
           <div class="hover">
-            <img class="card-img-top" :src="product.path" alt>
+            <img class="card-img-top" :src="urlConvert(product.path)"  height="400" alt>
             <div class="overlay">
               <button type="button" class="btn btn-primary" @click="addCart(product.name)">加到購物車</button>
             </div>
@@ -80,7 +80,8 @@ export default {
           first: "First",
           last: "Last"
         }
-      }
+      },
+      listTest:''
     };
   },
   components: {
@@ -92,8 +93,13 @@ export default {
       this.page = page;
     },
     ...mapActions({
-      addCart: "shop/addCart"
-    })
+      addCart: "shop/addCart",
+      iniProduct:'shop/initProduct'
+    }),
+    urlConvert(path){
+      var url = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
+      return url+path
+    }
   },
   computed: {
     pageStart() {
@@ -101,7 +107,11 @@ export default {
     },
     ...mapGetters({
       productList: "shop/getProducts"
-    })
+    }),
+
+  },
+  mounted(){
+    this.iniProduct();
   }
 };
 </script>

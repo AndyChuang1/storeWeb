@@ -1,4 +1,6 @@
 import axios from 'axios'
+axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
+
 const types = {
     ADD_CART: "ADD_CART",
     CANCEL: "CANCEL",
@@ -6,7 +8,7 @@ const types = {
     INIT_PRODUCT: "INIT_PRODUCT"
 }
 
-const state = ()=> ({
+const state = () => ({
     products: [
         {
             name: "敏瑞靈 益生菌",
@@ -14,7 +16,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞靈 益生",
@@ -22,7 +24,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞靈 益",
@@ -30,7 +32,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞靈",
@@ -38,7 +40,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞",
@@ -46,7 +48,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏",
@@ -54,7 +56,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞靈 益生菌1",
@@ -62,7 +64,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞靈 益生菌2",
@@ -70,7 +72,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         },
         {
             name: "敏瑞靈 益生菌3",
@@ -78,7 +80,7 @@ const state = ()=> ({
             types: "health",
             path: require("@/assets/img/Product/getThumb.jpg"),
             detail: "含有10種對人體具有特定功能的益生菌。",
-            unit:'50包/盒'
+            unit: '50包/盒'
         }
     ],
     shoppingCart: []
@@ -106,7 +108,11 @@ const actions = {
     },
     initProduct({ commit }) {
         axios
-            .get('http://opendata.khcc.gov.tw/public/OD_ksml_news.ashx')
+            .get('/productList', {
+                params: {
+                    types: 'all'
+                }
+            })
             .then(function (response) {
                 const data = response.data;
                 commit(types.INIT_PRODUCT, data);

@@ -44,6 +44,10 @@ module.exports = {
     {src:"~plugins/vue-pagination-2.js",ssr:false},
     
   ],
+  env:{
+    devUrl :'http://localhost:8080',
+    prodUrl :'http://localhost:3000'
+  },
 
   /*
   ** Nuxt.js modules

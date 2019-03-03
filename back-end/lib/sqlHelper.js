@@ -31,7 +31,7 @@ module.exports = {
     },
     getProductList(types){
         const sqlStatementTypes = `SELECT name,types,price,detail,path from product where types =?`;
-        const sqlStatementAll = `SELECT name,types,price,detail,path from product`;
+        const sqlStatementAll = `SELECT name,types,price,unit,detail,path from product`;
         return new Promise((resolve,reject)=>{
             if (types ==='all'){
                 db.serialize(() => {
