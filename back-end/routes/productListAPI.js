@@ -4,7 +4,7 @@ var router = express.Router();
 var sql = require('../lib/sqlHelper')
 
 /* GET users listing. */
-router.get('/', function (req, res) {
+router.get('/productList', function (req, res) {
     const types = req.query.types
      sql.getProductList(types).then(result=>{
          console.log(result);
