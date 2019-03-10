@@ -86,7 +86,6 @@ export default {
   },
   components: {
     MainHeader
-    // Pagination
   },
   methods: {
     setPage: function(page) {

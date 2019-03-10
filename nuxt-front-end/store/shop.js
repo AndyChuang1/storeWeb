@@ -1,5 +1,5 @@
-import axios from 'axios'
-axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
+// import axios from 'axios'
+// axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
 
 const types = {
     ADD_CART: "ADD_CART",
@@ -107,8 +107,8 @@ const actions = {
 
     },
     initProduct({ commit }) {
-        axios
-            .get('/productList', {
+        this.$axios
+            .get('/api/productList', {
                 params: {
                     types: 'all'
                 }

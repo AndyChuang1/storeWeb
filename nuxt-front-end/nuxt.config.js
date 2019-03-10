@@ -42,6 +42,7 @@ module.exports = {
     {src:'~/plugins/libs/jquery.textillate.js',ssr:false},
     {src:'~/plugins/libs/jquery.lettering.js',ssr:false},
     {src:"~plugins/vue-pagination-2.js",ssr:false},
+    '~/plugins/axios.js'
     
   ],
   env:{
