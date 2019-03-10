@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 var secret =require('../config').secret;
 module.exports ={
     createToken(user,pwad){
-        return jwt.sign({user:user,pwad:pwad},secret, {
+        return jwt.sign({user:user},secret, {
             expiresIn: 60*60*24
           })
   
