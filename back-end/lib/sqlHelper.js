@@ -43,27 +43,32 @@ module.exports = {
 
         })
     },
-    getUser(name,cb) {
+    getUser(name, cb) {
         const sqlStatement = `SELECT name, pawd from user where name =?`;
-        
+
         db.serialize(() => {
 
-            db.all(sqlStatement,name, function (err, rows) {
+            db.all(sqlStatement, name, function (err, rows) {
                 if (err) {
                     console.log('getUser error all')
                     throw err;
                 } else {
                     const user = JSON.stringify(rows)
-                     console.log('getUser : ',rows)
+                    console.log('getUser : ', rows)
                     // cb(rows) 
-                    cb(rows) ;
-                   
+                    if (rows.length <= 0) {
+                        cb([{ name: 'no', pawd: 'no' }])
+                    } else {
+                        cb(rows);
+                    }
+
+
                 }
 
             })
-            
+
         })
-        
+
     },
     insertData(name, unit, types, price, detail, path, sales) {
         const sqlStatement = `INSERT INTO product (name, unit, types, price, detail, path, sales)VALUES(?,?,?,?,?,?,?) ON CONFLICT(name)

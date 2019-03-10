@@ -2,17 +2,18 @@
   <div id="login">
     <no-ssr>
       <div class="text-center">
-        <form class="form-signin">
+        <form class="form-signin" >
           <img class="mb-4" src="@/assets/favicon.png" alt width="72" height="72">
           <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
           <label for="inputEmail" class="sr-only">Email address</label>
           <input
-            type="email"
+            type
             id="inputEmail"
             class="form-control"
-            placeholder="Email address"
+            placeholder="User"
             required
             autofocus
+            v-model="user"
           >
           <label for="inputPassword" class="sr-only">Password</label>
           <input
@@ -21,13 +22,14 @@
             class="form-control"
             placeholder="Password"
             required
+            v-model="pawd"
           >
           <div class="checkbox mb-3">
             <label>
               <input type="checkbox" value="remember-me"> Remember me
             </label>
           </div>
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+          <button class="btn btn-lg btn-primary btn-block" type="submit" @click.prevent="login">Sign in</button>
           <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
         </form>
       </div>
@@ -40,7 +42,40 @@ import "@/assets/css/signin.scss";
 export default {
   name: "login",
   data() {
-    return {};
+    return {
+      user: "",
+      pawd: ""
+    };
+  },
+  middleware:'notAuthenticated',
+  methods: {
+    login() {
+      var header = {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+      this.$axios.post(
+        "/login",
+        {
+          name: this.user,
+          pawd: this.pawd
+        },
+        {
+          headers: header
+        }
+      )
+        .then(res => {
+          const {data}=res;
+          if (!data.success){
+            alert(data.message)
+          }else{
+            this.$store.dispatch('auth/login',data.token);
+            this.$router.push('/admin')
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 };
 </script>

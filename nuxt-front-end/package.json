@@ -18,6 +18,7 @@
     "jquery": "^3.3.1",
     "nuxt": "^2.4.0",
     "popper.js": "^1.14.7",
+    "qs": "^6.6.0",
     "vue-pagination-2": "^2.0.3"
   },
   "devDependencies": {
