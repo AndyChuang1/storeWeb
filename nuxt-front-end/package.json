@@ -16,10 +16,12 @@
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
+    "material-icons": "^0.3.0",
     "nuxt": "^2.4.0",
     "popper.js": "^1.14.7",
     "qs": "^6.6.0",
-    "vue-pagination-2": "^2.0.3"
+    "vue-pagination-2": "^2.0.3",
+    "vuesax": "^3.8.24"
   },
   "devDependencies": {
     "node-sass": "^4.11.0",

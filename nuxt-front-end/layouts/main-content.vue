@@ -6,13 +6,12 @@
         <div class="main-background col-12">
           <mainbanner></mainbanner>
           <div class="row">
-            <nuxt />
+            <nuxt/>
           </div>
         </div>
       </div>
-    <mainfooter></mainfooter>
+      <mainfooter></mainfooter>
     </div>
-
   </div>
 </template>
 <script>

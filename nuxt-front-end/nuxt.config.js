@@ -31,7 +31,9 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    "~/node_modules/bootstrap/dist/css/bootstrap.css"
+    "~/node_modules/bootstrap/dist/css/bootstrap.css",
+    "~/node_modules/material-icons/iconfont/material-icons.css"
+
   ],
 
   /*
@@ -42,6 +44,7 @@ module.exports = {
     {src:'~/plugins/libs/jquery.textillate.js',ssr:false},
     {src:'~/plugins/libs/jquery.lettering.js',ssr:false},
     {src:"~plugins/vue-pagination-2.js",ssr:false},
+    {src:"~plugins/vuesax.js",ssr:false},
     '~/plugins/axios.js'
     
   ],
