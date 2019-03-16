@@ -3,7 +3,7 @@
     <h1>Admin page</h1>
     <vs-alert
       active="true"
-    >Product</vs-alert>
+    >Order</vs-alert>
   </div>
 </template>
 <script>

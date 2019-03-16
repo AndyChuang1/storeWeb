@@ -2,10 +2,14 @@ const types ={
     LOG_IN:"LOG_ING",
     LOG_OUT:"LOG_OUT"
 }
-const storageToken = "token"
+const storageToken = "token";
+var SaveToken ;
+if(process.browser){
+    SaveToken = localStorage.getItem(storageToken)||null
+}
 
 const state = ()=>({
-    token:null
+    token:SaveToken
 })
 const getters ={
     getToken:state=> state.token

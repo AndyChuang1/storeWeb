@@ -2,11 +2,14 @@
   <div id="admin">
     <div class="container-fluid">
       <div class="row">
-        <div class="admin-sidebar col-3">
+        <div class="admin-sidebar col-lg-2">
           <sidebar></sidebar>
         </div>
-        <div class="admin-content col-9">
-          <nuxt></nuxt>
+        <div class="admin-content col-lg-10 ">
+          <div class="container">
+            <nuxt></nuxt>
+          </div>
+          
         </div>
       </div>
       <mainfooter></mainfooter>
@@ -44,6 +47,9 @@ html {
 }
 body {
   background-color: #eaebeb;
+}
+.col{
+  width: 0%
 }
 
 </style>

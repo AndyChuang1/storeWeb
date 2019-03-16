@@ -11,26 +11,23 @@
         hidden-background
       >
         <div class="header-sidebar" slot="header">
-          <vs-avatar size="70px" src="@/assets/favicon.png"/>
+          <vs-avatar size="70px" color="#FFFFFF" :src="favicon" />
 
-          <h4>My Name
-            <vs-button color="primary" icon="more_horiz" type="flat"></vs-button>
+          <h4>Hello
           </h4>
         </div>
 
-        <vs-sidebar-item index="1" icon="question_answer" to="/admin/product">Dashboard</vs-sidebar-item>
+        <vs-sidebar-item index="1" icon="question_answer" to="/admin">商品新增修改</vs-sidebar-item>
 
-        <vs-sidebar-item index="2" icon="gavel">History</vs-sidebar-item>
+        <vs-sidebar-item index="2" icon="gavel" to="/admin/orderlist">訂單查詢</vs-sidebar-item>
 
         <vs-divider icon="person" position="left">User</vs-divider>
 
         <vs-sidebar-item index="3" icon="verified_user">Configurations</vs-sidebar-item>
         <vs-sidebar-item index="4" icon="account_box">Profile</vs-sidebar-item>
-        <vs-sidebar-item index="5">Card</vs-sidebar-item>
 
         <div class="footer-sidebar" slot="footer">
-          <vs-button icon="reply" color="danger" type="flat">log out</vs-button>
-          <vs-button icon="settings" color="primary" type="border"></vs-button>
+          <vs-button icon="reply" color="danger" type="flat" @click="logout" href='/login'>log out</vs-button>
         </div>
       </vs-sidebar>
     </div>
@@ -42,8 +39,13 @@ export default {
   data() {
     return {
       active: true,
-      background: false
+      favicon:require('../assets/favicon.png')
     };
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('auth/logout');
+    }
   },
   components: {}
 };
