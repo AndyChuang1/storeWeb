@@ -37,18 +37,25 @@
           />
         </vs-select>
       </div>
-      <div class="col-12">
-        商品說明 :
-        <vs-textarea style="background:white" v-model="detail" />
+      <div class="col-3 d-flex align-items-center">
+        <span class="mr-3">特價 :</span>
+        <span class="mt-3 mb-3">
+          <vs-radio v-model="sales" vs-value="1">是</vs-radio>
+          <vs-radio v-model="sales" vs-value="0">否</vs-radio>
+        </span>
+      </div>
+      <div class="col-12">商品說明 :
+        <vs-textarea style="background:white" v-model="detail"/>
       </div>
       <div class="col-12 d-flex justify-content-end">
-        <vs-button color="primary" type="filled">新增</vs-button>
+        <vs-button color="primary" type="filled" @click="submit">新增</vs-button>
       </div>
     </div>
   </div>
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
+import { mapGetters } from "vuex";
 
 export default {
   name: "admin",
@@ -56,7 +63,7 @@ export default {
   middleware: "authenticated",
   data() {
     return {
-      colorx:"#103767",
+      colorx: "#103767",
       url: null,
       image: null,
       name: null,
@@ -64,18 +71,62 @@ export default {
       price: null,
       detail: null,
       types: null,
-      sales: null,
-      options:[{types:'生物科技類'},{types:'養生食材區'}]
+      sales: 0,
+      options: [{ types: "生物科技類" }, { types: "養生食材區" }]
     };
   },
   components: {
     MainHeader
+  },
+  computed: {
+    ...mapGetters({ getToken: "auth/getToken" })
   },
   methods: {
     onFileChange(e) {
       const file = e.target.files[0];
       this.image = file;
       this.url = URL.createObjectURL(file);
+    },
+    submit() {
+      let formData = new FormData();
+      const token = this.getToken;
+      // console.log(this.image)
+      // formData.append("productImage", this.image);
+      formData.append("productImage", this.image);
+
+      formData.append("name", this.name);
+      formData.append("unit", this.unit);
+      formData.append("price", this.price);
+      formData.append("detail", this.detail);
+      formData.append("types", this.types);
+      formData.append("sales", this.sales);
+      this.$axios
+        .post("/apipost/product", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "x-access-token": token
+          },
+          transformRequest: [
+            function(data) {
+              return data;
+            }
+          ]
+        })
+        .then(res => {
+          this.$vs.notify({title:'新增成功',text:'產品已更新，重新整理即可看到產品',color:'success'})
+         
+        }).then(()=>{
+          this.name =null;
+          this.unit =null;
+          this.price =null;
+          this.detail ='';
+          this.types =null;
+          this.url=null;
+        })
+        .catch(err => {
+          console.log(err);
+          this.$vs.notify({title:'新增失敗',text:'請重新新增',color:'danger'})
+        });
     }
   }
 };
@@ -89,6 +140,9 @@ export default {
     max-width: 100%;
     max-height: 200px;
   }
+}
+ul{
+  margin-bottom: 0;
 }
 </style>
 

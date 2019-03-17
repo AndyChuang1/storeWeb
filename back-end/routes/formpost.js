@@ -73,11 +73,10 @@ router.post('/product',function (req, res, next) {
             res.status(413).json({ Success: false, message: err.message })
         } else {
             if (req.file.filename) {
-                const path = '/product/' + req.file.filename
-                sql.insertData(name, unit, types, price, detail, path, sales)
+                // const path = '/product/' + req.file.filename
+                // sql.insertData(name, unit, types, price, detail, path, sales)
                 res.status(200).json({ Success: true })
             }
-
         }
     })
 
