@@ -4,10 +4,19 @@
       <main-header class="mb-3" title="商品管理"></main-header>
     </div>
     <div style="display:inline-block">
-      <vs-button color="primary" type="border" icon="add" to='admin/add-product'>新增產品</vs-button>
+      <vs-button color="primary" type="border" icon="add" to='admin/add-product' >新增產品</vs-button>
     </div>
      <div style="display:inline-block">
-      <vs-button color="primary" type="border" icon="add" to='admin/add-product'>新增類別</vs-button>
+      <vs-button color="primary" type="border" icon="add" @click="activePrompt = true" >新增類別</vs-button>
+       <vs-prompt
+      @vs-cancel="types=''"
+      @vs-accept="updateTypes"
+      :vs-active.sync="activePrompt">
+       <div class="con-exemple-prompt">
+          Enter the security code
+         <vs-input placeholder="Code" vs-placeholder="Code" v-model="types"/>
+       </div>
+     </vs-prompt>
     </div>
 
     <div class="mgt-content">
@@ -47,7 +56,10 @@ export default {
   middleware: "authenticated",
   data() {
     return {
-      productList: []
+      productList: [],
+      activePrompt:false,
+      types:'',
+
     };
   },
   components: {
@@ -69,6 +81,9 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    updateTypes(){
+      console.log("updateTypes")
     }
   },
   created() {
