@@ -48,6 +48,7 @@
         <vs-textarea style="background:white" v-model="detail"/>
       </div>
       <div class="col-12 d-flex justify-content-end">
+        <vs-button class="mr-1" color="primary" type="filled" to='/admin'>取消</vs-button>
         <vs-button color="primary" type="filled" @click="submit">新增</vs-button>
       </div>
     </div>
@@ -113,6 +114,7 @@ export default {
           ]
         })
         .then(res => {
+          console.log(res)
           this.$vs.notify({title:'新增成功',text:'產品已更新，重新整理即可看到產品',color:'success'})
          
         }).then(()=>{
@@ -124,8 +126,12 @@ export default {
           this.url=null;
         })
         .catch(err => {
-          console.log(err);
-          this.$vs.notify({title:'新增失敗',text:'請重新新增',color:'danger'})
+          const {status}=err.response
+          if (status==401){
+            this.$vs.notify({title:'新增失敗',text:'Token過期，請重新登入',color:'danger'})
+          }else{
+            this.$vs.notify({title:'新增失敗',text:err,color:'danger'})
+          }
         });
     }
   }
