@@ -106,21 +106,27 @@ const actions = {
         commit(types.ADD_QUN, payload)
 
     },
-    initProduct({ commit }) {
-        this.$axios
-            .get('/api/productList', {
-                params: {
-                    types: 'all'
-                }
-            })
-            .then(function (response) {
-                const data = response.data;
-                commit(types.INIT_PRODUCT, data);
+    async initProduct({ commit }) {
+        // this.$axios
+        //     .get('/api/productList', {
+        //         params: {
+        //             types: 'all'
+        //         }
+        //     })
+        //     .then(function (response) {
+        //         const data = response.data;
+        //         commit(types.INIT_PRODUCT, data);
 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        //     })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     });
+        try {
+            var { data } = await this.$axios.get('/api/productList',{params: {types: 'all'}});
+            await commit(types.INIT_PRODUCT, data);
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
 

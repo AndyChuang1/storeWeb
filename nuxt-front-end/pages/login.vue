@@ -75,7 +75,15 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    checkToken(){
+      var token = process.browser?localStorage.getItem("token") : null;
+      this.$store.dispatch('auth/checkToken',token);
+      this.$router.push('/admin');
     }
+  },
+  created(){
+    this.checkToken();
   }
 };
 </script>

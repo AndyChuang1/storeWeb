@@ -110,7 +110,10 @@ export default {
 
   },
   mounted(){
-    this.iniProduct();
+    
+  },
+  async asyncData({store}){
+    await store.dispatch('shop/initProduct')
   }
 };
 </script>

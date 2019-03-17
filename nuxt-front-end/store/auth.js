@@ -3,10 +3,8 @@ const types ={
     LOG_OUT:"LOG_OUT"
 }
 const storageToken = "token";
-var SaveToken ;
-if(process.browser){
-    SaveToken = localStorage.getItem(storageToken)||null
-}
+var SaveToken = process.browser ? localStorage.getItem(storageToken) : null
+
 
 const state = ()=>({
     token:SaveToken
@@ -23,6 +21,9 @@ const actions ={
     logout({commit}){
         localStorage.removeItem(storageToken);
         commit(types.LOG_OUT);
+    },
+    checkToken({commit},token){
+        commit(types.LOG_IN,token);
     }
 }
 
