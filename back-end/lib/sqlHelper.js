@@ -9,6 +9,7 @@ module.exports = {
         db.serialize(() => {
             db.run("CREATE TABLE IF NOT EXISTS product(name TEXT PRIMARY KEY,unit TEXT,types TEXT,price INTEGER,detail TEXT,path TEXT,sales INTEGER)");
             db.run("CREATE TABLE IF NOT EXISTS user(name TEXT PRIMARY KEY,pawd TEXT)");
+            db.run("CREATE TABLE IF NOT EXISTS prodTypes(name TEXT PRIMARY KEY)");
             console.log('DB connected')
 
         })
@@ -87,6 +88,23 @@ module.exports = {
 
         })
     },
+    insertTypes(name,cb){
+        const sqlStatement = `INSERT INTO prodTypes (name)VALUES(?)`
+        db.serialize(() => {
+
+            db.run(sqlStatement, [name], function (err, rows) {
+                if (err) {
+                    cb({err:err}) 
+                } else {
+                    cb({success:true})
+                    console.log('Types Inserted' + ' Types:' + name)
+                   
+                }
+
+            })
+
+        })
+    },
     getProductList(types) {
         const sqlStatementTypes = `SELECT rowid,name,types,price,detail,path from product where types =?`;
         const sqlStatementAll = `SELECT rowid,name,types,price,unit,detail,path from product`;
@@ -97,7 +115,7 @@ module.exports = {
                     db.all(sqlStatementAll, function (err, rows) {
                         if (err) {
                             reject('getProductList error all')
-                            throw err;
+                            return err;
                         } else {
                             console.log('getProductList' + ' types:' + types)
                             const productList = JSON.stringify(rows)
@@ -115,7 +133,7 @@ module.exports = {
                     db.all(sqlStatementTypes, types, function (err, rows) {
                         if (err) {
                             reject('getProductList error types')
-                            throw err;
+                            return err;
                         } else {
                             console.log('getProductList' + ' types:' + types)
                             const productList = JSON.stringify(rows)

@@ -84,6 +84,27 @@ router.post('/product',function (req, res, next) {
     // res.status(200).end('Success!!')
 });
 
+router.post('/types',function (req, res, next) {
+    //console.log(req)
+    const {name} = req.body
+      try{
+        sql.insertTypes(name,(result)=>{
+            if(result.err){
+                res.status(400).json({Success: false,Msg:'Same types exist'})
+            }else{
+                res.status(200).json({Success: true})
+            }
+           
+        })
+        
+      }catch(e){
+        console.log(e);
+      }
+  
+      //res.status(200).json({ Success: true })
+      // res.status(200).end('Success!!')
+  });
+
 
 
 
