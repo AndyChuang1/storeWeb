@@ -31,8 +31,8 @@
         <vs-select :color="colorx" class="selectExample" v-model="types">
           <vs-select-item
             :key="index"
-            :value="item.types"
-            :text="item.types"
+            :value="item.name"
+            :text="item.name"
             v-for="(item,index) in options"
           />
         </vs-select>
@@ -48,7 +48,7 @@
         <vs-textarea style="background:white" v-model="detail"/>
       </div>
       <div class="col-12 d-flex justify-content-end">
-        <vs-button class="mr-1" color="primary" type="filled" to='/admin'>取消</vs-button>
+        <vs-button class="mr-1" color="primary" type="filled" to="/admin">取消</vs-button>
         <vs-button color="primary" type="filled" @click="submit">新增</vs-button>
       </div>
     </div>
@@ -73,11 +73,14 @@ export default {
       detail: null,
       types: null,
       sales: 0,
-      options: [{ types: "生物科技類" }, { types: "養生食材區" }]
+      options: [{ name: "生物科技類" }, { name: "養生食材區" }]
     };
   },
   components: {
     MainHeader
+  },
+  created() {
+    this.iniTypes();
   },
   computed: {
     ...mapGetters({ getToken: "auth/getToken" })
@@ -87,6 +90,17 @@ export default {
       const file = e.target.files[0];
       this.image = file;
       this.url = URL.createObjectURL(file);
+    },
+    iniTypes() {
+      this.$axios
+        .get("/api/productTypes")
+        .then(response => {
+          const data = response.data;
+          this.options = data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     submit() {
       let formData = new FormData();
@@ -114,23 +128,31 @@ export default {
           ]
         })
         .then(res => {
-          console.log(res)
-          this.$vs.notify({title:'新增成功',text:'產品已更新，重新整理即可看到產品',color:'success'})
-         
-        }).then(()=>{
-          this.name =null;
-          this.unit =null;
-          this.price =null;
-          this.detail ='';
-          this.types =null;
-          this.url=null;
+          console.log(res);
+          this.$vs.notify({
+            title: "新增成功",
+            text: "產品已更新，重新整理即可看到產品",
+            color: "success"
+          });
+        })
+        .then(() => {
+          this.name = null;
+          this.unit = null;
+          this.price = null;
+          this.detail = "";
+          this.types = null;
+          this.url = null;
         })
         .catch(err => {
-          const {status}=err.response
-          if (status==401){
-            this.$vs.notify({title:'新增失敗',text:'Token過期，請重新登入',color:'danger'})
-          }else{
-            this.$vs.notify({title:'新增失敗',text:err,color:'danger'})
+          const { status } = err.response;
+          if (status == 401) {
+            this.$vs.notify({
+              title: "新增失敗",
+              text: "Token過期，請重新登入",
+              color: "danger"
+            });
+          } else {
+            this.$vs.notify({ title: "新增失敗", text: err, color: "danger" });
           }
         });
     }
@@ -147,7 +169,7 @@ export default {
     max-height: 200px;
   }
 }
-ul{
+ul {
   margin-bottom: 0;
 }
 </style>
