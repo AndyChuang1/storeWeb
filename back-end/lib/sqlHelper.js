@@ -88,17 +88,17 @@ module.exports = {
 
         })
     },
-    insertTypes(name,cb){
+    insertTypes(name, cb) {
         const sqlStatement = `INSERT INTO prodTypes (name)VALUES(?)`
         db.serialize(() => {
 
             db.run(sqlStatement, [name], function (err, rows) {
                 if (err) {
-                    cb({err:err}) 
+                    cb({ err: err })
                 } else {
-                    cb({success:true})
+                    cb({ success: true })
                     console.log('Types Inserted' + ' Types:' + name)
-                   
+
                 }
 
             })
@@ -147,6 +147,28 @@ module.exports = {
 
         })
 
+    },
+    getProductTypes(){
+        const sqlStatementAll = `SELECT name from prodTypes`;
+        return new Promise((resolve,reject)=>{
+            db.serialize(() => {
+
+                db.all(sqlStatementAll, function (err, rows) {
+                    if (err) {
+                        reject('getProductTypes error types')
+                        return err;
+                    } else {
+                        console.log('getProducTypes')
+                        const productTypes = JSON.stringify(rows)
+                        resolve(productTypes)
+                    }
+    
+                })
+    
+            })
+
+        })
+       
     }
 
 }

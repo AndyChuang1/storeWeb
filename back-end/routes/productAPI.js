@@ -9,6 +9,19 @@ router.get('/productList', function (req, res) {
      sql.getProductList(types).then(result=>{
         //  console.log(result);
          res.status(200).end(result)
+     }).catch(err=>{
+         console.log(err);
+         res.status(400).end(err)
+     })
+  
+});
+router.get('/productTypes', function (req, res) {
+     sql.getProductTypes().then(result=>{
+        //  console.log(result);
+         res.status(200).end(result)
+     }).catch(err=>{
+        console.log(err);
+        res.status(400).end(err)
      })
   
 });

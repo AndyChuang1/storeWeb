@@ -7,7 +7,7 @@ var cors = require('cors')
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var formPostRouter = require('./routes/formpost');
-var productListRouter = require('./routes/productListAPI');
+var productRouter = require('./routes/productAPI');
 var secret =require('./config').secret;
 
 var sql = require('./lib/sqlHelper')
@@ -39,7 +39,7 @@ app.set('secret', secret)
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/apipost',formPostRouter)
-app.use('/api', productListRouter);
+app.use('/api', productRouter);
 
 const uploadFolder = './public/product';
 createFolder(uploadFolder);
