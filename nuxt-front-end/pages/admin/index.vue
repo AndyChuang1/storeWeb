@@ -33,6 +33,7 @@
           <vs-th>價錢</vs-th>
           <vs-th>種類</vs-th>
           <vs-th>單位</vs-th>
+          <vs-th>功能</vs-th>
         </template>
 
         <template slot-scope="{data}">
@@ -45,6 +46,10 @@
 
             <vs-td :data="data[indextr].types">{{data[indextr].types}}</vs-td>
             <vs-td :data="data[indextr].rowid">{{data[indextr].unit}}</vs-td>
+            <vs-td :data="data[indextr].rowid">
+              <vs-button type="gradient">編輯</vs-button>
+              <vs-button color="danger" type="gradient">刪除</vs-button>
+            </vs-td>
           </vs-tr>
         </template>
       </vs-table>
