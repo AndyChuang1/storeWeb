@@ -8,7 +8,7 @@
       >
         <div class="card h-100">
           <div class="hover">
-            <img class="card-img-top" :src="urlConvert(product.path)"  height="400" alt>
+            <img class="card-img-top" :src="urlConvert(product.path)" height="400" alt>
             <div class="overlay">
               <button type="button" class="btn btn-primary" @click="addCart(product.name)">加到購物車</button>
             </div>
@@ -37,16 +37,31 @@
         </no-ssr>
       </div>
     </div>
+
+    <div
+      v-if="productList.length==0"
+      class="container content-statement d-flex justify-content-center mt-3"
+    >
+      <div class="col-auto mt-3">
+        <h2>請來電洽詢或至現場購買</h2>
+        <h3>永盛堂中藥行</h3>
+        <p>公司地址：(104) 台北市中山區吉林路191號</p>
+        <p>連絡電話：02-2531-0309</p>
+        <p>傳真號碼：02-2531-0278</p>
+        <p>營業時間：週一至週日 早上10:00-晚上23:00</p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "products",
-  layout: "product-content",
+  name: "types",
+  layout: "",
   data() {
     return {
+      path: null,
       page: 1,
       countOfPage: 8,
       pageTexts: {
@@ -56,11 +71,11 @@ export default {
           last: "Last"
         }
       },
-      listTest:''
+      listTest: ""
     };
   },
   components: {
-    MainHeader
+      MainHeader
   },
   methods: {
     setPage: function(page) {
@@ -85,11 +100,11 @@ export default {
 
   },
   mounted(){
+    this.path= this.$route.path;
     
   },
-  async asyncData({store}){
-    
-    await store.dispatch('shop/initProduct','all')
+  async asyncData({store,params }){
+    await store.dispatch('shop/initProduct',params.types)
   }
 };
 </script>

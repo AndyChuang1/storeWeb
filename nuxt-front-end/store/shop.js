@@ -106,7 +106,7 @@ const actions = {
         commit(types.ADD_QUN, payload)
 
     },
-    async initProduct({ commit }) {
+    async initProduct({ commit },payload) {
         // this.$axios
         //     .get('/api/productList', {
         //         params: {
@@ -122,7 +122,7 @@ const actions = {
         //         console.log(error);
         //     });
         try {
-            var { data } = await this.$axios.get('/api/productList',{params: {types: 'all'}});
+            var { data } = await this.$axios.get('/api/productList',{params: {types: payload}});
             await commit(types.INIT_PRODUCT, data);
         } catch (err) {
             console.log(err)

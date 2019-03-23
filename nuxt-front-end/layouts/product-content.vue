@@ -9,28 +9,22 @@
             <div class="products col-12">
               <main-header title="產品目錄">
                 <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <router-link
+                      :class="[{active:path=='/products/'},'nav-link']"
+                      :to="'/products/'"
+                    >所有產品</router-link>
+                  </li>
                   <li class="nav-item" v-for="(category,index) in catalogList" :key="index">
                     <router-link
-                      :class="[{active:path=='/products/'+category.url},'nav-link']"
-                      :to="'/products/'+category.url"
-                    >{{category.product}}</router-link>
+                      :class="[{active:path=='/products/'+category.name},'nav-link']"
+                      :to="'/products/'+category.name"
+                    >{{category.name}}</router-link>
                   </li>
                 </ul>
               </main-header>
               <nuxt/>
-              <div
-                v-if="path!=='/products/'"
-                class="container content-statement d-flex justify-content-center mt-3"
-              >
-                <div class="col-auto mt-3">
-                  <h2>請來電洽詢或至現場購買</h2>
-                  <h3>永盛堂中藥行</h3>
-                  <p>公司地址：(104) 台北市中山區吉林路191號</p>
-                  <p>連絡電話：02-2531-0309</p>
-                  <p>傳真號碼：02-2531-0278</p>
-                  <p>營業時間：週一至週日 早上10:00-晚上23:00</p>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -55,32 +49,31 @@ export default {
   data() {
     return {
       catalogList: [
-        { product: "所有產品", url: "" },
-        { product: "特價商品", url: "sales" },
-        { product: "養生食材區", url: "health" },
-        { product: "藥膳燉包區", url: "package" },
-        { product: "養生飲品區", url: "drink" },
-        { product: "沖泡式五穀", url: "grain" },
-        { product: "生物科技類", url: "bio" },
-        { product: "GMP產品", url: "gmp" },
-        { product: "坐月子藥膳", url: "pm" },
-        { product: "蜜餞食品區", url: "succade" },
-        { product: "南北什貨曲", url: "goods" },
-        { product: "香料滷包類", url: "pouch" },
-        { product: "周邊商品區", url: "accessory" },
-        { product: "外用商品區", url: "external" },
-        { product: "代工服務區", url: "oem" }
+        { name: "特價商品", rowid: 1 },
+        { name: "養生食材區", rowid: 2 },
+        { name: "藥膳燉包區", rowid: 3 },
+        { name: "養生飲品區", rowid: 4 },
+        { name: "沖泡式五穀", rowid: 5 },
+        { name: "生物科技類", rowid: 6 },
+        { name: "GMP產品", rowid: 7 },
+        { name: "坐月子藥膳", rowid: 8 },
+        { name: "蜜餞食品區", rowid: 9 },
+        { name: "南北什貨曲", rowid: 10 },
+        { name: "香料滷包類", rowid: 11 },
+        { name: "周邊商品區", rowid: 12 },
+        { name: "外用商品區", rowid: 13 },
+        { name: "代工服務區", rowid: 14 }
       ],
-      path: ""
+      path: null
     };
   },
-  mounted() {
+  created() {
     this.path = this.$route.path;
   },
   watch: {
     $route(to, from) {
       this.path = this.$route.path;
-      console.log(this.path);
+      // console.log(this.path);
     }
   },
   methods: {}
