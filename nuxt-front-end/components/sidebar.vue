@@ -18,13 +18,13 @@
         </div>
 
         <vs-sidebar-item index="1" icon="question_answer" to="/admin">商品新增修改</vs-sidebar-item>
-
-        <vs-sidebar-item index="2" icon="gavel" to="/admin/orderlist">訂單查詢</vs-sidebar-item>
+        <vs-sidebar-item index="2" icon="gavel" to="/admin/add-types">類別新增修改</vs-sidebar-item>
+        <vs-sidebar-item index="3" icon="gavel" to="/admin/orderlist">訂單查詢</vs-sidebar-item>
 
         <vs-divider icon="person" position="left">User</vs-divider>
 
-        <vs-sidebar-item index="3" icon="verified_user">Configurations</vs-sidebar-item>
-        <vs-sidebar-item index="4" icon="account_box">Profile</vs-sidebar-item>
+        <vs-sidebar-item index="5" icon="verified_user">Configurations</vs-sidebar-item>
+        <vs-sidebar-item index="6" icon="account_box">Profile</vs-sidebar-item>
 
         <div class="footer-sidebar" slot="footer">
           <vs-button icon="reply" color="danger" type="flat" @click="logout" href='/login'>log out</vs-button>

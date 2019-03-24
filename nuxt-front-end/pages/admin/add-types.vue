@@ -1,10 +1,7 @@
 <template>
   <div id="product-mgt">
     <div class="mgt-title">
-      <main-header class="mb-3" title="商品管理"></main-header>
-    </div>
-    <div style="display:inline-block">
-      <vs-button color="primary" type="border" icon="add" to="admin/add-product">新增產品</vs-button>
+      <main-header class="mb-3" title="類別管理"></main-header>
     </div>
     <div style="display:inline-block">
       <vs-button color="primary" type="border" icon="add" @click="activePrompt = true">新增類別</vs-button>
@@ -23,17 +20,15 @@
     </div>
 
     <div class="mgt-content">
-      <vs-table max-items="10" pagination :data="productList">
+      <vs-table max-items="10" pagination :data="productTypes">
         <template slot="header">
-          <h3>商品列表</h3>
+          <h3>類別列表</h3>
         </template>
         <template slot="thead">
           <vs-th>#</vs-th>
-          <vs-th>名稱</vs-th>
-          <vs-th>價錢</vs-th>
-          <vs-th>種類</vs-th>
-          <vs-th>單位</vs-th>
+          <vs-th>類別名稱</vs-th>
           <vs-th>功能</vs-th>
+         
         </template>
 
         <template slot-scope="{data}">
@@ -42,13 +37,9 @@
 
             <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
 
-            <vs-td :data="data[indextr].rowid">{{data[indextr].price}}</vs-td>
-
-            <vs-td :data="data[indextr].types">{{data[indextr].types}}</vs-td>
-            <vs-td :data="data[indextr].rowid">{{data[indextr].unit}}</vs-td>
             <vs-td :data="data[indextr].rowid">
-              <vs-button type="gradient" :to="'admin/edit/'+data[indextr].name" @click="editProduct(data[indextr])">編輯</vs-button>
-              <vs-button color="danger" type="gradient" @click="deleteConfirm(data[indextr].name)">刪除</vs-button>
+              <vs-button type="gradient">編輯</vs-button>
+              <vs-button color="danger" type="gradient">刪除</vs-button>
             </vs-td>
           </vs-tr>
         </template>
@@ -65,7 +56,7 @@ export default {
   middleware: "authenticated",
   data() {
     return {
-      productList: [],
+      productTypes: [],
       activePrompt: false,
       types: ""
     };
@@ -77,17 +68,17 @@ export default {
     ...mapGetters({ getToken: "auth/getToken" })
   },
   methods: {
-    initProduct() {
+    initTypes() {
       var vm = this;
       this.$axios
-        .get("/api/productList", {
+        .get("/api/productTypes", {
           params: {
             types: "all"
           }
         })
         .then(function(response) {
           const data = response.data;
-          vm.productList = data;
+          vm.productTypes = data;
         })
         .catch(function(error) {
           console.log(error);
@@ -125,27 +116,10 @@ export default {
             });
           }
         });
-    },
-    deleteConfirm(name){
-       this.$vs.dialog({
-        type:'confirm',
-        color: 'danger',
-        title: `確認`,
-        text: `是否要刪除本產品 : ${name}?`,
-        accept:this.deleteCProduct(name),
-        acceptText:'確認',
-        cancelText:'取消'
-      })
-    },
-    deleteCProduct(name){
-      console.log(`Delete ${name}`)
-    },
-    editProduct(data){
-      console.log(data)
     }
   },
   created() {
-    this.initProduct();
+    this.initTypes();
   }
 };
 </script>

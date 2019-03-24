@@ -1,5 +1,6 @@
 <template>
-  <div id="admin">
+  
+    <div id="admin">
     <div class="container-fluid">
       <div class="row">
         <div class="admin-sidebar col-lg-2">
@@ -15,6 +16,7 @@
       <mainfooter></mainfooter>
     </div>
   </div>
+
 </template>
 <script>
 import mainfooter from "~/components/footer.vue";
@@ -29,7 +31,9 @@ export default {
     return {
       active: true
     };
-  }
+  },
+ 
+ 
 };
 </script>
 <style lang="scss">

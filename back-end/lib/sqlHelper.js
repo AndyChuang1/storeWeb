@@ -168,7 +168,7 @@ module.exports = {
 
     },
     getProductTypes() {
-        const sqlStatementAll = `SELECT name from prodTypes`;
+        const sqlStatementAll = `SELECT rowid,name from prodTypes`;
         return new Promise((resolve, reject) => {
             db.serialize(() => {
 
