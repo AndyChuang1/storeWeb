@@ -80,6 +80,7 @@ export default {
   },
   created() {
     this.iniTypes();
+    this.getProduct(this.$route.params.name)
     
   },
   computed: {
@@ -97,6 +98,25 @@ export default {
         .then(response => {
           const data = response.data;
           this.options = data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    getProduct(productName){
+      this.$axios
+        .get("/api/productList",{params: {name: productName}})
+        .then(response => {
+          const data = response.data[0];
+          var url = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
+          this.name=data.name;
+          this.unit=data.unit;
+          this.price=data.price;
+          this.sales=data.sales;
+          this.types=data.types;
+          this.detail=data.detail;
+          this.url=url+data.path;
+          
         })
         .catch(function(error) {
           console.log(error);
@@ -160,5 +180,14 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+#preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    max-width: 100%;
+    max-height: 200px;
+  }
+}
 </style>
 
