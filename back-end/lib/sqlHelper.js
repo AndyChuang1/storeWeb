@@ -105,14 +105,14 @@ module.exports = {
 
         })
     },
-    getProductList(types) {
+    getProductList(types, name) {
         const sqlStatementTypes = `SELECT rowid,name,types,price,detail,path from product where types =?`;
         const sqlStatementAll = `SELECT rowid,name,types,price,unit,detail,path,sales from product`;
         const sqlStatementSales = `SELECT rowid,name,types,price,unit,detail,path,sales from product where sales =1`;
+        const sqlStatementName = `SELECT rowid,name,types,price,unit,detail,path,sales from product where name =?`;
         return new Promise((resolve, reject) => {
-            if (types === 'all') {
-                db.serialize(() => {
-
+            db.serialize(() => {
+                if (types === 'all') {
                     db.all(sqlStatementAll, function (err, rows) {
                         if (err) {
                             reject('getProductList error all')
@@ -124,14 +124,8 @@ module.exports = {
 
                         }
 
-                    })
-
-                })
-
-            } else if (types==='特價商品') {
-                console.log('Sales');
-                db.serialize(() => {
-
+                    });
+                } else if (types === '特價商品') {
                     db.all(sqlStatementSales, function (err, rows) {
                         if (err) {
                             reject('getProductSales error all')
@@ -144,10 +138,21 @@ module.exports = {
                         }
 
                     })
+                } else if (name) {
+                    db.all(sqlStatementName, name, function (err, rows) {
+                        if (err) {
+                            reject('getProductList error types')
+                            return err;
+                        } else {
+                            console.log('getProductList' + 'Name:' + name)
+                            const productList = JSON.stringify(rows)
+                            resolve(productList)
+                        }
 
-                })
-            } else {
-                db.serialize(() => {
+                    });
+
+
+                } else {
 
                     db.all(sqlStatementTypes, types, function (err, rows) {
                         if (err) {
@@ -159,14 +164,16 @@ module.exports = {
                             resolve(productList)
                         }
 
-                    })
+                    });
 
-                })
-            }
+                }
 
-        })
 
+
+            });
+        });
     },
+
     getProductTypes() {
         const sqlStatementAll = `SELECT rowid,name from prodTypes`;
         return new Promise((resolve, reject) => {

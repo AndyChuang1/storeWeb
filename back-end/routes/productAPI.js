@@ -5,8 +5,9 @@ var sql = require('../lib/sqlHelper')
 
 /* GET users listing. */
 router.get('/productList', function (req, res) {
-    const types = req.query.types
-     sql.getProductList(types).then(result=>{
+    const types = req.query.types;
+    const name=req.query.name;
+     sql.getProductList(types,name).then(result=>{
         //  console.log(result);
          res.status(200).end(result)
      }).catch(err=>{
