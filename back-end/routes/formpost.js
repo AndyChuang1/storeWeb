@@ -105,6 +105,30 @@ router.post('/types',function (req, res, next) {
       // res.status(200).end('Success!!')
   });
 
+  router.put('/product/:id',function (req, res, next) { 
+      upload(req, res, function (err) {
+        console.log(req)
+          const { name,unit, types, price, detail, sales } = req.body
+          const {id} =req.params;
+          if (req.fileValidationError) {
+              //415 Unsupported Media Type
+              res.status(415).json({ Success: false, message: req.fileValidationError })
+          } else if (err instanceof multer.MulterError) {
+              // 413 Payload Too Large
+              res.status(413).json({ Success: false, message: err.message })
+          } else {
+              if (req.file) {
+                const path = '/product/' + req.file.filename
+                sql.updateProudct(name,unit, types, price, detail,path,sales,id);
+                res.status(200).json({ Success: true })
+              }
+          }
+      })
+  
+      //res.status(200).json({ Success: true })
+      // res.status(200).end('Success!!')
+  });
+
 
 
 

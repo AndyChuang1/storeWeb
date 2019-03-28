@@ -1,5 +1,6 @@
 <template>
-  <div id="product-mgt">
+<no-ssr>
+<div id="product-mgt">
     <div class="mgt-title">
       <main-header class="mb-3" title="商品管理"></main-header>
     </div>
@@ -23,7 +24,7 @@
     </div>
 
     <div class="mgt-content">
-      <vs-table max-items="10" pagination :data="productList">
+      <vs-table search  max-items="10" pagination :data="productList">
         <template slot="header">
           <h3>商品列表</h3>
         </template>
@@ -55,6 +56,8 @@
       </vs-table>
     </div>
   </div>
+</no-ssr>
+  
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
