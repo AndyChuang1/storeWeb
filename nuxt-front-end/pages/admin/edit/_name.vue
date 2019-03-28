@@ -64,6 +64,7 @@ export default {
   data() {
     return {
       colorx: "#103767",
+      rowid:null,
       url: null,
       image: null,
       name: null,
@@ -116,6 +117,7 @@ export default {
           this.types=data.types;
           this.detail=data.detail;
           this.url=url+data.path;
+          this.rowid=data.rowid;
           
         })
         .catch(function(error) {
@@ -136,7 +138,7 @@ export default {
       formData.append("types", this.types);
       formData.append("sales", this.sales);
       this.$axios
-        .post("/apipost/product", formData, {
+        .put(`/apipost/product/${this.rowid}`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             "x-access-token": token
@@ -150,18 +152,13 @@ export default {
         .then(res => {
           console.log(res);
           this.$vs.notify({
-            title: "新增成功",
-            text: "產品已更新，重新整理即可看到產品",
+            title: "更新成功",
+            text: "產品已更新!!",
             color: "success"
           });
         })
         .then(() => {
-          this.name = null;
-          this.unit = null;
-          this.price = null;
-          this.detail = "";
-          this.types = null;
-          this.url = null;
+          this.$router.push('/admin');
         })
         .catch(err => {
           const { status } = err.response;
