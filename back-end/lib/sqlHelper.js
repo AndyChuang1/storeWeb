@@ -89,19 +89,31 @@ module.exports = {
         })
     },
     updateProudct(name, unit, types, price, detail, path, sales,id){
-        console.log(id);
         const sqlStatement = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,path=?,sales=? WHERE rowid = ?`;
+        const sqlStatementImageSame = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,sales=? WHERE rowid = ?`;
         db.serialize(() => {
-
-            db.run(sqlStatement, [name, unit, types, price, detail, path, sales,id], function (err, rows) {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log('Data Update' + ' Product:' + name)
-
-                }
-
-            })
+            if(path){
+                db.run(sqlStatement, [name, unit, types, price, detail, path, sales,id], function (err, rows) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log('Data Update' + ' Product:' + name)
+    
+                    }
+    
+                });
+            }else{
+                db.run(sqlStatementImageSame, [name, unit, types, price, detail, sales,id], function (err, rows) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log('Data Update' + ' Product:' + name+' same Image')
+    
+                    }
+    
+                })
+            }
+           
 
         })
     },

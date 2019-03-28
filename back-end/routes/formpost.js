@@ -121,6 +121,11 @@ router.post('/types',function (req, res, next) {
                 const path = '/product/' + req.file.filename
                 sql.updateProudct(name,unit, types, price, detail,path,sales,id);
                 res.status(200).json({ Success: true })
+              }else{
+                  console.log('Image path keep same');
+                  const path =null;
+                sql.updateProudct(name,unit, types, price, detail,path,sales,id);
+                res.status(200).json({ Success: true })
               }
           }
       })
