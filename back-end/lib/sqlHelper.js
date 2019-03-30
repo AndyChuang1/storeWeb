@@ -211,18 +211,18 @@ module.exports = {
                     }
 
                 });
-                
+
 
             })
 
         })
 
     },
-    delProduct(name,id, cb) {
+    delProduct(name, id, cb) {
         const sqlStatement = `DELETE FROM product WHERE name=? AND rowid=?  `
         db.serialize(() => {
 
-            db.run(sqlStatement, [name,id], function (err, rows) {
+            db.run(sqlStatement, [name, id], function (err, rows) {
                 if (err) {
                     cb({ err: err })
                 } else {
@@ -239,7 +239,7 @@ module.exports = {
                 }
 
             })
-           
+
 
         })
     },
