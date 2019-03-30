@@ -100,9 +100,7 @@ router.post('/types',function (req, res, next) {
       }catch(e){
         console.log(e);
       }
-  
-      //res.status(200).json({ Success: true })
-      // res.status(200).end('Success!!')
+
   });
 
   router.put('/product/:id',function (req, res, next) { 
@@ -133,6 +131,22 @@ router.post('/types',function (req, res, next) {
       //res.status(200).json({ Success: true })
       // res.status(200).end('Success!!')
   });
+
+  router.delete('/product/:id',function (req, res, next) { 
+    const {id} =req.params;
+    const {name}=req.query;
+    sql.delProduct(name,id,(result)=>{
+        if(result.err){
+            console.log(result.err)
+            res.status(400).json({Success: false,Msg:'Delete error'})
+        }else{
+            res.status(200).json({Success: true})
+        }
+    })
+
+    //res.status(200).json({ Success: true })
+    // res.status(200).end('Success!!')
+});
 
 
 

@@ -88,35 +88,7 @@ module.exports = {
 
         })
     },
-    updateProudct(name, unit, types, price, detail, path, sales,id){
-        const sqlStatement = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,path=?,sales=? WHERE rowid = ?`;
-        const sqlStatementImageSame = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,sales=? WHERE rowid = ?`;
-        db.serialize(() => {
-            if(path){
-                db.run(sqlStatement, [name, unit, types, price, detail, path, sales,id], function (err, rows) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        console.log('Data Update' + ' Product:' + name)
-    
-                    }
-    
-                });
-            }else{
-                db.run(sqlStatementImageSame, [name, unit, types, price, detail, sales,id], function (err, rows) {
-                    if (err) {
-                        throw err;
-                    } else {
-                        console.log('Data Update' + ' Product:' + name+' same Image')
-    
-                    }
-    
-                })
-            }
-           
 
-        })
-    },
     insertTypes(name, cb) {
         const sqlStatement = `INSERT INTO prodTypes (name)VALUES(?)`
         db.serialize(() => {
@@ -127,10 +99,33 @@ module.exports = {
                 } else {
                     cb({ success: true })
                     console.log('Types Inserted' + ' Types:' + name)
-
                 }
 
             })
+
+        })
+    },
+    updateProudct(name, unit, types, price, detail, path, sales, id) {
+        const sqlStatement = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,path=?,sales=? WHERE rowid = ?`;
+        const sqlStatementImageSame = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,sales=? WHERE rowid = ?`;
+        db.serialize(() => {
+            if (path) {
+                db.run(sqlStatement, [name, unit, types, price, detail, path, sales, id], function (err, rows) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log('Data Update' + ' Product:' + name)
+                    }
+                });
+            } else {
+                db.run(sqlStatementImageSame, [name, unit, types, price, detail, sales, id], function (err, rows) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log('Data Update' + ' Product:' + name + ' same Image')
+                    }
+                })
+            }
 
         })
     },
@@ -196,9 +191,6 @@ module.exports = {
                     });
 
                 }
-
-
-
             });
         });
     },
@@ -218,12 +210,38 @@ module.exports = {
                         resolve(productTypes)
                     }
 
-                })
+                });
+                
 
             })
 
         })
 
-    }
+    },
+    delProduct(name,id, cb) {
+        const sqlStatement = `DELETE FROM product WHERE name=? AND rowid=?  `
+        db.serialize(() => {
+
+            db.run(sqlStatement, [name,id], function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                } else {
+                    cb({ success: true })
+                    console.log(`Delete ${name}`)
+                }
+
+            });
+            db.exec('VACUUM', function (err, rows) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log('VACUUM ')
+                }
+
+            })
+           
+
+        })
+    },
 
 }

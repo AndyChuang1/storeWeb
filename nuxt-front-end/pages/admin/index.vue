@@ -48,7 +48,7 @@
             <vs-td :data="data[indextr].types">{{data[indextr].types}}</vs-td>
             <vs-td :data="data[indextr].rowid">{{data[indextr].unit}}</vs-td>
             <vs-td :data="data[indextr].rowid">
-              <vs-button type="gradient" :to="'admin/edit/'+data[indextr].name" @click="editProduct(data[indextr])">編輯</vs-button>
+              <vs-button type="gradient" :to="'admin/edit/'+data[indextr].name" >編輯</vs-button>
               <vs-button color="danger" type="gradient" @click="deleteConfirm(data[indextr].name)">刪除</vs-button>
             </vs-td>
           </vs-tr>
