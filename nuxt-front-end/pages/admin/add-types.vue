@@ -30,7 +30,7 @@
       >
         <div class="con-exemple-prompt">
           輸入類別 :
-          <vs-input placeholder="Types" v-model="editTypes"/>
+          <vs-input placeholder="Types" v-model="editTypes.name"/>
         </div>
       </vs-prompt>
     </div>
@@ -53,7 +53,7 @@
             <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
 
             <vs-td :data="data[indextr].rowid">
-              <vs-button type="gradient" @click="editType(data[indextr].name)">編輯</vs-button>
+              <vs-button type="gradient" @click="editType(data[indextr].name,data[indextr].rowid)">編輯</vs-button>
               <vs-button
                 color="danger"
                 type="gradient"
@@ -79,7 +79,10 @@ export default {
       activePromptAdd: false,
       activePromptEdit: false,
       types: "",
-      editTypes: "",
+      editTypes: {
+        name:null,
+        rowid:null
+      },
       delData: {
         name: null,
         rowid: null
@@ -109,9 +112,10 @@ export default {
           console.log(error);
         });
     },
-    editType(name) {
+    editType(name,rowid) {
       console.log(name);
-      this.editTypes = name;
+      this.editTypes.name = name;
+      this.editTypes.rowid=rowid;
       this.activePromptEdit = true;
     },
     addTypes() {
@@ -151,7 +155,40 @@ export default {
         });
     },
     updateTypes() {
-      console.log(this.editTypes);
+      const token = this.getToken;
+      const{name,rowid}=this.editTypes;
+      this.$axios
+        .put(`/apipost/types/${rowid}`, {
+          name:name
+        }, {
+          headers: {
+            "x-access-token": token
+          },
+        
+        })
+        .then(res => {
+          console.log(res);
+          this.$vs.notify({
+            title: "更新成功",
+            text: "類別已更新!!",
+            color: "success"
+          });
+        })
+        .then(() => {
+          this.initTypes();
+        })
+        .catch(err => {
+          const { status } = err.response;
+          if (status == 401) {
+            this.$vs.notify({
+              title: "新增失敗",
+              text: "Token過期，請重新登入",
+              color: "danger"
+            });
+          } else {
+            this.$vs.notify({ title: "新增失敗", text: err, color: "danger" });
+          }
+        });
     },
     deleteConfirm(name, rowid) {
       this.$vs.dialog({
@@ -168,9 +205,40 @@ export default {
       this.delData.rowid = rowid;
     },
     deleteType() {
+      const token = this.getToken;
       const name = this.delData.name;
-      const id = this.delData.rowid ;
-       console.log(`Delete ${name}`);
+      const rowid = this.delData.rowid ;
+      this.$axios
+        .delete(`/apipost/types/${rowid}`, {
+          params: { name: name },
+          headers: {
+            "x-access-token": token
+          }
+        })
+        .then(res => {
+          console.log(res);
+          this.$vs.notify({
+            title: "刪除成功",
+            text: "刪除已完成!",
+            color: "success"
+          });
+        })
+        .then(() => {
+          this.initTypes();
+          console.log(`Delete ${name}`);
+        })
+        .catch(err => {
+          const { status } = err.response;
+          if (status == 401) {
+            this.$vs.notify({
+              title: "新增失敗",
+              text: "Token過期，請重新登入",
+              color: "danger"
+            });
+          } else {
+            this.$vs.notify({ title: "新增失敗", text: err, color: "danger" });
+          }
+        });
     },
     cancelDel() {
       this.delData.name = null;
