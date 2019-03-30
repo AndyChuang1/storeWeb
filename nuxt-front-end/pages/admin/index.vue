@@ -145,7 +145,7 @@ export default {
         color: "danger",
         title: `確認`,
         text: `是否要刪除本產品 : ${name}?`,
-        accept: this.deleteCProduct,
+        accept: this.deleteProduct,
         cancel: this.cancelDel,
         acceptText: "確認",
         cancelText: "取消"
@@ -153,7 +153,7 @@ export default {
       this.delData.name = name;
       this.delData.rowid = rowid;
     },
-    deleteCProduct() {
+    deleteProduct() {
       const name = this.delData.name;
       const rowid = this.delData.rowid;
 

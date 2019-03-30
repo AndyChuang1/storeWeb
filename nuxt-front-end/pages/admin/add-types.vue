@@ -4,17 +4,33 @@
       <main-header class="mb-3" title="類別管理"></main-header>
     </div>
     <div style="display:inline-block">
-      <vs-button color="primary" type="border" icon="add" @click="activePrompt = true">新增類別</vs-button>
+      <vs-button color="primary" type="border" icon="add" @click="activePromptAdd = true">新增類別</vs-button>
       <vs-prompt
         @vs-cancel="types=''"
-        @vs-accept="updateTypes"
-        :vs-active.sync="activePrompt"
+        @vs-accept="addTypes"
+        :vs-active.sync="activePromptAdd"
         vs-title="新增類別"
         vs-accept-text="新增"
         vs-cancel-text="取消"
       >
-        <div class="con-exemple-prompt">輸入類別 :
+        <div class="con-exemple-prompt">
+          輸入類別 :
           <vs-input placeholder="Types" v-model="types"/>
+        </div>
+      </vs-prompt>
+    </div>
+    <div class="editType">
+      <vs-prompt
+        @vs-cancel="editTypes=''"
+        @vs-accept="updateTypes"
+        :vs-active.sync="activePromptEdit"
+        vs-title="修改類別"
+        vs-accept-text="修改"
+        vs-cancel-text="取消"
+      >
+        <div class="con-exemple-prompt">
+          輸入類別 :
+          <vs-input placeholder="Types" v-model="editTypes"/>
         </div>
       </vs-prompt>
     </div>
@@ -28,7 +44,6 @@
           <vs-th>#</vs-th>
           <vs-th>類別名稱</vs-th>
           <vs-th>功能</vs-th>
-         
         </template>
 
         <template slot-scope="{data}">
@@ -38,8 +53,12 @@
             <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
 
             <vs-td :data="data[indextr].rowid">
-              <vs-button type="gradient">編輯</vs-button>
-              <vs-button color="danger" type="gradient">刪除</vs-button>
+              <vs-button type="gradient" @click="editType(data[indextr].name)">編輯</vs-button>
+              <vs-button
+                color="danger"
+                type="gradient"
+                @click="deleteConfirm(data[indextr].name,data[indextr].rowid)"
+              >刪除</vs-button>
             </vs-td>
           </vs-tr>
         </template>
@@ -57,8 +76,14 @@ export default {
   data() {
     return {
       productTypes: [],
-      activePrompt: false,
-      types: ""
+      activePromptAdd: false,
+      activePromptEdit: false,
+      types: "",
+      editTypes: "",
+      delData: {
+        name: null,
+        rowid: null
+      }
     };
   },
   components: {
@@ -84,27 +109,35 @@ export default {
           console.log(error);
         });
     },
-    updateTypes() {
+    editType(name) {
+      console.log(name);
+      this.editTypes = name;
+      this.activePromptEdit = true;
+    },
+    addTypes() {
       const token = this.getToken;
-      this.$axios.post(
-        "/apipost/types",
-        {
-          name: this.types
-        },
-        {
-          headers: {
-            "x-access-token": token
+      this.$axios
+        .post(
+          "/apipost/types",
+          {
+            name: this.types
+          },
+          {
+            headers: {
+              "x-access-token": token
+            }
           }
-        }
-      )
+        )
         .then(res => {
           this.$vs.notify({
             title: "新增成功",
             text: "類別以更新",
             color: "success"
           });
-        }).then(()=>{
-          this.types=null;
+        })
+        .then(() => {
+          this.types = null;
+          this.initTypes();
         })
         .catch(err => {
           const { status } = err.response;
@@ -116,6 +149,32 @@ export default {
             });
           }
         });
+    },
+    updateTypes() {
+      console.log(this.editTypes);
+    },
+    deleteConfirm(name, rowid) {
+      this.$vs.dialog({
+        type: "confirm",
+        color: "danger",
+        title: `確認`,
+        text: `是否要刪除此區 : ${name}?`,
+        accept: this.deleteType,
+        cancel: this.cancelDel,
+        acceptText: "確認",
+        cancelText: "取消"
+      });
+      this.delData.name = name;
+      this.delData.rowid = rowid;
+    },
+    deleteType() {
+      const name = this.delData.name;
+      const id = this.delData.rowid ;
+       console.log(`Delete ${name}`);
+    },
+    cancelDel() {
+      this.delData.name = null;
+      this.delData.rowid = null;
     }
   },
   created() {
