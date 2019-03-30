@@ -83,6 +83,51 @@ router.post('/product',function (req, res, next) {
     //res.status(200).json({ Success: true })
     // res.status(200).end('Success!!')
 });
+router.put('/product/:id',function (req, res, next) { 
+    upload(req, res, function (err) {
+      console.log(req)
+        const { name,unit, types, price, detail, sales } = req.body
+        const {id} =req.params;
+        if (req.fileValidationError) {
+            //415 Unsupported Media Type
+            res.status(415).json({ Success: false, message: req.fileValidationError })
+        } else if (err instanceof multer.MulterError) {
+            // 413 Payload Too Large
+            res.status(413).json({ Success: false, message: err.message })
+        } else {
+            if (req.file) {
+              const path = '/product/' + req.file.filename
+              sql.updateProudct(name,unit, types, price, detail,path,sales,id);
+              res.status(200).json({ Success: true })
+            }else{
+                console.log('Image path keep same');
+                const path =null;
+              sql.updateProudct(name,unit, types, price, detail,path,sales,id);
+              res.status(200).json({ Success: true })
+            }
+        }
+    })
+
+    //res.status(200).json({ Success: true })
+    // res.status(200).end('Success!!')
+});
+
+router.delete('/product/:id',function (req, res, next) { 
+  const {id} =req.params;
+  const {name}=req.query;
+  
+  sql.delProduct(name,id,(result)=>{
+      if(result.err){
+          console.log(result.err)
+          res.status(400).json({Success: false,Msg:'Delete error'})
+      }else{
+          res.status(200).json({Success: true})
+      }
+  })
+
+  // res.status(200).json({ Success: true })
+  // res.status(200).end('Success!!')
+});
 
 router.post('/types',function (req, res, next) {
     //console.log(req)
@@ -102,41 +147,31 @@ router.post('/types',function (req, res, next) {
       }
 
   });
+  router.put('/types/:id',function (req, res, next) {
+    //console.log(req)
+    const {id} =req.params;
+    const {name} = req.body
+      try{
+        sql.updateType(name,id,(result)=>{
+            if(result.err){
+                res.status(400).json({Success: false,Msg:'Same types exist'})
+            }else{
+                res.status(200).json({Success: true})
+            }
+           
+        })
+        
+      }catch(e){
+        console.log(e);
+      }
 
-  router.put('/product/:id',function (req, res, next) { 
-      upload(req, res, function (err) {
-        console.log(req)
-          const { name,unit, types, price, detail, sales } = req.body
-          const {id} =req.params;
-          if (req.fileValidationError) {
-              //415 Unsupported Media Type
-              res.status(415).json({ Success: false, message: req.fileValidationError })
-          } else if (err instanceof multer.MulterError) {
-              // 413 Payload Too Large
-              res.status(413).json({ Success: false, message: err.message })
-          } else {
-              if (req.file) {
-                const path = '/product/' + req.file.filename
-                sql.updateProudct(name,unit, types, price, detail,path,sales,id);
-                res.status(200).json({ Success: true })
-              }else{
-                  console.log('Image path keep same');
-                  const path =null;
-                sql.updateProudct(name,unit, types, price, detail,path,sales,id);
-                res.status(200).json({ Success: true })
-              }
-          }
-      })
-  
-      //res.status(200).json({ Success: true })
-      // res.status(200).end('Success!!')
   });
 
-  router.delete('/product/:id',function (req, res, next) { 
+  router.delete('/types/:id',function (req, res, next) { 
     const {id} =req.params;
     const {name}=req.query;
     
-    sql.delProduct(name,id,(result)=>{
+    sql.delType(name,id,(result)=>{
         if(result.err){
             console.log(result.err)
             res.status(400).json({Success: false,Msg:'Delete error'})
@@ -144,10 +179,12 @@ router.post('/types',function (req, res, next) {
             res.status(200).json({Success: true})
         }
     })
-
+  
     // res.status(200).json({ Success: true })
     // res.status(200).end('Success!!')
-});
+  });
+
+  
 
 
 

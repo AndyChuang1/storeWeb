@@ -129,6 +129,23 @@ module.exports = {
 
         })
     },
+    updateType(name, id, cb) {
+        const sqlStatement = `UPDATE prodTypes set name=? WHERE rowid = ?`;
+        db.serialize(() => {
+
+            db.run(sqlStatement, [name, id], function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                    throw err;
+                } else {
+                    console.log('Data Update' + ' Types:' + name)
+                    cb({ success: true })
+                }
+            });
+
+
+        })
+    },
     getProductList(types, name) {
         const sqlStatementTypes = `SELECT rowid,name,types,price,detail,path from product where types =?`;
         const sqlStatementAll = `SELECT rowid,name,types,price,unit,detail,path,sales from product`;
@@ -228,6 +245,31 @@ module.exports = {
                 } else {
                     cb({ success: true })
                     console.log(`Delete ${name}`)
+                }
+
+            });
+            db.exec('VACUUM', function (err, rows) {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log('VACUUM ')
+                }
+
+            })
+
+
+        })
+    },
+    delType(name, id, cb) {
+        const sqlStatement = `DELETE FROM prodTypes WHERE name=? AND rowid=?  `
+        db.serialize(() => {
+
+            db.run(sqlStatement, [name, id], function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                } else {
+                    cb({ success: true })
+                    console.log(`Delete ${name}  ${id}`)
                 }
 
             });
