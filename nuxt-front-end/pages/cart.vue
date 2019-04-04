@@ -95,9 +95,9 @@
               <div class="valid-tooltip">Looks good!</div>
             </div>
           </div>
-          <div class="form-row justify-content-center">
+          <div class="form-row">
             <div class="col-md-6 mb-3">
-              <label for="validationTooltip03">地址</label>
+              <label for="validationTooltip03">送貨地址</label>
               <input
                 type="text"
                 class="form-control"
@@ -127,9 +127,20 @@
               </select>
             </div>
           </div>
+          <div class="form-row justify-content-between">
+            <div class="col-md-3 mb-3">
+              <label for="validationTooltip05">收貨時間</label>
+              <select class="custom-select">
+                <option value="1">08:00~12:00</option>
+                <option value="2">12:00~17:00</option>
+                <option value="3">17:00~20:00</option>
+              </select>
+            </div>
+            <button class="btn btn-primary col-md-1" type="submit">送出訂單</button>
+          </div>
         </div>
-        <main-header title="收件人資料"></main-header>
-        <div class="container pt-2 mb-5">
+        <!-- <main-header title="收件人資料"></main-header> -->
+        <!-- <div class="container pt-2 mb-5">
           <div class="form-row">
             <div class="col-md-12 mb-3">
               <span>資料是否同上 :</span>
@@ -236,8 +247,7 @@
             </div>
              <button class="btn btn-primary" type="submit">送出訂單</button>
           </div>
-        </div>
-       
+        </div>-->
       </form>
     </div>
   </div>
