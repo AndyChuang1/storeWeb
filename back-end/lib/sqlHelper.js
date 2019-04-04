@@ -10,6 +10,28 @@ module.exports = {
             db.run("CREATE TABLE IF NOT EXISTS product(name TEXT PRIMARY KEY,unit TEXT,types TEXT,price INTEGER,detail TEXT,path TEXT,sales INTEGER)");
             db.run("CREATE TABLE IF NOT EXISTS user(name TEXT PRIMARY KEY,pawd TEXT)");
             db.run("CREATE TABLE IF NOT EXISTS prodTypes(name TEXT PRIMARY KEY)");
+            db.run(`CREATE TABLE IF NOT EXISTS productOrder
+            (
+              orderId INTEGER PRIMARY KEY, name  TEXT NOT NULL,
+              idCard TEXT,
+              phone TEXT,
+              Mphone TEXT NOT NULL,
+              address TEXT NOT NULL,
+              zip INTEGER,
+              payment TEXT NOT NULL,
+              deliverTime TEXT NOT NULL,
+              status TEXT NOT NULL,
+              updateTime TEXT NOT NULL
+            )`);
+            db.run(`CREATE TABLE IF NOT EXISTS orderDetail
+            (
+              DetailId INTEGER PRIMARY KEY, 
+              name  TEXT NOT NULL,
+              qun INTEGER NOT NULL,
+              price INTEGER NOT NULL,
+              orderId INTEGER NOT NULL,
+              FOREIGN KEY(orderId) REFERENCES productOrder(orderId)
+            )`);
             console.log('DB connected')
 
         })
@@ -102,6 +124,38 @@ module.exports = {
                 }
 
             })
+
+        })
+    },
+    insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime, cb) {
+        const sqlStatement = `INSERT INTO productOrder (name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,updateTime) VALUES(?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))`
+        db.serialize(() => {
+
+            db.run(sqlStatement, [name,idCard,phone,Mphone,address,zip,payment,status,deliverTime], function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                } else {
+                    cb({ success: true,orderId:this.lastID });
+                    console.log('Order Inserted' + ' Order:' + name)
+                }
+
+            });
+
+        })
+    },
+    insertOrderDetail(name,qun,price,orderId, cb) {
+        const sqlStatement = `INSERT INTO orderDetail (name,qun,price,orderId) VALUES(?,?,?,?)`
+        db.serialize(() => {
+
+            db.run(sqlStatement, [name,qun,price,orderId], function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                } else {
+                    cb({ success: true});
+                    console.log('OrderDetail Inserted' + ' Order:' + name)
+                }
+
+            });
 
         })
     },
@@ -235,6 +289,7 @@ module.exports = {
         })
 
     },
+    
     delProduct(name, id, cb) {
         const sqlStatement = `DELETE FROM product WHERE name=? AND rowid=?  `
         db.serialize(() => {

@@ -27,4 +27,23 @@ router.get('/productTypes', function (req, res) {
   
 });
 
+router.post('/order',function(req,res){
+    const { name,idCard,phone,Mphone,address,zip,payment,deliverTime,product,status} = req.body
+    const OrderList = JSON.parse(product)
+    
+    sql.insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,(result)=>{
+        if(result.err){
+            res.status(400).json({Success: false,Msg:result.err})
+        }else{
+            res.status(200).json({Success: true})
+            OrderList.forEach(item => {
+                const {title,price,quantity}=item;
+                console.log(title);
+                sql.insertOrderDetail(title,quantity,price,result.orderId,(result)=>{
+                    res.status(200).end(result)
+                })
+            });
+        }
+    })
+})
 module.exports = router;
