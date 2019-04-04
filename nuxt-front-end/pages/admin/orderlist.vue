@@ -7,42 +7,17 @@
       <vs-tabs>
         <vs-tab :vs-label="uncompletedMsg">
           <div class="uncompleted-content">
-            <vs-table search :data="orderList">
-              <template slot="thead">
-                <vs-th>#</vs-th>
-                <vs-th>客戶姓名</vs-th>
-                <vs-th>客戶電話</vs-th>
-                <vs-th>創建時間</vs-th>
-                <vs-th>訂單狀態</vs-th>
-                <vs-th>功能</vs-th>
-              </template>
-
-              <template slot-scope="{data}">
-                <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-                  <vs-td :data="data[indextr].rowid">{{data[indextr].rowid}}</vs-td>
-                  <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
-                  <vs-td :data="data[indextr].phone">{{data[indextr].phone}}</vs-td>
-                  <vs-td :data="data[indextr].phone">{{data[indextr].updateTime}}</vs-td>
-                  <vs-td :data="data[indextr].phone">{{data[indextr].status}}</vs-td>
-                  <vs-td :data="data[indextr].rowid">
-                    <vs-button
-                      type="gradient"
-                      @click="editType(data[indextr].name,data[indextr].rowid)"
-                    >查看</vs-button>
-                    <vs-button
-                      color="danger"
-                      type="gradient"
-                      @click="deleteConfirm(data[indextr].name,data[indextr].rowid)"
-                    >刪除</vs-button>
-                  </vs-td>
-                </vs-tr>
-              </template>
-            </vs-table>
+            <order-Table :orderList="orderList.filter(item=>item.status==='未確認')"></order-Table>
+          </div>
+        </vs-tab>
+        <vs-tab :vs-label="confirmMsg">
+          <div class="confirm-content">
+            <order-Table :orderList="orderList.filter(item=>item.status==='已確認')"></order-Table>
           </div>
         </vs-tab>
         <vs-tab :vs-label="completedMsg">
           <div class="completed-content">
-
+            <order-Table :orderList="orderList.filter(item=>item.status==='已完成')"></order-Table>
           </div>
         </vs-tab>
       </vs-tabs>
@@ -52,6 +27,7 @@
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
+import orderTable from "@/components/orderTable"
 export default {
   name: "admin",
   layout: "admin",
@@ -101,20 +77,38 @@ export default {
             "有助於維持在暗處的視覺。.減少不飽和脂肪酸的氧化。有助於減少自由基的產生。",
           path: "/product/2019-3-3金盞精明(LUTEIN).jpg",
           sales: 0
+        },
+        {
+          rowid: 5,
+          name: "金正恩",
+          phone: "0954455884",
+          updateTime: "2018-07-05 11:26:34",
+          status: "已確認",
+          detail:
+            "有助於維持在暗處的視覺。.減少不飽和脂肪酸的氧化。有助於減少自由基的產生。",
+          path: "/product/2019-3-3金盞精明(LUTEIN).jpg",
+          sales: 0
         }
+        
       ]
     };
   },
   components: {
-    MainHeader
+    MainHeader,
+    orderTable
   },
   computed:{
     completedMsg(){
-      let uncompletedOrder = this.orderList.filter(item=>item.status==='已完成');
-      return `以完成訂單 (${uncompletedOrder.length})`
+      let completedOrder = this.orderList.filter(item=>item.status==='已完成');
+      return `以完成訂單 (${completedOrder.length})`
     },
     uncompletedMsg(){
-      return `未完成訂單 (${this.orderList.length})`
+      let uncompletedOrder = this.orderList.filter(item=>item.status==='未確認');
+      return `未完成訂單 (${uncompletedOrder.length})`
+    },
+    confirmMsg(){
+      let confirmOrder = this.orderList.filter(item=>item.status==='已確認');
+      return `已確認訂單 (${confirmOrder.length})`
     }
   },
   methods: {
