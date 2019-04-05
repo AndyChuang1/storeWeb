@@ -81,10 +81,9 @@ export default {
   created() {
     // this.initOrderList();
   },
-  asyncData({store}){
+  asyncData({store,app}){
     const token= store.state.auth.token;
-    console.log()
-    return this.$axios.get("/apipost/order", {
+    return app.$axios.get("/apipost/order", {
           headers: {
             "x-access-token": token
           },
