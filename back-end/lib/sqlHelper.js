@@ -289,6 +289,44 @@ module.exports = {
         })
 
     },
+    getOrderList(orderId) {
+        const sqlStatementOverView = `SELECT orderId,name,Mphone,status,updateTime from productOrder`;
+        const sqlStatementDetail = `SELECT * from productOrder where orderId=${orderId}`;
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+                if(!orderId){
+                    db.all(sqlStatementOverView, function (err, rows) {
+                        if (err) {
+                            reject('getOrderList error types')
+                            return err;
+                        } else {
+                            console.log('getOrderList')
+                            const orderList = JSON.stringify(rows)
+                            resolve(orderList)
+                        }
+    
+                    });
+                }else{
+                    db.all(sqlStatementDetail, function (err, rows) {
+                        if (err) {
+                            reject('getOrderList error types')
+                            return err;
+                        } else {
+                            console.log('getOrderList')
+                            const orderList = JSON.stringify(rows)
+                            resolve(orderList)
+                        }
+    
+                    });
+                }
+               
+
+
+            })
+
+        })
+
+    },
     
     delProduct(name, id, cb) {
         const sqlStatement = `DELETE FROM product WHERE name=? AND rowid=?  `

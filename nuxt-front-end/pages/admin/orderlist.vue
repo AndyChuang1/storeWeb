@@ -100,7 +100,7 @@ export default {
   computed:{
     completedMsg(){
       let completedOrder = this.orderList.filter(item=>item.status==='已完成');
-      return `以完成訂單 (${completedOrder.length})`
+      return `已完成訂單 (${completedOrder.length})`
     },
     uncompletedMsg(){
       let uncompletedOrder = this.orderList.filter(item=>item.status==='未確認');
