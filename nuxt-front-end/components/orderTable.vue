@@ -14,7 +14,7 @@
         <vs-tr :key="indextr" v-for="(tr, indextr) in data">
           <vs-td :data="data[indextr].rowid">{{indextr+1}}</vs-td>
           <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
-          <vs-td :data="data[indextr].phone">{{data[indextr].phone}}</vs-td>
+          <vs-td :data="data[indextr].phone">{{data[indextr].Mphone}}</vs-td>
           <vs-td :data="data[indextr].phone">{{data[indextr].updateTime}}</vs-td>
           <vs-td :data="data[indextr].phone">{{data[indextr].status}}</vs-td>
           <vs-td :data="data[indextr].rowid">
