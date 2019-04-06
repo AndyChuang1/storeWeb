@@ -3,7 +3,7 @@ var secret =require('../config').secret;
 module.exports ={
     createToken(user,pwad){
         return jwt.sign({user:user},secret, {
-            expiresIn: 60*60*3
+            expiresIn: 60*60*24*30
           })
   
     },

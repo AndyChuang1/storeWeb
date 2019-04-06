@@ -18,7 +18,7 @@
           <vs-td :data="data[indextr].phone">{{data[indextr].updateTime}}</vs-td>
           <vs-td :data="data[indextr].phone">{{data[indextr].status}}</vs-td>
           <vs-td :data="data[indextr].rowid">
-            <vs-button type="gradient" @click="editType(data[indextr].name,data[indextr].rowid)">查看</vs-button>
+            <vs-button type="gradient" :to="'/admin/orderdetail/'+data[indextr].orderId">查看</vs-button>
             <vs-button
               color="danger"
               type="gradient"

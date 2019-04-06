@@ -201,5 +201,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.mgt-content /deep/  ul{
+  margin-bottom: 0;
+}
 </style>
 
