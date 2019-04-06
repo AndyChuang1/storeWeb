@@ -5,10 +5,12 @@
     </div>
     <div class="tab">
       <vs-tabs>
-        <vs-tab :vs-label='uncompletedMsg'>
+        <vs-tab :vs-label="uncompletedMsg">
           <div class="uncompleted-content">
-            <order-Table :orderList="orderList.filter(item=>item.status==='未確認')"></order-Table>
-            
+            <order-Table
+              v-on:del_order="initOrderList"
+              :orderList="orderList.filter(item=>item.status==='未確認')"
+            ></order-Table>
           </div>
         </vs-tab>
         <vs-tab :vs-label="confirmMsg">
@@ -28,7 +30,7 @@
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
-import orderTable from "@/components/orderTable"
+import orderTable from "@/components/orderTable";
 export default {
   name: "admin",
   layout: "admin",
@@ -36,38 +38,53 @@ export default {
   data() {
     return {
       orderList: [],
-    
+      completedM: null,
+      uncompletedM: null,
+      confirmM: null
     };
   },
   components: {
     MainHeader,
     orderTable
   },
-  computed:{
-    completedMsg(){
-      let completedOrder = this.orderList.filter(item=>item.status==='已完成');
-      
-      return `已完成訂單 (${completedOrder.length})`
+  computed: {
+    completedMsg() {
+      let completedOrder = this.orderList.filter(
+        item => item.status === "已完成"
+      );
+      this.completedM = `已完成訂單 (${completedOrder.length})`;
+
+      return this.completedM;
     },
-    uncompletedMsg(){
-      let uncompletedOrder = this.orderList.filter(item=>item.status==='未確認');
-      console.log(uncompletedOrder)
-      return `未完成訂單 (${uncompletedOrder.length})`
+    uncompletedMsg: {
+      get() {
+        let uncompletedOrder = this.orderList.filter(
+          item => item.status === "未確認"
+        );
+        this.uncompletedM = `未完成訂單 (${uncompletedOrder.length})`;
+        return this.uncompletedM;
+      },
+      set(newValue){
+        console.log('SET'+newValue)
+      }
     },
-    confirmMsg(){
-      let confirmOrder = this.orderList.filter(item=>item.status==='已確認');
-      return `已確認訂單 (${confirmOrder.length})`
+    confirmMsg() {
+      let confirmOrder = this.orderList.filter(
+        item => item.status === "已確認"
+      );
+      this.confirmM = `已確認訂單 (${confirmOrder.length})`;
+      return this.confirmM;
     }
   },
   methods: {
     initOrderList() {
       var vm = this;
-      const token= this.$store.state.auth.token;
+      const token = this.$store.state.auth.token;
       this.$axios
         .get("/apipost/order", {
           headers: {
             "x-access-token": token
-          },
+          }
         })
         .then(function(response) {
           const data = response.data;
@@ -76,29 +93,45 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+      this.$forceUpdate();
     }
   },
   created() {
     // this.initOrderList();
   },
-  asyncData({store,app}){
-    const token= store.state.auth.token;
-    return app.$axios.get("/apipost/order", {
-          headers: {
-            "x-access-token": token
-          },
-        })
-        .then(function(response) {
-          const data = response.data;
-          return {orderList:data}
-         
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-
+  asyncData({ store, app }) {
+    const token = store.state.auth.token;
+    return app.$axios
+      .get("/apipost/order", {
+        headers: {
+          "x-access-token": token
+        }
+      })
+      .then(function(response) {
+        const data = response.data;
+        return { orderList: data };
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    // return myFetchMethod(token,app.$axios);
   }
 };
+// function myFetchMethod(token,axios) {
+//   axios
+//     .get("/apipost/order", {
+//       headers: {
+//         "x-access-token": token
+//       }
+//     })
+//     .then(function(response) {
+//       const data = response.data;
+//       return { orderList: data };
+//     })
+//     .catch(function(error) {
+//       console.log(error);
+//     });
+// }
 </script>
 <style lang="scss" scoped>
 </style>

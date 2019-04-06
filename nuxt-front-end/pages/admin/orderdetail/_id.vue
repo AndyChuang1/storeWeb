@@ -121,7 +121,42 @@ export default {
     MainHeader
   },
   methods: {
-    submit() {},
+    submit() {
+    const token = this.$store.state.auth.token;
+    const orderId = this.$route.params.id;
+     this.$axios
+        .put(`/apipost/order/${orderId}`, {
+          status:this.customer[0].status
+        }, {
+          headers: {
+            "x-access-token": token
+          },
+        
+        })
+        .then(res => {
+          console.log(res);
+          this.$vs.notify({
+            title: "更新成功",
+            text: "狀態已更新!!",
+            color: "success"
+          });
+        })
+        .then(() => {
+          this.$router.push('/admin/orderlist')
+        })
+        .catch(err => {
+          const { status } = err.response;
+          if (status == 401) {
+            this.$vs.notify({
+              title: "新增失敗",
+              text: "Token過期，請重新登入",
+              color: "danger"
+            });
+          } else {
+            this.$vs.notify({ title: "新增失敗", text: err, color: "danger" });
+          }
+        });
+    },
     getDetail() {
       const token = this.$store.state.auth.token;
       this.$axios
