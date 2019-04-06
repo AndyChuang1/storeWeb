@@ -192,6 +192,14 @@ router.post('/types',function (req, res, next) {
         res.status(400).end(err)
     })
   })
+  router.get('/orderdetail',function(req,res,next){
+    const {orderId}=req.query;
+    sql.getOrderDetail(orderId).then((result)=>{
+        res.status(200).end(result)
+    }).catch(err=>{
+        res.status(400).end(err)
+    })
+  })
   
 
 

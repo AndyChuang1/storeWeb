@@ -7,6 +7,7 @@
         <vs-th>客戶電話</vs-th>
         <vs-th>創建時間</vs-th>
         <vs-th>訂單狀態</vs-th>
+        <vs-th>總金額</vs-th>
         <vs-th>功能</vs-th>
       </template>
 
@@ -17,6 +18,7 @@
           <vs-td :data="data[indextr].phone">{{data[indextr].Mphone}}</vs-td>
           <vs-td :data="data[indextr].phone">{{data[indextr].updateTime}}</vs-td>
           <vs-td :data="data[indextr].phone">{{data[indextr].status}}</vs-td>
+          <vs-td :data="data[indextr].phone">{{data[indextr].total}}元</vs-td>
           <vs-td :data="data[indextr].rowid">
             <vs-button type="gradient" :to="'/admin/orderdetail/'+data[indextr].orderId">查看</vs-button>
             <vs-button

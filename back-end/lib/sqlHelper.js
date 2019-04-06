@@ -128,15 +128,15 @@ module.exports = {
 
         })
     },
-    insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total, cb) {
+    insertOrder(name, idCard, phone, Mphone, address, zip, payment, status, deliverTime, total, cb) {
         const sqlStatement = `INSERT INTO productOrder (name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total,updateTime) VALUES(?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))`
         db.serialize(() => {
 
-            db.run(sqlStatement, [name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total], function (err, rows) {
+            db.run(sqlStatement, [name, idCard, phone, Mphone, address, zip, payment, status, deliverTime, total], function (err, rows) {
                 if (err) {
                     cb({ err: err })
                 } else {
-                    cb({ success: true,orderId:this.lastID });
+                    cb({ success: true, orderId: this.lastID });
                     console.log('Order Inserted' + ' Order:' + name)
                 }
 
@@ -144,15 +144,15 @@ module.exports = {
 
         })
     },
-    insertOrderDetail(name,qun,price,orderId, cb) {
+    insertOrderDetail(name, qun, price, orderId, cb) {
         const sqlStatement = `INSERT INTO orderDetail (name,qun,price,orderId) VALUES(?,?,?,?)`
         db.serialize(() => {
 
-            db.run(sqlStatement, [name,qun,price,orderId], function (err, rows) {
+            db.run(sqlStatement, [name, qun, price, orderId], function (err, rows) {
                 if (err) {
                     cb({ err: err })
                 } else {
-                    cb({ success: true});
+                    cb({ success: true });
                     console.log('OrderDetail Inserted' + ' Order:' + name)
                 }
 
@@ -295,32 +295,32 @@ module.exports = {
         const sqlStatementDetail = `SELECT * from productOrder where orderId=${orderId}`;
         return new Promise((resolve, reject) => {
             db.serialize(() => {
-                if(!orderId){
+                if (!orderId) {
                     db.all(sqlStatementOverView, function (err, rows) {
                         if (err) {
-                            reject('getOrderList error types')
+                            reject('getOrderList error')
                             return err;
                         } else {
                             console.log('getOrderList')
                             const orderList = JSON.stringify(rows)
                             resolve(orderList)
                         }
-    
+
                     });
-                }else{
+                } else {
                     db.all(sqlStatementDetail, function (err, rows) {
                         if (err) {
-                            reject('getOrderList error types')
+                            reject('getOrderList error')
                             return err;
                         } else {
                             console.log('getOrderList')
                             const orderList = JSON.stringify(rows)
                             resolve(orderList)
                         }
-    
+
                     });
                 }
-               
+
 
 
             })
@@ -328,7 +328,29 @@ module.exports = {
         })
 
     },
-    
+    getOrderDetail(orderId) {
+        const sqlStatementAll = `SELECT name,qun,price,price*qun as total from orderDetail where orderId=${orderId}`;
+        return new Promise((resolve, reject) => {
+            db.serialize(() => {
+
+                db.all(sqlStatementAll, function (err, rows) {
+                    if (err) {
+                        reject('getOrderDetail error')
+                        return err;
+                    } else {
+                        console.log('getOrderDetail')
+                        const orderList = JSON.stringify(rows)
+                        resolve(orderList)
+                    }
+
+                });
+
+            })
+
+        })
+
+    },
+
     delProduct(name, id, cb) {
         const sqlStatement = `DELETE FROM product WHERE name=? AND rowid=?  `
         db.serialize(() => {
