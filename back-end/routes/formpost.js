@@ -183,6 +183,23 @@ router.post('/types',function (req, res, next) {
     // res.status(200).json({ Success: true })
     // res.status(200).end('Success!!')
   });
+  
+  router.delete('/order/:id',function (req, res, next) { 
+    const {id} =req.params;
+    
+    
+    sql.delOrder(id,(result)=>{
+        if(result.err){
+            console.log(result.err)
+            res.status(400).json({Success: false,Msg:'Delete error'})
+        }else{
+            res.status(200).json({Success: true})
+        }
+    })
+  
+    // res.status(200).json({ Success: true })
+    // res.status(200).end('Success!!')
+  });
 
   router.get('/order',function(req,res,next){
     const {orderId}=req.query;

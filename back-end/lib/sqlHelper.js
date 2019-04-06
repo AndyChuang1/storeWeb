@@ -401,5 +401,30 @@ module.exports = {
 
         })
     },
+    delOrder(id, cb) {
+        const sqlStatement = `DELETE FROM orderDetail WHERE orderId=${id} `
+        const sqlStatementProduct = `DELETE FROM productOrder WHERE orderId=${id} `
+        db.serialize(() => {
+
+            db.run(sqlStatement, function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                } else {
+                    console.log(`Delete OrderDetail : ${id}`)
+                }
+
+            });
+            db.run(sqlStatementProduct, function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                } else {
+                    cb({ success: true })
+                    console.log(`Successfully Delete OrderID :  ${id}`)
+                }
+
+            });
+
+        })
+    },
 
 }
