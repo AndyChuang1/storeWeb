@@ -7,6 +7,7 @@
         <vs-th>客戶電話</vs-th>
         <vs-th>創建時間</vs-th>
         <vs-th>訂單狀態</vs-th>
+        <vs-th>訂單編號</vs-th>
         <vs-th>總金額</vs-th>
         <vs-th>功能</vs-th>
       </template>
@@ -15,10 +16,11 @@
         <vs-tr :key="indextr" v-for="(tr, indextr) in data">
           <vs-td :data="data[indextr].rowid">{{indextr+1}}</vs-td>
           <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
-          <vs-td :data="data[indextr].phone">{{data[indextr].Mphone}}</vs-td>
-          <vs-td :data="data[indextr].phone">{{data[indextr].updateTime}}</vs-td>
-          <vs-td :data="data[indextr].phone">{{data[indextr].status}}</vs-td>
-          <vs-td :data="data[indextr].phone">{{data[indextr].total}}元</vs-td>
+          <vs-td :data="data[indextr].Mphone">{{data[indextr].Mphone}}</vs-td>
+          <vs-td :data="data[indextr].updateTime">{{data[indextr].updateTime}}</vs-td>
+          <vs-td :data="data[indextr].status">{{data[indextr].status}}</vs-td>
+          <vs-td :data="data[indextr].orderId">{{data[indextr].orderId}}</vs-td>
+          <vs-td :data="data[indextr].total">{{data[indextr].total}}元</vs-td>
           <vs-td :data="data[indextr].rowid">
             <vs-button type="gradient" :to="'/admin/orderdetail/'+data[indextr].orderId">查看</vs-button>
             <vs-button
