@@ -58,7 +58,12 @@
             <vs-td :data="data[indextr].payment">{{data[indextr].payment}}</vs-td>
             <vs-td :data="data[indextr].deliverTime">{{data[indextr].deliverTime}}</vs-td>
             <vs-td :data="data[indextr].status">
-              <vs-select width="70px" color="#103767" class="selectExample" v-model="customer[0].status">
+              <vs-select
+                width="70px"
+                color="#103767"
+                class="selectExample"
+                v-model="customer[0].status"
+              >
                 <vs-select-item
                   :key="index"
                   :value="item.name"
@@ -73,9 +78,9 @@
       </vs-table>
     </div>
     <div class="col-12 d-flex justify-content-end mt-4">
-        <vs-button class="mr-1" color="primary" type="filled" to="/admin/orderlist">取消</vs-button>
-        <vs-button color="primary" type="filled" @click="submit">修改</vs-button>
-      </div>
+      <vs-button class="mr-1" color="primary" type="filled" to="/admin/orderlist">取消</vs-button>
+      <vs-button color="primary" type="filled" @click="submit">修改</vs-button>
+    </div>
   </div>
 </template>
 <script>
@@ -109,16 +114,39 @@ export default {
           total: 4455
         }
       ],
-      options:[{ name: "未確認" }, { name: "已確認" },{name:"已完成"}]
+      options: [{ name: "未確認" }, { name: "已確認" }, { name: "已完成" }]
     };
   },
   components: {
     MainHeader
   },
-  methods:{
-      submit(){
-
-      }
+  methods: {
+    submit() {},
+    getDetail() {
+      const token = this.$store.state.auth.token;
+      this.$axios
+        .all([this.$axios.get("/apipost/order", {
+          params: { orderId: this.$route.params.id },
+          headers: {
+            "x-access-token": token
+          }
+        }), this.$axios.get("/apipost/orderdetail", {
+          params: { orderId: this.$route.params.id },
+          headers: {
+            "x-access-token": token
+          }
+        })])
+        .then(this.$axios.spread((res,res2)=> {
+            this.customer=res.data
+            this.order=res2.data
+        }) )
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  },
+  created(){
+      this.getDetail();
   }
 };
 </script>
