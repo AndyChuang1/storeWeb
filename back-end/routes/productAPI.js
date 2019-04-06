@@ -28,10 +28,10 @@ router.get('/productTypes', function (req, res) {
 });
 
 router.post('/order',function(req,res){
-    const { name,idCard,phone,Mphone,address,zip,payment,deliverTime,product,status} = req.body
+    const { name,idCard,phone,Mphone,address,zip,payment,deliverTime,product,status,total} = req.body
     const OrderList = JSON.parse(product)
     
-    sql.insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,(result)=>{
+    sql.insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total,(result)=>{
         if(result.err){
             res.status(400).json({Success: false,Msg:result.err})
         }else{

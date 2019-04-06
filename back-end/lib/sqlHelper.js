@@ -21,7 +21,8 @@ module.exports = {
               payment TEXT NOT NULL,
               deliverTime TEXT NOT NULL,
               status TEXT NOT NULL,
-              updateTime TEXT NOT NULL
+              updateTime TEXT NOT NULL,
+              total INTEGER
             )`);
             db.run(`CREATE TABLE IF NOT EXISTS orderDetail
             (
@@ -127,11 +128,11 @@ module.exports = {
 
         })
     },
-    insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime, cb) {
-        const sqlStatement = `INSERT INTO productOrder (name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,updateTime) VALUES(?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))`
+    insertOrder(name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total, cb) {
+        const sqlStatement = `INSERT INTO productOrder (name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total,updateTime) VALUES(?,?,?,?,?,?,?,?,?,?,datetime('now', 'localtime'))`
         db.serialize(() => {
 
-            db.run(sqlStatement, [name,idCard,phone,Mphone,address,zip,payment,status,deliverTime], function (err, rows) {
+            db.run(sqlStatement, [name,idCard,phone,Mphone,address,zip,payment,status,deliverTime,total], function (err, rows) {
                 if (err) {
                     cb({ err: err })
                 } else {
@@ -290,7 +291,7 @@ module.exports = {
 
     },
     getOrderList(orderId) {
-        const sqlStatementOverView = `SELECT orderId,name,Mphone,status,updateTime from productOrder`;
+        const sqlStatementOverView = `SELECT orderId,name,Mphone,status,total,updateTime from productOrder`;
         const sqlStatementDetail = `SELECT * from productOrder where orderId=${orderId}`;
         return new Promise((resolve, reject) => {
             db.serialize(() => {
