@@ -36,11 +36,11 @@ function fileFilter(req, file, cb) {
     }
 }
 //midleware
-router.use( (req, res, next) =>{
+router.use((req, res, next) => {
     console.log(req)
 
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
- 
+
     if (token) {
         auth.verifyToken(token).then(decoded => {
             req.decoded = decoded
@@ -60,8 +60,8 @@ router.use( (req, res, next) =>{
     }
 })
 /* GET home page. */
-router.post('/product',function (req, res, next) {
-  //console.log(req)
+router.post('/product', function (req, res, next) {
+    //console.log(req)
     upload(req, res, function (err) {
         const { name, unit, types, price, detail, sales } = req.body
 
@@ -83,11 +83,11 @@ router.post('/product',function (req, res, next) {
     //res.status(200).json({ Success: true })
     // res.status(200).end('Success!!')
 });
-router.put('/product/:id',function (req, res, next) { 
+router.put('/product/:id', function (req, res, next) {
     upload(req, res, function (err) {
-      console.log(req)
-        const { name,unit, types, price, detail, sales } = req.body
-        const {id} =req.params;
+        console.log(req)
+        const { name, unit, types, price, detail, sales } = req.body
+        const { id } = req.params;
         if (req.fileValidationError) {
             //415 Unsupported Media Type
             res.status(415).json({ Success: false, message: req.fileValidationError })
@@ -96,14 +96,14 @@ router.put('/product/:id',function (req, res, next) {
             res.status(413).json({ Success: false, message: err.message })
         } else {
             if (req.file) {
-              const path = '/product/' + req.file.filename
-              sql.updateProudct(name,unit, types, price, detail,path,sales,id);
-              res.status(200).json({ Success: true })
-            }else{
+                const path = '/product/' + req.file.filename
+                sql.updateProudct(name, unit, types, price, detail, path, sales, id);
+                res.status(200).json({ Success: true })
+            } else {
                 console.log('Image path keep same');
-                const path =null;
-              sql.updateProudct(name,unit, types, price, detail,path,sales,id);
-              res.status(200).json({ Success: true })
+                const path = null;
+                sql.updateProudct(name, unit, types, price, detail, path, sales, id);
+                res.status(200).json({ Success: true })
             }
         }
     })
@@ -112,112 +112,127 @@ router.put('/product/:id',function (req, res, next) {
     // res.status(200).end('Success!!')
 });
 
-router.delete('/product/:id',function (req, res, next) { 
-  const {id} =req.params;
-  const {name}=req.query;
-  
-  sql.delProduct(name,id,(result)=>{
-      if(result.err){
-          console.log(result.err)
-          res.status(400).json({Success: false,Msg:'Delete error'})
-      }else{
-          res.status(200).json({Success: true})
-      }
-  })
+router.delete('/product/:id', function (req, res, next) {
+    const { id } = req.params;
+    const { name } = req.query;
 
-  // res.status(200).json({ Success: true })
-  // res.status(200).end('Success!!')
+    sql.delProduct(name, id, (result) => {
+        if (result.err) {
+            console.log(result.err)
+            res.status(400).json({ Success: false, Msg: 'Delete error' })
+        } else {
+            res.status(200).json({ Success: true })
+        }
+    })
+
+    // res.status(200).json({ Success: true })
+    // res.status(200).end('Success!!')
 });
 
-router.post('/types',function (req, res, next) {
+router.post('/types', function (req, res, next) {
     //console.log(req)
-    const {name} = req.body
-      try{
-        sql.insertTypes(name,(result)=>{
-            if(result.err){
-                res.status(400).json({Success: false,Msg:'Same types exist'})
-            }else{
-                res.status(200).json({Success: true})
+    const { name } = req.body
+    try {
+        sql.insertTypes(name, (result) => {
+            if (result.err) {
+                res.status(400).json({ Success: false, Msg: 'Same types exist' })
+            } else {
+                res.status(200).json({ Success: true })
             }
-           
-        })
-        
-      }catch(e){
-        console.log(e);
-      }
 
-  });
-  router.put('/types/:id',function (req, res, next) {
+        })
+
+    } catch (e) {
+        console.log(e);
+    }
+
+});
+router.put('/types/:id', function (req, res, next) {
     //console.log(req)
-    const {id} =req.params;
-    const {name} = req.body
-      try{
-        sql.updateType(name,id,(result)=>{
-            if(result.err){
-                res.status(400).json({Success: false,Msg:'Same types exist'})
-            }else{
-                res.status(200).json({Success: true})
+    const { id } = req.params;
+    const { name } = req.body
+    try {
+        sql.updateType(name, id, (result) => {
+            if (result.err) {
+                res.status(400).json({ Success: false, Msg: 'Same types exist' })
+            } else {
+                res.status(200).json({ Success: true })
             }
-           
+
         })
-        
-      }catch(e){
+
+    } catch (e) {
         console.log(e);
-      }
+    }
 
-  });
+});
 
-  router.delete('/types/:id',function (req, res, next) { 
-    const {id} =req.params;
-    const {name}=req.query;
-    
-    sql.delType(name,id,(result)=>{
-        if(result.err){
+router.delete('/types/:id', function (req, res, next) {
+    const { id } = req.params;
+    const { name } = req.query;
+
+    sql.delType(name, id, (result) => {
+        if (result.err) {
             console.log(result.err)
-            res.status(400).json({Success: false,Msg:'Delete error'})
-        }else{
-            res.status(200).json({Success: true})
+            res.status(400).json({ Success: false, Msg: 'Delete error' })
+        } else {
+            res.status(200).json({ Success: true })
         }
     })
-  
+
     // res.status(200).json({ Success: true })
     // res.status(200).end('Success!!')
-  });
-  
-  router.delete('/order/:id',function (req, res, next) { 
-    const {id} =req.params;
-    
-    
-    sql.delOrder(id,(result)=>{
-        if(result.err){
+});
+
+router.delete('/order/:id', function (req, res, next) {
+    const { id } = req.params;
+    sql.delOrder(id, (result) => {
+        if (result.err) {
             console.log(result.err)
-            res.status(400).json({Success: false,Msg:'Delete error'})
-        }else{
-            res.status(200).json({Success: true})
+            res.status(400).json({ Success: false, Msg: 'Delete error' })
+        } else {
+            res.status(200).json({ Success: true })
         }
     })
-  
+
     // res.status(200).json({ Success: true })
     // res.status(200).end('Success!!')
-  });
+});
+router.put('/order/:id', function (req, res, next) {
+    const { id } = req.params;
+    const { status } = req.body;
 
-  router.get('/order',function(req,res,next){
-    const {orderId}=req.query;
-    sql.getOrderList(orderId).then((result)=>{
+    sql.updateOrderStatus(status, id, (result) => {
+        if (result.err) {
+            console.log(result.err)
+            res.status(400).json({ Success: false, Msg: 'Delete error' })
+        } else {
+            res.status(200).json({ Success: true })
+        }
+    })
+
+    // res.status(200).json({ Success: true })
+    // res.status(200).end('Success!!')
+});
+
+router.get('/order', function (req, res, next) {
+    const { orderId } = req.query;
+    sql.getOrderList(orderId).then((result) => {
         res.status(200).end(result)
-    }).catch(err=>{
+    }).catch(err => {
         res.status(400).end(err)
     })
-  })
-  router.get('/orderdetail',function(req,res,next){
-    const {orderId}=req.query;
-    sql.getOrderDetail(orderId).then((result)=>{
+})
+router.get('/orderdetail', function (req, res, next) {
+    const { orderId } = req.query;
+    sql.getOrderDetail(orderId).then((result) => {
         res.status(200).end(result)
-    }).catch(err=>{
+    }).catch(err => {
         res.status(400).end(err)
     })
-  })
-  
+})
+
+
 
 
 

@@ -201,6 +201,23 @@ module.exports = {
 
         })
     },
+    updateOrderStatus(status, id, cb) {
+        const sqlStatement = `UPDATE productOrder set status=? WHERE orderId = ?`;
+        db.serialize(() => {
+
+            db.run(sqlStatement, [status, id], function (err, rows) {
+                if (err) {
+                    cb({ err: err })
+                    throw err;
+                } else {
+                    console.log('Order Update' + ' Status:' + status)
+                    cb({ success: true })
+                }
+            });
+
+
+        })
+    },
     getProductList(types, name) {
         const sqlStatementTypes = `SELECT rowid,name,types,price,detail,path from product where types =?`;
         const sqlStatementAll = `SELECT rowid,name,types,price,unit,detail,path,sales from product`;
