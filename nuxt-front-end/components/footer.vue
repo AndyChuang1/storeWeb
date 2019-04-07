@@ -22,7 +22,7 @@ $break-mobile:480px;
 #main-footer {
     position: absolute;
    left: 0;
-   bottom: 0;
+   bottom: -2rem;
    right: 0;
    width: 100%;
    padding: 1rem;

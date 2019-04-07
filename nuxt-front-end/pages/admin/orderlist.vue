@@ -2,6 +2,7 @@
   <div>
     <div class="mgt-title">
       <main-header class="mb-3" title="訂單管理"></main-header>
+      
     </div>
     <div class="tab">
       <vs-tabs>
@@ -15,17 +16,16 @@
         </vs-tab>
         <vs-tab :vs-label="confirmMsg">
           <div class="confirm-content">
-            <order-Table :orderList="orderList.filter(item=>item.status==='已確認')"></order-Table>
+            <order-Table v-on:del_order="initOrderList" :orderList="orderList.filter(item=>item.status==='已確認')"></order-Table>
           </div>
         </vs-tab>
         <vs-tab :vs-label="completedMsg">
           <div class="completed-content">
-            <order-Table :orderList="orderList.filter(item=>item.status==='已完成')"></order-Table>
+            <order-Table v-on:del_order="initOrderList" :orderList="orderList.filter(item=>item.status==='已完成')"></order-Table>
           </div>
         </vs-tab>
       </vs-tabs>
     </div>
-    <div></div>
   </div>
 </template>
 <script>
@@ -40,7 +40,8 @@ export default {
       orderList: [],
       completedM: null,
       uncompletedM: null,
-      confirmM: null
+      confirmM: null,
+      test:1
     };
   },
   components: {
@@ -89,11 +90,12 @@ export default {
         .then(function(response) {
           const data = response.data;
           vm.orderList = data;
+          vm.$$forceUpdate();
         })
         .catch(function(error) {
           console.log(error);
         });
-      this.$forceUpdate();
+      
     }
   },
   created() {

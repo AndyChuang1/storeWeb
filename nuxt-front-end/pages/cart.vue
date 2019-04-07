@@ -43,11 +43,13 @@
 
     <div class="clintInfo">
       <main-header title="購買人資料"></main-header>
-      <form class="needs-validation" novalidate>
+      <form class="needs-validation mb-4" novalidate>
         <div class="container pt-2">
           <div class="form-row">
             <div class="col-md-3 mb-3">
-              <label for="validationTooltip01">姓名</label>
+              <label for="validationTooltip01">
+                <span class="requireMark">*</span>姓名
+              </label>
               <input
                 type="text"
                 class="form-control"
@@ -55,6 +57,7 @@
                 placeholder="Name"
                 value
                 required
+                v-model="formData.name"
               >
               <div class="valid-tooltip">Looks good!</div>
             </div>
@@ -67,11 +70,12 @@
                 placeholder="ID number"
                 value
                 required
+                v-model="formData.idCard"
               >
               <div class="valid-tooltip">Looks good!</div>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationTooltip02">電話</label>
+              <label for="validationTooltip02">室內電話</label>
               <input
                 type="text"
                 class="form-control"
@@ -79,11 +83,14 @@
                 placeholder="Phone"
                 value
                 required
+                v-model="formData.phone"
               >
               <div class="valid-tooltip">Looks good!</div>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationTooltip02">行動電話</label>
+              <label for="validationTooltip02">
+                <span class="requireMark">*</span>行動電話
+              </label>
               <input
                 type="text"
                 class="form-control"
@@ -91,19 +98,23 @@
                 placeholder="Mobile phone"
                 value
                 required
+                v-model="formData.Mphone"
               >
               <div class="valid-tooltip">Looks good!</div>
             </div>
           </div>
           <div class="form-row">
             <div class="col-md-6 mb-3">
-              <label for="validationTooltip03">送貨地址</label>
+              <label for="validationTooltip03">
+                <span class="requireMark">*</span>送貨地址
+              </label>
               <input
                 type="text"
                 class="form-control"
                 id="validationTooltip03"
                 placeholder="Address"
                 required
+                v-model="formData.address"
               >
               <div class="invalid-tooltip">Please provide a valid city.</div>
             </div>
@@ -115,30 +126,42 @@
                 id="validationTooltip05"
                 placeholder="Zip"
                 required
+                v-model="formData.zip"
               >
               <div class="invalid-tooltip">Please provide a valid zip.</div>
             </div>
             <div class="col-md-3 mb-3">
-              <label for="validationTooltip05">付款方式</label>
-              <select class="custom-select">
-                <option value="1">貨到付款</option>
-                <option value="2">銀行匯款</option>
-                <option value="3">ATM轉帳</option>
+              <label for="validationTooltip05">
+                <span class="requireMark">*</span>付款方式
+              </label>
+              <select class="custom-select" v-model="formData.payment">
+                <option>貨到付款</option>
+                <option>銀行匯款</option>
+                <option>ATM轉帳</option>
               </select>
             </div>
           </div>
           <div class="form-row justify-content-between">
             <div class="col-md-3 mb-3">
-              <label for="validationTooltip05">收貨時間</label>
-              <select class="custom-select">
-                <option value="1">08:00~12:00</option>
-                <option value="2">12:00~17:00</option>
-                <option value="3">17:00~20:00</option>
+              <label for="validationTooltip05">
+                <span class="requireMark">*</span>收貨時間
+              </label>
+              <select class="custom-select" v-model="formData.deliverTime">
+                <option>08:00~12:00</option>
+                <option>12:00~17:00</option>
+                <option>17:00~20:00</option>
               </select>
             </div>
-            <button class="btn btn-primary col-md-1" type="submit">送出訂單</button>
+            <div class="col-md-2 d-flex align-items-center">
+              <button class="btn btn-primary align-items-center" @click.prevent="submit">送出訂單</button>
+
+              <div>
+                <span class="requireMark">*</span>為必填資料
+              </div>
+            </div>
           </div>
         </div>
+
         <!-- <main-header title="收件人資料"></main-header> -->
         <!-- <div class="container pt-2 mb-5">
           <div class="form-row">
@@ -259,7 +282,21 @@ export default {
   name: "cart",
   layout: "main-content",
   data() {
-    return {};
+    return {
+      formData: {
+        name: null,
+        idCard: null,
+        phone: null,
+        Mphone: null,
+        address: null,
+        zip: null,
+        deliverTime: "17:00~20:00",
+        product: null,
+        payment: "銀行匯款",
+        status: "未確認",
+        total: null
+      }
+    };
   },
   components: {
     MainHeader
@@ -282,6 +319,36 @@ export default {
         num: num
       };
       this.changeQun(payload);
+    },
+    submit() {
+      this.formData["total"] = this.total;
+      this.formData["product"] = JSON.stringify(this.CartList);
+      console.log(this.formData);
+      const header = {
+        "Content-Type": "application/x-www-form-urlencoded"
+      };
+      this.$axios
+        .post("/api/order", this.formData, {
+          headers: header
+        })
+        .then(res => {
+          const { data } = res;
+          console.log(data);
+          this.$vs.dialog({
+            color: 'success',
+            title: `訂單送出成功!!`,
+            text:
+              "請等待店員通知! 或者 請聯絡本店 : 02-2531-0309",
+            accept: this.acceptAlert,
+            close:this.acceptAlert,
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    acceptAlert(){
+      window.location.reload(true)
     }
   }
 };
@@ -292,6 +359,12 @@ export default {
 }
 .cart-block {
   border-bottom: 1px solid gray;
+}
+.clintInfo {
+  position: relative;
+}
+.requireMark {
+  color: red;
 }
 </style>
 

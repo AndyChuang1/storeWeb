@@ -1,10 +1,10 @@
 <template>
   <div id="titleheader" class="maintop">
-
-    <h1>{{title}}</h1>
-    <slot></slot>
+    <div class="title-text">
+      <h1>{{title}}</h1>
+      <slot></slot>
+    </div>
   </div>
-
 </template>
 <script>
 export default {
@@ -23,9 +23,13 @@ export default {
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang='scss' scoped>
 .maintop {
   border-bottom: 3px solid #808080;
+  .title-text {
+    display: flex;
+    align-items:flex-end;
+  }
 }
 
 .maintop h1 {
