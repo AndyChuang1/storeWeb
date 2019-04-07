@@ -92,7 +92,7 @@
                 <span class="requireMark">*</span>行動電話
               </label>
               <input
-                type="text"
+                type="text "
                 class="form-control"
                 id="validationTooltip02"
                 placeholder="Mobile phone"
@@ -152,12 +152,12 @@
                 <option>17:00~20:00</option>
               </select>
             </div>
-            <div class="col-md-2 d-flex align-items-center">
+            <div class="col-md-3 d-flex align-items-center">
               <button class="btn btn-primary align-items-center" @click.prevent="submit">送出訂單</button>
-
-              <div>
+              <div class="pl-2">
                 <span class="requireMark">*</span>為必填資料
               </div>
+                
             </div>
           </div>
         </div>
