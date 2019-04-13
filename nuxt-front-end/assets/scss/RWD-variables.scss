@@ -1,0 +1,13 @@
+$phone-media: 480px;
+$phoneS-media: 375px;
+
+@mixin phone-width() {
+  @media all and (max-width: $phone-media) {
+    @content;
+  }
+}
+@mixin phoneSmall-width() {
+  @media all and (max-width: $phoneS-media) {
+    @content;
+  }
+}

@@ -56,14 +56,24 @@ export default {
 </script>
 
 
-<style>
+<style lang='scss'>
+@import "~assets/scss/RWD-variables.scss";
+
+
 #shopping-cart a {
   color: white;
   display: none;
 }
+
 @media (max-width: 575.98px) {
   #shopping-cart a {
     display: initial;
   }
 }
+.navbar-brand{
+  @include phoneSmall-width(){
+    font-size: 1rem;
+  }
+}
+
 </style>
