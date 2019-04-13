@@ -11,9 +11,9 @@
                 <ul class="nav nav-pills">
                   <li class="nav-item">
                     <router-link
-                      :class="[{active:path=='/products/'},'nav-link']"
+                      :class="[{active:path=='/products'||path=='/products/'},'nav-link']"
                       :to="'/products/'"
-                    >所有產品</router-link>
+                    >所有產品區</router-link>
                   </li>
                   <li class="nav-item" v-for="(category,index) in catalogList" :key="index">
                     <router-link
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       catalogList: [
-        { name: "特價商品", rowid: 1 },
+        { name: "特價商品區", rowid: 1 },
         { name: "養生食材區", rowid: 2 },
         { name: "藥膳燉包區", rowid: 3 },
         { name: "養生飲品區", rowid: 4 },

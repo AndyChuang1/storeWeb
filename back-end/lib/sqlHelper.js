@@ -238,7 +238,7 @@ module.exports = {
                         }
 
                     });
-                } else if (types === '特價商品') {
+                } else if (types === '特價商品區') {
                     db.all(sqlStatementSales, function (err, rows) {
                         if (err) {
                             reject('getProductSales error all')

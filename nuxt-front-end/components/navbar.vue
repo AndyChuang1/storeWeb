@@ -28,7 +28,7 @@
             <li :class="[{active:$route.path=='/guide'},'nav-item']">
               <router-link class="nav-link" to="/guide">購物指南</router-link>
             </li>
-            <li :class="[{active:$route.path=='/products'},'nav-item']">
+            <li :class="[{active:$route.path.split('/')[1]=='products'},'nav-item']">
               <router-link class="nav-link" to="/products">產品目錄</router-link>
             </li>
 
