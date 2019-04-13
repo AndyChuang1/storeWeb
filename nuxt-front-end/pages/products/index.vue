@@ -8,7 +8,7 @@
       >
         <div class="card h-100">
           <div class="hover">
-            <img class="card-img-top" :src="urlConvert(product.path)"  height="400" alt>
+            <img class="card-img-top" :src="urlConvert(product.path)" alt>
             <div class="overlay">
               <button type="button" class="btn btn-primary" @click="addCart(product.name)">加到購物車</button>
             </div>
@@ -56,7 +56,7 @@ export default {
           last: "Last"
         }
       },
-      listTest:''
+      listTest: ""
     };
   },
   components: {
@@ -68,11 +68,14 @@ export default {
     },
     ...mapActions({
       addCart: "shop/addCart",
-      iniProduct:'shop/initProduct'
+      iniProduct: "shop/initProduct"
     }),
-    urlConvert(path){
-      var url = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
-      return url+path
+    urlConvert(path) {
+      var url =
+        process.env.NODE_ENV == "development"
+          ? process.env.devUrl
+          : process.env.prodUrl;
+      return url + path;
     }
   },
   computed: {
@@ -81,19 +84,16 @@ export default {
     },
     ...mapGetters({
       productList: "shop/getProducts"
-    }),
-
+    })
   },
-  mounted(){
-    
-  },
-  async asyncData({store}){
-    
-    await store.dispatch('shop/initProduct','all')
+  mounted() {},
+  async asyncData({ store }) {
+    await store.dispatch("shop/initProduct", "all");
   }
 };
 </script>
 <style lang="scss" scoped>
+@import "~assets/scss/RWD-variables.scss";
 .hover {
   position: relative;
 }
@@ -122,6 +122,14 @@ export default {
 }
 .hover:hover .overlay {
   height: 100%;
+}
+.card {
+  img {
+    height: 20vmax;
+    @include phone-width {
+      height: 40vh;
+    }
+  }
 }
 </style>
 

@@ -27,7 +27,8 @@ export default {
 .maintop {
   border-bottom: 3px solid #808080;
   .title-text {
-    display: flex;
+    // display: flex;
+    font-family: "cwTeXKai", serif;
     align-items:flex-end;
   }
 }

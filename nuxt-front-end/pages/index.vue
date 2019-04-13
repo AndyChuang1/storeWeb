@@ -109,6 +109,7 @@ export default {
 
 .carousel-caption {
   padding-left:3rem;
+  font-family: "cwTeXKai", serif;
   @include phone-width {
       top:35%;
       padding-left:1rem;
@@ -137,5 +138,9 @@ export default {
     
     }
 
+}
+.marketing{
+  font-family: "cwTeXKai", serif;
+  font-size: 1.25rem
 }
 </style>

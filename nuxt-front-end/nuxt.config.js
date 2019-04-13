@@ -15,7 +15,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/earlyaccess/cwtexkai.css' }
     ],
     script:[
       {src:'https://maps.googleapis.com/maps/api/js?key=AIzaSyAP8uxMTg1l4APwuezlZXqYhTf0J4HeHB0'},

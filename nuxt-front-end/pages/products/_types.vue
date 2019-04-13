@@ -109,6 +109,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "~assets/scss/RWD-variables.scss";
 .hover {
   position: relative;
 }
@@ -137,6 +138,14 @@ export default {
 }
 .hover:hover .overlay {
   height: 100%;
+}
+.card {
+  img {
+    height: 20vmax;
+    @include phone-width {
+      height: 40vh;
+    }
+  }
 }
 </style>
 

@@ -1,7 +1,6 @@
 <template>
   <div id="main-banner">
-    <div id="banner"
-      class="row">
+    <div id="banner" class="row">
       <div class="col-12">
         <div class="bannerText">
           <h1 class="title">永盛堂中藥行</h1>
@@ -14,8 +13,6 @@
 import "@/assets/css/carousel.css";
 import "@/assets/css/animate.css";
 
-
-
 export default {
   name: "mainbanner",
   mounted: function() {
@@ -27,9 +24,10 @@ export default {
 };
 </script>
 
-<style scoped>
-#main-banner{
-  margin-top: 3rem
+<style lang="scss" scoped>
+@import "~assets/scss/RWD-variables.scss";
+#main-banner {
+  margin-top: 3rem;
 }
 #banner {
   overflow: hidden;
@@ -44,5 +42,8 @@ export default {
   padding-left: 250px;
   padding-top: 13px;
   font-size: 55px;
+  @include phone-width {
+    display: none;
+  }
 }
 </style>

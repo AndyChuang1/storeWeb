@@ -4,7 +4,8 @@
       <div class="maintop">
         <main-header title="關於我們"></main-header>
       </div>
-      <div class="content">
+      <div class="content-main">
+        <div class="content">
         <p style="margin-top:15px">公司地址：(104)台北市中山區吉林路191號</p>
         <p>連絡電話：(02)-2531~0309</p>
         <p>傳真號碼：(02)-2531~0278</p>
@@ -38,6 +39,9 @@
 
           (請電話聯絡本店客服人員詢問)及親洽本店選購】~</p>
       </div>
+
+      </div>
+      
     </div>
 
   
@@ -135,6 +139,10 @@ export default {
     h1 {
       margin-top: 15px;
     }
+  }
+  .content-main{
+    font-family: "cwTeXKai", serif;
+  font-size: 1.25rem
   }
    
 

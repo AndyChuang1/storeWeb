@@ -15,24 +15,24 @@
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
+            <li :class="[{active:$route.path=='/'},'nav-item']">
               <!--<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>-->
               <router-link class="nav-link" to="/">首頁</router-link>
             </li>
-            <li class="nav-item">
+            <li :class="[{active:$route.path=='/news'},'nav-item']">
               <router-link class="nav-link" to="/news">最新消息</router-link>
             </li>
-            <li class="nav-item">
+            <li :class="[{active:$route.path=='/about'},'nav-item']">
               <router-link class="nav-link" to="/about">關於我們</router-link>
             </li>
-            <li class="nav-item">
+            <li :class="[{active:$route.path=='/guide'},'nav-item']">
               <router-link class="nav-link" to="/guide">購物指南</router-link>
             </li>
-            <li class="nav-item">
-              <router-link class="nav-link" to="/products/">產品目錄</router-link>
+            <li :class="[{active:$route.path=='/products'},'nav-item']">
+              <router-link class="nav-link" to="/products">產品目錄</router-link>
             </li>
 
-            <li class="nav-item">
+            <li :class="[{active:$route.path=='/cart'},'nav-item']">
               <router-link class="nav-link" to="/cart">購物車 ({{getShoppingCartTotal}})
               </router-link>
             </li>
@@ -51,6 +51,9 @@ export default {
   },
   mounted(){
     // console.log(mapGetters)
+     $(".nav-link").click(function() {
+      $("#navbarCollapse").removeClass("show");
+    });
   }
 }
 </script>

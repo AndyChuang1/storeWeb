@@ -1,5 +1,5 @@
 <template>
-  <div id="guide" class>
+  <div id="guide">
     <div class="col-sm">
       <main-header title="購物指南"></main-header>
       <div class="notification" style="color:red">
@@ -209,14 +209,19 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-$break-mobile: 480px;
+@import "~assets/scss/RWD-variables.scss";
+
+#guide{
+  font-family: "cwTeXKai", serif;
+  font-size: 1.25rem
+}
 .deliveryTable-mobile {
-  @media screen and (min-width: $break-mobile) {
+  @media screen and (min-width: $phone-media) {
     display: none;
   }
 }
 .deliveryTable {
-  @media screen and (max-width: $break-mobile) {
+  @media screen and (max-width: $phone-media) {
     display: none;
   }
 }
@@ -225,6 +230,9 @@ $break-mobile: 480px;
   h1 {
     margin-top: 25px;
     margin-bottom: 25px;
+    @include phone-width{
+      font-size: 1.5rem
+    }
   }
 }
 
@@ -233,6 +241,9 @@ $break-mobile: 480px;
   h1 {
     margin-top: 25px;
     margin-bottom: 25px;
+     @include phone-width{
+      font-size: 2rem
+    }
   }
 }
 
@@ -268,5 +279,11 @@ table {
 }
 .part4 {
   padding-bottom: 4rem;
+}
+ul {
+     padding-left: 40px!important;
+}
+ol {
+     padding-left: 40px!important;
 }
 </style>
