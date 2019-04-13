@@ -15,6 +15,12 @@
                       :to="'/products/'"
                     >所有產品區</router-link>
                   </li>
+                  <li class="nav-item">
+                    <router-link
+                      :class="[{active:path=='/products/特價商品區'},'nav-link']"
+                      :to="'/products/特價商品區'"
+                    >特價商品區</router-link>
+                  </li>
                   <li class="nav-item" v-for="(category,index) in catalogList" :key="index">
                     <router-link
                       :class="[{active:path=='/products/'+category.name},'nav-link']"
@@ -49,7 +55,6 @@ export default {
   data() {
     return {
       catalogList: [
-        { name: "特價商品區", rowid: 1 },
         { name: "養生食材區", rowid: 2 },
         { name: "藥膳燉包區", rowid: 3 },
         { name: "養生飲品區", rowid: 4 },
@@ -69,14 +74,31 @@ export default {
   },
   created() {
     this.path = this.$route.path;
+    this.initTypes();
+  },
+  methods:{
+     initTypes() {
+      this.$axios
+        .get("/api/productTypes", {
+          params: {
+            types: "all"
+          }
+        })
+        .then((response)=> {
+          const data = response.data;
+          this.catalogList = data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
   },
   watch: {
     $route(to, from) {
       this.path = this.$route.path;
       // console.log(this.path);
     }
-  },
-  methods: {}
+  }
 };
 </script>
 <style>

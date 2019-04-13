@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-auto mb-5">
+      <div class="col-auto">
         <no-ssr>
           <pagination
             :records="productList.length"
@@ -37,7 +37,16 @@
         </no-ssr>
       </div>
     </div>
-
+    <product-group v-if="$route.params.types=='生物科技類'" :productList="staticData.BioData"></product-group>
+    <product-group v-if="$route.params.types=='藥膳燉包區'" :productList="staticData.packageData"></product-group>
+    <product-group v-if="$route.params.types=='養生飲品區'" :productList="staticData.DrinkData"></product-group>
+    <product-group v-if="$route.params.types=='GMP產品'" :productList="staticData.GMPData"></product-group>
+    <product-group v-if="$route.params.types=='坐月子藥膳'" :productList="staticData.PMData"></product-group>
+    <product-group v-if="$route.params.types=='蜜餞食品區'" :productList="staticData.SuccadeData"></product-group>
+    <product-group v-if="$route.params.types=='南北什貨區'" :productList="staticData.GoodsData"></product-group>
+    <product-group v-if="$route.params.types=='香料滷包類'" :productList="staticData.PouchData"></product-group>
+    <product-group v-if="$route.params.types=='周邊產品區'" :productList="staticData.AccessoryData"></product-group>
+    <product-group v-if="$route.params.types=='代工服務區'" :productList="staticData.OEMData"></product-group>
     <div
       v-if="productList.length==0"
       class="container content-statement d-flex justify-content-center mt-3"
@@ -55,6 +64,8 @@
 </template>
 <script>
 import MainHeader from "@/components/mainheader";
+import productGroup from "@/components/productGroup";
+import staticData from "@/assets/js/static.js";
 import { mapGetters, mapActions } from "vuex";
 export default {
   name: "types",
@@ -71,11 +82,25 @@ export default {
           last: "Last"
         }
       },
-      listTest: ""
+      listTest: "",
+      staticData:{
+        packageData: staticData.getPackeage(),
+        BioData:staticData.getBio(),
+        DrinkData:staticData.getDrinks(),
+        GMPData:staticData.getGMP(),
+        PMData:staticData.getPM(),
+        SuccadeData:staticData.getSuccade(),
+        GoodsData:staticData.getGoods(),
+        PouchData:staticData.getPouch(),
+        AccessoryData:staticData.getAccessory(),
+        OEMData:staticData.getOEM(),
+      }
+      
     };
   },
   components: {
-      MainHeader
+    MainHeader,
+    productGroup
   },
   methods: {
     setPage: function(page) {
@@ -83,11 +108,14 @@ export default {
     },
     ...mapActions({
       addCart: "shop/addCart",
-      iniProduct:'shop/initProduct'
+      iniProduct: "shop/initProduct"
     }),
-    urlConvert(path){
-      var url = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
-      return url+path
+    urlConvert(path) {
+      var url =
+        process.env.NODE_ENV == "development"
+          ? process.env.devUrl
+          : process.env.prodUrl;
+      return url + path;
     }
   },
   computed: {
@@ -96,15 +124,13 @@ export default {
     },
     ...mapGetters({
       productList: "shop/getProducts"
-    }),
-
+    })
   },
-  mounted(){
-    this.path= this.$route.path;
-    
+  mounted() {
+    this.path = this.$route.path;
   },
-  async asyncData({store,params }){
-    await store.dispatch('shop/initProduct',params.types)
+  async asyncData({ store, params }) {
+    await store.dispatch("shop/initProduct", params.types);
   }
 };
 </script>
