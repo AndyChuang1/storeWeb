@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="product-content">
     <div class="row">
       <div
         class="col-lg-3 col-md-6 mb-4 mt-2"
@@ -130,6 +130,12 @@ export default {
       height: 40vh;
     }
   }
+}
+
+</style>
+<style>
+.product-content{
+  font-family: "cwTeXKai", serif;
 }
 </style>
 

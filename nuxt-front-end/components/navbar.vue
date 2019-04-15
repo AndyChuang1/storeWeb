@@ -6,7 +6,7 @@
         
         </a>
         <div id='shopping-cart'>
-          <router-link class="nav-link" to="/main/cart">
+          <router-link class="nav-link" to="/cart">
             <img src='@/assets/img/shopping_cart.png' width="20" height="20">({{getShoppingCartTotal}})</router-link>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

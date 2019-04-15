@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="product-content">
     <div class="row">
       <div
         class="col-lg-3 col-md-6 mb-4 mt-2"
@@ -51,7 +51,7 @@
       v-if="productList.length==0"
       class="container content-statement d-flex justify-content-center mt-3"
     >
-      <div class="col-auto mt-3">
+      <div class="col-auto mt-3 infor">
         <h2>請來電洽詢或至現場購買</h2>
         <h3>永盛堂中藥行</h3>
         <p>公司地址：(104) 台北市中山區吉林路191號</p>
@@ -172,6 +172,9 @@ export default {
       height: 40vh;
     }
   }
+}
+.infor{
+  border:2px solid sandybrown
 }
 </style>
 
