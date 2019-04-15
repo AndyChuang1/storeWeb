@@ -8,7 +8,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="first-slide" :src="require('@/assets/bannerH2.png')" alt="First slide">
+          <img class="first-slide" :src="require('@/assets/bannerH2.jpg')" alt="First slide">
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>因為堅持，才有好品質</h1>
@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="second-slide" :src="require('@/assets/bannerH2.png')" alt="Second slide">
+          <img class="second-slide" :src="require('@/assets/bannerH2.jpg')" alt="Second slide">
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>開放式陳列、價格透明</h1>
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="third-slide" :src="require('@/assets/bannerH2.png')" alt="Third slide">
+          <img class="third-slide" :src="require('@/assets/bannerH2.jpg')" alt="Third slide">
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>優良商號及優良從業人員及台北市中藥商業公會理事</h1>
