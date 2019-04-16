@@ -41,7 +41,7 @@
             <li>
               國外地區配送請參考
               <font color="red">中華郵政全球資訊網-國際快捷</font>
-              <a href="https://www.post.gov.tw/post/internet/Postal/index.jsp?ID=2010201">［連結］</a>
+              <a target="_blank" href="https://www.post.gov.tw/post/internet/Postal/index.jsp?ID=2010201">［連結］</a>
             </li>
             <li>運費報價 :
               <br>單位：新台幣(含稅金額)

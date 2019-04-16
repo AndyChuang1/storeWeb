@@ -9,7 +9,7 @@
     <p>{{Pcontents}}</p>
     <p><a class="btn btn-secondary"
         :href="link"
-        role="button">詳細資訊 &raquo;</a></p>
+        role="button" target="_blank">詳細資訊 &raquo;</a></p>
   </div>
 
 </template>
