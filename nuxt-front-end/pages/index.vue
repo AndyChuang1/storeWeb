@@ -8,7 +8,12 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="first-slide" :src="require('@/assets/bannerH2.jpg')" alt="First slide">
+          <img class="first-slide full" :src="require('@/assets/bannerH2.jpg')" alt="First slide">
+          <img
+            class="first-slide mobile"
+            :src="require('@/assets/bannerMobile.jpg')"
+            alt="First slide"
+          >
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>因為堅持，才有好品質</h1>
@@ -22,6 +27,12 @@
         </div>
         <div class="carousel-item">
           <img class="second-slide" :src="require('@/assets/bannerH2.jpg')" alt="Second slide">
+           <img
+            class="second-slide mobile"
+            :src="require('@/assets/bannerMobile.jpg')"
+            alt="Second slide"
+          >
+          
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>開放式陳列、價格透明</h1>
@@ -34,6 +45,11 @@
         </div>
         <div class="carousel-item">
           <img class="third-slide" :src="require('@/assets/bannerH2.jpg')" alt="Third slide">
+          <img
+            class="third-slide mobile"
+            :src="require('@/assets/bannerMobile.jpg')"
+            alt="Third slide"
+          >
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>優良商號及優良從業人員及台北市中藥商業公會理事</h1>
@@ -106,41 +122,49 @@ export default {
 <style lang="scss" scoped>
 @import "~assets/scss/RWD-variables.scss";
 
-
 .carousel-caption {
-  padding-left:3rem;
+  padding-left: 3rem;
   font-family: "cwTeXKai", serif;
+
   @include phone-width {
-      top:35%;
-      padding-left:1rem;
-    }
+    top: 35%;
+    padding-left: 0rem;
+  }
   h1 {
     font-weight: 700;
     @include phone-width {
       font-size: 1.5rem;
-      
     }
     @include phoneSmall-width {
       font-size: 1.5rem;
       font-weight: 700;
     }
   }
-  P{
+  p {
     @include phone-width {
       display: none;
     }
   }
-  
 }
 .carousel-item {
-    @include phone-width{
-     height: 13rem;
-    
+  .full {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+  @include phone-width {
+    .full {
+      display: none;
     }
-
+    .mobile {
+      display: block;
+    }
+    height: 13rem;
+  }
 }
-.marketing{
+.marketing {
   font-family: "cwTeXKai", serif;
-  font-size: 1.25rem
+  font-size: 1.25rem;
 }
 </style>

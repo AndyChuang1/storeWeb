@@ -179,7 +179,12 @@ export default {
   }
 }
 .infor{
-  border:2px solid sandybrown
+  border:2px solid sandybrown;
+  @include phone-width{
+    h2{
+      font-size: 1.75rem
+    }
+  }
 }
 </style>
 

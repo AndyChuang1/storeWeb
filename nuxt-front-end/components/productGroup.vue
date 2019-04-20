@@ -24,7 +24,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .product-group{
-    text-align: center
+    text-align: center;
+    font-size: 1.25rem
 }
 </style>
 
