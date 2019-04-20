@@ -137,7 +137,7 @@ export default {
 }
 .card {
   img {
-    height: 20vmax;
+    height: 20vw;
     @include phone-width {
       height: 40vh;
     }
