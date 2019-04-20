@@ -9,7 +9,7 @@
     <p>{{Pcontents}}</p>
     <p><a class="btn btn-secondary"
         :href="link"
-        role="button" target="_blank">詳細資訊 &raquo;</a></p>
+        role="button" target="_blank">{{btnContent}} &raquo;</a></p>
   </div>
 
 </template>
@@ -35,6 +35,12 @@ export default {
         },
         type:String
 
+      },
+      btnContent:{
+        default(){
+          return "詳細資訊"
+        },
+        type:String
       }
     },
 };

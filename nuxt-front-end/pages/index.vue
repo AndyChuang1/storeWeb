@@ -27,12 +27,12 @@
         </div>
         <div class="carousel-item">
           <img class="second-slide" :src="require('@/assets/bannerH2.jpg')" alt="Second slide">
-           <img
+          <img
             class="second-slide mobile"
             :src="require('@/assets/bannerMobile.jpg')"
             alt="Second slide"
           >
-          
+
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>開放式陳列、價格透明</h1>
@@ -80,10 +80,11 @@
           link="https://www.facebook.com/%E6%B0%B8%E7%9B%9B%E5%A0%82%E4%B8%AD%E8%97%A5%E8%A1%8C-255181264557655/"
         ></heading>
         <heading
-          Head="保健小妙方"
-          Pcontents="枸杞茶：枸杞十幾粒，加熱水沖泡，早餐與晚餐前各喝一杯，連續喝三個月。枸杞子，能滋腎、強壯筋骨，養肝、明目、潤肺生精，幫助記憶"
-          :img="require('@/assets/me.jpg')"
-          link="/recipe"
+          Head="Line"
+          Pcontents="LINE@永盛堂中藥行，歡迎立即加入。立即詢問產品與服務，價格與配送方式。提供您本行最迅速與最有品質的服務~期待您的加入!"
+          :img="require('@/assets/line.png')"
+          link="https://line.me/ti/p/XXXXXX"
+          btnContent="加入好友"
         ></heading>
         <heading
           Head="Maps"
