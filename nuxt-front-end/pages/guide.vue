@@ -205,6 +205,18 @@ export default {
   },
   components: {
     MainHeader
+  },
+  head() {
+    return {
+      title: "永盛堂中藥行-購物指南",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: `永盛堂中藥行，提供中藥材，順天本草、勝昌食品、蜜餞、保健食品等等周邊商品。【電話】2531-0309 【地址】中山區吉林路191號."訂購/付款/配送流程 | 運費說明| 商品退換貨辦理|`
+        }
+      ]
+    };
   }
 };
 </script>
@@ -221,6 +233,9 @@ export default {
   }
 }
 .deliveryTable {
+  th{
+    font-size: 1rem;
+  }
   @media screen and (max-width: $phone-media) {
     display: none;
   }

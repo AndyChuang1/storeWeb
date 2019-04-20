@@ -397,7 +397,13 @@ export default {
           console.log(error);
         });
       }
-    }
+    },
+   
+  },
+   head() {
+    return {
+      title: "永盛堂中藥行-購物車",
+    };
   }
 };
 </script>

@@ -12,7 +12,7 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content:"永盛堂中藥行，提供中藥材，順天本草、勝昌食品、蜜餞、保健食品等等周邊商品。【電話】2531-0309 【地址】中山區吉林路191號." }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },

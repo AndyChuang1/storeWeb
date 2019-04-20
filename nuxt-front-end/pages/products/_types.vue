@@ -51,7 +51,7 @@
       v-if="productList.length==0"
       class="container content-statement d-flex justify-content-center mt-3"
     >
-      <div class="col-auto mt-3 infor">
+      <div class="col-auto mt-3 mb-1 infor">
         <h2>請來電洽詢或至現場購買</h2>
         <h3>永盛堂中藥行</h3>
         <p>店鋪地址：(104) 台北市中山區吉林路191號</p>
@@ -131,6 +131,11 @@ export default {
   },
   async asyncData({ store, params }) {
     await store.dispatch("shop/initProduct", params.types);
+  },
+  head() {
+    return {
+      title: `永盛堂中藥行-${this.$route.params.types}`,
+    };
   }
 };
 </script>
@@ -167,7 +172,7 @@ export default {
 }
 .card {
   img {
-    height: 20vmax;
+    height: 20vw;
     @include phone-width {
       height: 40vh;
     }

@@ -53,6 +53,11 @@ export default {
   },
   components: {
     MainHeader
+  },
+  head() {
+    return {
+      title: "永盛堂中藥行-最新消息",
+    };
   }
 };
 </script>
