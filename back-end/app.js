@@ -13,13 +13,14 @@ var secret =require('./config').secret;
 var sql = require('./lib/sqlHelper')
 connectDB().then(()=>{
     sql.getUser('admin',(result)=>{
-        if(result.length<=0){
+       
+        if(result[0].name=='no'){
             sql.createAdmin();
         }
     });
 
     sql.getUser('yongsn',(result)=>{
-        if(result.length<=0){
+        if(result[0].name=='no'){
             sql.createUser();
         }
     })

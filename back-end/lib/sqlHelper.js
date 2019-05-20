@@ -8,7 +8,7 @@ module.exports = {
 
         db.serialize(() => {
             db.run("CREATE TABLE IF NOT EXISTS product(name TEXT PRIMARY KEY,unit TEXT,types TEXT,price INTEGER,detail TEXT,path TEXT,sales INTEGER)");
-            db.run("CREATE TABLE IF NOT EXISTS user(name TEXT PRIMARY KEY,pawd TEXT)");
+            db.run("CREATE TABLE IF NOT EXISTS user(name TEXT PRIMARY KEY,salt TEXT,hashPawd TEXT)");
             db.run("CREATE TABLE IF NOT EXISTS prodTypes(name TEXT PRIMARY KEY)");
             db.run(`CREATE TABLE IF NOT EXISTS productOrder
             (
@@ -38,9 +38,9 @@ module.exports = {
         })
     },
     createAdmin() {
-        const sqlStatement = 'INSERT INTO user (name,pawd)VALUES(?,?)'
+        const sqlStatement = 'INSERT INTO user (name,salt,hashPawd)VALUES(?,?,?)'
         db.serialize(() => {
-            db.run(sqlStatement, ['admin', 'qweasd'], function (err, rows) {
+            db.run(sqlStatement, ['admin', '5d1a10a0fe1f8ee3b01ecac9ea632f2d','2baf28cb80b45541ef7fcb4d7cddf343ded86372961a58b402e158a102e3c755'], function (err, rows) {
                 if (err) {
                     throw err;
                 } else {
@@ -53,9 +53,9 @@ module.exports = {
         })
     },
     createUser() {
-        const sqlStatement = 'INSERT INTO user (name,pawd)VALUES(?,?)'
+        const sqlStatement = 'INSERT INTO user (name,salt,hashPawd)VALUES(?,?,?)'
         db.serialize(() => {
-            db.run(sqlStatement, ['yongsn', '5138yongsn'], function (err, rows) {
+            db.run(sqlStatement, ['yongsn', '32db617abaffd2a49f0a929492616d7d','fd694438dec7f3d4e0045427126296b343c5df8751a05ff58787df2c64261290'], function (err, rows) {
                 if (err) {
                     throw err;
                 } else {
@@ -68,7 +68,7 @@ module.exports = {
         })
     },
     getUser(name, cb) {
-        const sqlStatement = `SELECT name, pawd from user where name =?`;
+        const sqlStatement = `SELECT name,salt,hashPawd from user where name =?`;
 
         db.serialize(() => {
 
@@ -78,7 +78,7 @@ module.exports = {
                     throw err;
                 } else {
                     const user = JSON.stringify(rows)
-                    console.log('getUser : ', rows)
+                    console.log('getUser : ', user)
                     // cb(rows) 
                     if (rows.length <= 0) {
                         cb([{ name: 'no', pawd: 'no' }])
