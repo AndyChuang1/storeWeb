@@ -47,26 +47,31 @@ router.post('/order', function (req, res) {
         }
     })
 })
-router.get('/getCaptcha', function (req, res, next) {
+router.get('/order', function (req, res, next) {
     return getCaptcha(req, res, next);
 })
 
 function getCaptcha(req, res, next) {
+    const msg ={};
     const captcha = svgCaptcha.create({
-        inverse: true,
+        inverse: false,
         fontSize: 36,
         noise: 2,
         width: 80,
-        height: 30,
-        color: true,
-        background: '#fff',
-        size: 5,
+        height: 40,
+        color: false,
+        // background: '#fffff4',
+        size: 4,
+        fontSize:48,
+        ignoreChars: '0o1i' 
     });
-    req.session = captcha.text;
-    res.cookie('captcha', req.session);
+    // req.session.captcha  = captcha.text;
+    msg.captcha =captcha.text;
+    msg.captchImg = captcha.data;
+    console.log('captcha create : '+captcha.text);
     // res.setHeader('Content-Type', 'image/svg+xml');
-    res.type('svg');
-    res.status(200).send(captcha.data);
+    // res.type('svg');
+    res.status(200).json(msg);
 
 }
 module.exports = router;
