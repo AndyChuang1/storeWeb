@@ -148,7 +148,7 @@
               <div class="pl-2 captcha">
                 <span v-html="svgData"></span>
                 <img src="@/assets/refresh-icon.svg" @click="getCaptcha()" />
-                <input class="captcha-input" />
+                <input class="captcha-input" v-model="formData.captcha"/>
               </div>
               <div>
                 <button class="btn btn-primary align-items-center" type="submit">送出訂單</button>
@@ -295,14 +295,13 @@ export default {
         payment: '銀行匯款',
         status: '未確認',
         total: null,
+        captcha:null
       },
       svgData: '',
     };
   },
-   asyncData({res}){
-     console.log(res);
-   },
-  created() {
+  created() {},
+  mounted() {
     this.getCaptcha();
   },
   components: {
@@ -370,9 +369,19 @@ export default {
       window.location.reload(true);
     },
     getCaptcha() {
+      // this.$axios
+      //   .get('/api/order')
+      //   .then((result) => {
+      //     console.log(result);
+      //     this.svgData = result.data;
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
       this.$axios
-        .get('/api/getCaptcha')
+        .get('http://localhost:3000/api2/order')
         .then((result) => {
+          // console.log(result);
           this.svgData = result.data;
         })
         .catch((error) => {
@@ -385,12 +394,18 @@ export default {
       };
       if (this.errors['name'].valid && this.errors['Mphone'].valid && this.errors['address'].valid) {
         this.$axios
-          .post('/api/order', this.formData, {
-            headers: header,
+          .post('http://localhost:3000/api2/order', this.formData, {
+            // headers: header,
+            // transformRequest: [
+            //   function(data, headers) {
+            //     // Do whatever you want to transform the data
+
+            //     return data;
+            //   },
+            // ],
           })
           .then((res) => {
             const { data } = res;
-            console.log(data);
             this.$vs.dialog({
               color: 'success',
               title: `訂單送出成功!!`,
@@ -400,7 +415,8 @@ export default {
             });
           })
           .catch((error) => {
-            console.log(error);
+            // console.log(error)
+            alert(error.response.data.msg);
           });
       }
     },
