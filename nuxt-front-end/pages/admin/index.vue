@@ -166,7 +166,6 @@ export default {
           }
         })
         .then(res => {
-          console.log(res);
           this.$vs.notify({
             title: "刪除成功",
             text: "刪除已完成!",

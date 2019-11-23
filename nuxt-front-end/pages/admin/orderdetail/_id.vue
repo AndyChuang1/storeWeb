@@ -134,7 +134,6 @@ export default {
         
         })
         .then(res => {
-          console.log(res);
           this.$vs.notify({
             title: "更新成功",
             text: "狀態已更新!!",

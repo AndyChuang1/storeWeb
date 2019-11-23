@@ -38,7 +38,7 @@
 </template>
 <script>
 import "@/assets/css/signin.scss";
-
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   name: "login",
   data() {
@@ -69,6 +69,7 @@ export default {
             alert(data.message)
           }else{
             this.$store.dispatch('auth/login',data.token);
+            Cookie.set('auth', data.token,{ expires: 1 })
             this.$router.push('/admin')
           }
         })
@@ -83,7 +84,7 @@ export default {
     }
   },
   created(){
-    this.checkToken();
+    // this.checkToken();
   }
 };
 </script>

@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+const Cookie = process.client ? require('js-cookie') : undefined
 export default {
   name: "sidebar",
   data() {
@@ -44,6 +45,7 @@ export default {
   },
   methods: {
     logout() {
+      Cookie.remove('auth')
       this.$store.dispatch("auth/logout");
     }
   },
