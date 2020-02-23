@@ -4,33 +4,39 @@
       <main-header class="mb-3" title="類別管理"></main-header>
     </div>
     <div style="display:inline-block">
-      <vs-button color="primary" type="border" icon="add" @click="activePromptAdd = true">新增類別</vs-button>
+      <vs-button
+        color="primary"
+        type="border"
+        icon="add"
+        @click="activePromptAdd = true"
+        >新增類別</vs-button
+      >
       <vs-prompt
-        @vs-cancel="types=''"
-        @vs-accept="addTypes"
-        :vs-active.sync="activePromptAdd"
-        vs-title="新增類別"
-        vs-accept-text="新增"
-        vs-cancel-text="取消"
+        @cancel="types = ''"
+        @accept="addTypes"
+        :active.sync="activePromptAdd"
+        title="新增類別"
+        accept-text="新增"
+        cancel-text="取消"
       >
         <div class="con-exemple-prompt">
           輸入類別 :
-          <vs-input placeholder="Types" v-model="types"/>
+          <vs-input placeholder="Types" v-model="types" />
         </div>
       </vs-prompt>
     </div>
     <div class="editType">
       <vs-prompt
-        @vs-cancel="editTypes=''"
-        @vs-accept="updateTypes"
-        :vs-active.sync="activePromptEdit"
-        vs-title="修改類別"
-        vs-accept-text="修改"
-        vs-cancel-text="取消"
+        @cancel="editTypes = ''"
+        @accept="updateTypes"
+        :active.sync="activePromptEdit"
+        title="修改類別"
+        accept-text="修改"
+        cancel-text="取消"
       >
         <div class="con-exemple-prompt">
           輸入類別 :
-          <vs-input placeholder="Types" v-model="editTypes.name"/>
+          <vs-input placeholder="Types" v-model="editTypes.name" />
         </div>
       </vs-prompt>
     </div>
@@ -46,19 +52,24 @@
           <vs-th>功能</vs-th>
         </template>
 
-        <template slot-scope="{data}">
+        <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-            <vs-td :data="data[indextr].rowid">{{data[indextr].rowid}}</vs-td>
+            <vs-td :data="data[indextr].rowid">{{ data[indextr].rowid }}</vs-td>
 
-            <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
+            <vs-td :data="data[indextr].name">{{ data[indextr].name }}</vs-td>
 
             <vs-td :data="data[indextr].rowid">
-              <vs-button type="gradient" @click="editType(data[indextr].name,data[indextr].rowid)">編輯</vs-button>
+              <vs-button
+                type="gradient"
+                @click="editType(data[indextr].name, data[indextr].rowid)"
+                >編輯</vs-button
+              >
               <vs-button
                 color="danger"
                 type="gradient"
-                @click="deleteConfirm(data[indextr].name,data[indextr].rowid)"
-              >刪除</vs-button>
+                @click="deleteConfirm(data[indextr].name, data[indextr].rowid)"
+                >刪除</vs-button
+              >
             </vs-td>
           </vs-tr>
         </template>
@@ -80,8 +91,8 @@ export default {
       activePromptEdit: false,
       types: "",
       editTypes: {
-        name:null,
-        rowid:null
+        name: null,
+        rowid: null
       },
       delData: {
         name: null,
@@ -112,10 +123,10 @@ export default {
           console.log(error);
         });
     },
-    editType(name,rowid) {
+    editType(name, rowid) {
       console.log(name);
       this.editTypes.name = name;
-      this.editTypes.rowid=rowid;
+      this.editTypes.rowid = rowid;
       this.activePromptEdit = true;
     },
     addTypes() {
@@ -156,16 +167,19 @@ export default {
     },
     updateTypes() {
       const token = this.getToken;
-      const{name,rowid}=this.editTypes;
+      const { name, rowid } = this.editTypes;
       this.$axios
-        .put(`/apipost/types/${rowid}`, {
-          name:name
-        }, {
-          headers: {
-            "x-access-token": token
+        .put(
+          `/apipost/types/${rowid}`,
+          {
+            name: name
           },
-        
-        })
+          {
+            headers: {
+              "x-access-token": token
+            }
+          }
+        )
         .then(res => {
           console.log(res);
           this.$vs.notify({
@@ -207,7 +221,7 @@ export default {
     deleteType() {
       const token = this.getToken;
       const name = this.delData.name;
-      const rowid = this.delData.rowid ;
+      const rowid = this.delData.rowid;
       this.$axios
         .delete(`/apipost/types/${rowid}`, {
           params: { name: name },
@@ -251,8 +265,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.mgt-content /deep/  ul{
+.mgt-content /deep/ ul {
   margin-bottom: 0;
 }
 </style>
-
