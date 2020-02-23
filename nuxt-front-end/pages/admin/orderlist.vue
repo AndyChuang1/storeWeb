@@ -2,26 +2,31 @@
   <div>
     <div class="mgt-title">
       <main-header class="mb-3" title="訂單管理"></main-header>
-      
     </div>
     <div class="tab">
       <vs-tabs>
-        <vs-tab :vs-label="uncompletedMsg">
+        <vs-tab :label="uncompletedMsg">
           <div class="uncompleted-content">
             <order-Table
               v-on:del_order="initOrderList"
-              :orderList="orderList.filter(item=>item.status==='未確認')"
+              :orderList="orderList.filter(item => item.status === '未確認')"
             ></order-Table>
           </div>
         </vs-tab>
-        <vs-tab :vs-label="confirmMsg">
+        <vs-tab :label="confirmMsg">
           <div class="confirm-content">
-            <order-Table v-on:del_order="initOrderList" :orderList="orderList.filter(item=>item.status==='已確認')"></order-Table>
+            <order-Table
+              v-on:del_order="initOrderList"
+              :orderList="orderList.filter(item => item.status === '已確認')"
+            ></order-Table>
           </div>
         </vs-tab>
-        <vs-tab :vs-label="completedMsg">
+        <vs-tab :label="completedMsg">
           <div class="completed-content">
-            <order-Table v-on:del_order="initOrderList" :orderList="orderList.filter(item=>item.status==='已完成')"></order-Table>
+            <order-Table
+              v-on:del_order="initOrderList"
+              :orderList="orderList.filter(item => item.status === '已完成')"
+            ></order-Table>
           </div>
         </vs-tab>
       </vs-tabs>
@@ -41,7 +46,7 @@ export default {
       completedM: null,
       uncompletedM: null,
       confirmM: null,
-      test:1
+      test: 1
     };
   },
   components: {
@@ -65,8 +70,8 @@ export default {
         this.uncompletedM = `未完成訂單 (${uncompletedOrder.length})`;
         return this.uncompletedM;
       },
-      set(newValue){
-        console.log('SET'+newValue)
+      set(newValue) {
+        console.log("SET" + newValue);
       }
     },
     confirmMsg() {
@@ -95,7 +100,6 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      
     }
   },
   created() {
@@ -135,6 +139,4 @@ export default {
 //     });
 // }
 </script>
-<style lang="scss" scoped>
-</style>
-
+<style lang="scss" scoped></style>
