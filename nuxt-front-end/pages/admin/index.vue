@@ -5,21 +5,33 @@
         <main-header class="mb-3" title="商品管理"></main-header>
       </div>
       <div style="display:inline-block">
-        <vs-button color="primary" type="border" icon="add" to="admin/add-product">新增產品</vs-button>
+        <vs-button
+          color="primary"
+          type="border"
+          icon="add"
+          :to="{ name: 'admin-add-product' }"
+          >新增產品</vs-button
+        >
       </div>
       <div style="display:inline-block">
-        <vs-button color="primary" type="border" icon="add" @click="activePrompt = true">新增類別</vs-button>
+        <vs-button
+          color="primary"
+          type="border"
+          icon="add"
+          @click="activePrompt = true"
+          >新增類別</vs-button
+        >
         <vs-prompt
-          @vs-cancel="types=''"
-          @vs-accept="updateTypes"
-          :vs-active.sync="activePrompt"
-          vs-title="新增類別"
-          vs-accept-text="新增"
-          vs-cancel-text="取消"
+          @cancel="types = ''"
+          @accept="updateTypes"
+          :active.sync="activePrompt"
+          title="新增類別"
+          accept-text="新增"
+          cancel-text="取消"
         >
           <div class="con-exemple-prompt">
             輸入類別 :
-            <vs-input placeholder="Types" v-model="types"/>
+            <vs-input placeholder="Types" v-model="types" />
           </div>
         </vs-prompt>
       </div>
@@ -38,23 +50,36 @@
             <vs-th>功能</vs-th>
           </template>
 
-          <template slot-scope="{data}">
+          <template slot-scope="{ data }">
             <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-              <vs-td :data="data[indextr].rowid">{{indextr+1}}</vs-td>
+              <vs-td :data="data[indextr].rowid">{{ indextr + 1 }}</vs-td>
 
-              <vs-td :data="data[indextr].name">{{data[indextr].name}}</vs-td>
+              <vs-td :data="data[indextr].name">{{ data[indextr].name }}</vs-td>
 
-              <vs-td :data="data[indextr].rowid">{{data[indextr].price}}</vs-td>
+              <vs-td :data="data[indextr].rowid">{{
+                data[indextr].price
+              }}</vs-td>
 
-              <vs-td :data="data[indextr].types">{{data[indextr].types}}</vs-td>
-              <vs-td :data="data[indextr].rowid">{{data[indextr].unit}}</vs-td>
+              <vs-td :data="data[indextr].types">{{
+                data[indextr].types
+              }}</vs-td>
+              <vs-td :data="data[indextr].rowid">{{
+                data[indextr].unit
+              }}</vs-td>
               <vs-td :data="data[indextr].rowid">
-                <vs-button type="gradient" :to="'admin/edit/'+data[indextr].name">編輯</vs-button>
+                <vs-button
+                  type="gradient"
+                  :to="'admin/edit/' + data[indextr].name"
+                  >編輯</vs-button
+                >
                 <vs-button
                   color="danger"
                   type="gradient"
-                  @click="deleteConfirm(data[indextr].name,data[indextr].rowid)"
-                >刪除</vs-button>
+                  @click="
+                    deleteConfirm(data[indextr].name, data[indextr].rowid)
+                  "
+                  >刪除</vs-button
+                >
               </vs-td>
             </vs-tr>
           </template>
@@ -200,8 +225,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.mgt-content /deep/  ul{
+.mgt-content /deep/ ul {
   margin-bottom: 0;
 }
 </style>
-

@@ -4,11 +4,11 @@
       <main-header class="mb-3" title="商品新增"></main-header>
     </div>
     <div id="preview">
-      <img v-if="url" :src="url">
+      <img v-if="url" :src="url" />
     </div>
     <div class="con-upload">
       <div class="con-input-upload">
-        <input type="file" @change="onFileChange">
+        <input type="file" @change="onFileChange" />
         <span class="text-input">選擇圖片</span>
         <span class="input-progress" style="width: 0%;"></span>
       </div>
@@ -16,15 +16,15 @@
     <div class="product-form row mt-3">
       <div class="col-3">
         <p>商品名稱 :</p>
-        <vs-input icon="search" placeholder="商品名稱" v-model="name"/>
+        <vs-input icon="search" placeholder="商品名稱" v-model="name" />
       </div>
       <div class="col-3">
         <p>價錢 :</p>
-        <vs-input icon="search" placeholder="價錢" v-model="price"/>
+        <vs-input icon="search" placeholder="價錢" v-model="price" />
       </div>
       <div class="col-3">
         <p>商品單位 :</p>
-        <vs-input icon="search" placeholder="商品單位" v-model="unit"/>
+        <vs-input icon="search" placeholder="商品單位" v-model="unit" />
       </div>
       <div class="col-3">
         <p>商品分類 :</p>
@@ -33,7 +33,7 @@
             :key="index"
             :value="item.name"
             :text="item.name"
-            v-for="(item,index) in options"
+            v-for="(item, index) in options"
           />
         </vs-select>
       </div>
@@ -44,12 +44,21 @@
           <vs-radio v-model="sales" vs-value="0">否</vs-radio>
         </span>
       </div>
-      <div class="col-12">商品說明 :
-        <vs-textarea style="background:white" v-model="detail"/>
+      <div class="col-12">
+        商品說明 :
+        <vs-textarea style="background:white" v-model="detail" />
       </div>
       <div class="col-12 d-flex justify-content-end">
-        <vs-button class="mr-1" color="primary" type="filled" to="/admin">取消</vs-button>
-        <vs-button color="primary" type="filled" @click="submit">新增</vs-button>
+        <vs-button
+          class="mr-1"
+          color="primary"
+          type="filled"
+          :to="{ name: 'admin' }"
+          >取消</vs-button
+        >
+        <vs-button color="primary" type="filled" @click="submit"
+          >新增</vs-button
+        >
       </div>
     </div>
   </div>
@@ -59,7 +68,7 @@ import MainHeader from "@/components/mainheader";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "admin",
+  name: "admin-add-product",
   layout: "admin",
   middleware: "authenticated",
   data() {
@@ -172,5 +181,10 @@ export default {
 ul {
   margin-bottom: 0;
 }
+.vuesax-app-is-ltr {
+  .con-input-upload {
+    float: unset;
+    width: 100%;
+  }
+}
 </style>
-
