@@ -3,23 +3,37 @@
     <div class="row">
       <div
         class="col-lg-3 col-md-6 mb-4 mt-2"
-        v-for="(product,index) in productList.slice(pageStart,pageStart+countOfPage)"
+        v-for="(product, index) in productList.slice(
+          pageStart,
+          pageStart + countOfPage
+        )"
         :key="index"
       >
         <div class="card h-100">
           <div class="hover">
-            <img class="card-img-top" :src="urlConvert(product.path)" height="400" alt>
+            <img
+              class="card-img-top"
+              :src="urlConvert(product.path)"
+              height="400"
+              alt
+            />
             <div class="overlay">
-              <button type="button" class="btn btn-primary" @click="addCart(product.name)">加到購物車</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="addCart(product.name)"
+              >
+                加到購物車
+              </button>
             </div>
           </div>
           <div class="card-body">
             <h4 class="card-title d-flex justify-content-between">
-              <span>{{product.name}}</span>
-              <span>{{product.unit}}</span>
+              <span>{{ product.name }}</span>
+              <span>{{ product.unit }}</span>
             </h4>
-            <h5>NT{{product.price}}元</h5>
-            <p class="card-text">{{product.detail}}</p>
+            <h5>NT{{ product.price }}元</h5>
+            <p class="card-text">{{ product.detail }}</p>
           </div>
         </div>
       </div>
@@ -37,18 +51,48 @@
         </no-ssr>
       </div>
     </div>
-    <product-group v-if="$route.params.types=='生物科技類'" :productList="staticData.BioData"></product-group>
-    <product-group v-if="$route.params.types=='藥膳燉包區'" :productList="staticData.packageData"></product-group>
-    <product-group v-if="$route.params.types=='養生飲品區'" :productList="staticData.DrinkData"></product-group>
-    <product-group v-if="$route.params.types=='GMP產品'" :productList="staticData.GMPData"></product-group>
-    <product-group v-if="$route.params.types=='坐月子藥膳'" :productList="staticData.PMData"></product-group>
-    <product-group v-if="$route.params.types=='蜜餞食品區'" :productList="staticData.SuccadeData"></product-group>
-    <product-group v-if="$route.params.types=='南北什貨區'" :productList="staticData.GoodsData"></product-group>
-    <product-group v-if="$route.params.types=='香料滷包類'" :productList="staticData.PouchData"></product-group>
-    <product-group v-if="$route.params.types=='周邊產品區'" :productList="staticData.AccessoryData"></product-group>
-    <product-group v-if="$route.params.types=='代工服務區'" :productList="staticData.OEMData"></product-group>
+    <product-group
+      v-show="$route.params.types == '生物科技類'"
+      :productList="staticData.BioData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '藥膳燉包區'"
+      :productList="staticData.packageData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '養生飲品區'"
+      :productList="staticData.DrinkData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == 'GMP產品'"
+      :productList="staticData.GMPData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '坐月子藥膳'"
+      :productList="staticData.PMData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '蜜餞食品區'"
+      :productList="staticData.SuccadeData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '南北什貨區'"
+      :productList="staticData.GoodsData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '香料滷包類'"
+      :productList="staticData.PouchData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '周邊產品區'"
+      :productList="staticData.AccessoryData"
+    ></product-group>
+    <product-group
+      v-show="$route.params.types == '代工服務區'"
+      :productList="staticData.OEMData"
+    ></product-group>
     <div
-      v-if="productList.length==0"
+      v-show="productList.length == 0"
       class="container content-statement d-flex justify-content-center mt-3"
     >
       <div class="col-auto mt-3 mb-1 infor">
@@ -83,19 +127,18 @@ export default {
         }
       },
       listTest: "",
-      staticData:{
+      staticData: {
         packageData: staticData.getPackeage(),
-        BioData:staticData.getBio(),
-        DrinkData:staticData.getDrinks(),
-        GMPData:staticData.getGMP(),
-        PMData:staticData.getPM(),
-        SuccadeData:staticData.getSuccade(),
-        GoodsData:staticData.getGoods(),
-        PouchData:staticData.getPouch(),
-        AccessoryData:staticData.getAccessory(),
-        OEMData:staticData.getOEM(),
+        BioData: staticData.getBio(),
+        DrinkData: staticData.getDrinks(),
+        GMPData: staticData.getGMP(),
+        PMData: staticData.getPM(),
+        SuccadeData: staticData.getSuccade(),
+        GoodsData: staticData.getGoods(),
+        PouchData: staticData.getPouch(),
+        AccessoryData: staticData.getAccessory(),
+        OEMData: staticData.getOEM()
       }
-      
     };
   },
   components: {
@@ -134,7 +177,7 @@ export default {
   },
   head() {
     return {
-      title: `永盛堂中藥行-${this.$route.params.types}`,
+      title: `永盛堂中藥行-${this.$route.params.types}`
     };
   }
 };
@@ -178,13 +221,12 @@ export default {
     }
   }
 }
-.infor{
-  border:2px solid sandybrown;
-  @include phone-width{
-    h2{
-      font-size: 1.75rem
+.infor {
+  border: 2px solid sandybrown;
+  @include phone-width {
+    h2 {
+      font-size: 1.75rem;
     }
   }
 }
 </style>
-

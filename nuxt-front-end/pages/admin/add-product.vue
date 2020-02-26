@@ -4,7 +4,7 @@
       <main-header class="mb-3" title="商品新增"></main-header>
     </div>
     <div id="preview">
-      <img v-if="url" :src="url" />
+      <img v-show="url" :src="url" />
     </div>
     <div class="con-upload">
       <div class="con-input-upload">

@@ -4,11 +4,11 @@
       <main-header class="mb-3" title="商品修改"></main-header>
     </div>
     <div id="preview">
-      <img v-if="url" :src="url">
+      <img v-show="url" :src="url" />
     </div>
     <div class="con-upload">
       <div class="con-input-upload">
-        <input type="file" @change="onFileChange">
+        <input type="file" @change="onFileChange" />
         <span class="text-input">選擇圖片</span>
         <span class="input-progress" style="width: 0%;"></span>
       </div>
@@ -16,15 +16,15 @@
     <div class="product-form row mt-3">
       <div class="col-3">
         <p>商品名稱 :</p>
-        <vs-input icon="search" placeholder="商品名稱" v-model="name"/>
+        <vs-input icon="search" placeholder="商品名稱" v-model="name" />
       </div>
       <div class="col-3">
         <p>價錢 :</p>
-        <vs-input icon="search" placeholder="價錢" v-model="price"/>
+        <vs-input icon="search" placeholder="價錢" v-model="price" />
       </div>
       <div class="col-3">
         <p>商品單位 :</p>
-        <vs-input icon="search" placeholder="商品單位" v-model="unit"/>
+        <vs-input icon="search" placeholder="商品單位" v-model="unit" />
       </div>
       <div class="col-3">
         <p>商品分類 :</p>
@@ -33,7 +33,7 @@
             :key="index"
             :value="item.name"
             :text="item.name"
-            v-for="(item,index) in options"
+            v-for="(item, index) in options"
           />
         </vs-select>
       </div>
@@ -44,12 +44,17 @@
           <vs-radio v-model="sales" vs-value="0">否</vs-radio>
         </span>
       </div>
-      <div class="col-12">商品說明 :
-        <vs-textarea style="background:white" v-model="detail"/>
+      <div class="col-12">
+        商品說明 :
+        <vs-textarea style="background:white" v-model="detail" />
       </div>
       <div class="col-12 d-flex justify-content-end">
-        <vs-button class="mr-1" color="primary" type="filled" to="/admin">取消</vs-button>
-        <vs-button color="primary" type="filled" @click="submit">修改</vs-button>
+        <vs-button class="mr-1" color="primary" type="filled" to="/admin"
+          >取消</vs-button
+        >
+        <vs-button color="primary" type="filled" @click="submit"
+          >修改</vs-button
+        >
       </div>
     </div>
   </div>
@@ -64,7 +69,7 @@ export default {
   data() {
     return {
       colorx: "#103767",
-      rowid:null,
+      rowid: null,
       url: null,
       image: null,
       name: null,
@@ -81,8 +86,7 @@ export default {
   },
   created() {
     this.iniTypes();
-    this.getProduct(this.$route.params.name)
-    
+    this.getProduct(this.$route.params.name);
   },
   computed: {
     ...mapGetters({ getToken: "auth/getToken" })
@@ -104,21 +108,23 @@ export default {
           console.log(error);
         });
     },
-    getProduct(productName){
+    getProduct(productName) {
       this.$axios
-        .get("/api/productList",{params: {name: productName}})
+        .get("/api/productList", { params: { name: productName } })
         .then(response => {
           const data = response.data[0];
-          var url = process.env.NODE_ENV == 'development' ? process.env.devUrl : process.env.prodUrl;
-          this.name=data.name;
-          this.unit=data.unit;
-          this.price=data.price;
-          this.sales=data.sales;
-          this.types=data.types;
-          this.detail=data.detail;
-          this.url=url+data.path;
-          this.rowid=data.rowid;
-          
+          var url =
+            process.env.NODE_ENV == "development"
+              ? process.env.devUrl
+              : process.env.prodUrl;
+          this.name = data.name;
+          this.unit = data.unit;
+          this.price = data.price;
+          this.sales = data.sales;
+          this.types = data.types;
+          this.detail = data.detail;
+          this.url = url + data.path;
+          this.rowid = data.rowid;
         })
         .catch(function(error) {
           console.log(error);
@@ -157,7 +163,7 @@ export default {
           });
         })
         .then(() => {
-          this.$router.push('/admin');
+          this.$router.push("/admin");
         })
         .catch(err => {
           const { status } = err.response;
@@ -186,4 +192,3 @@ export default {
   }
 }
 </style>
-
