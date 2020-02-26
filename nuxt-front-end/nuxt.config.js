@@ -84,7 +84,9 @@ module.exports = {
   ],
   env: {
     devUrl: "http://localhost:8080",
-    prodUrl: "http://localhost:8080"
+    prodUrl: "http://52.74.212.171:8080",
+    devNuxtURL: "http://localhost:3000",
+    prodNuxtURL: "http://52.74.212.171:3000"
   },
 
   /*
