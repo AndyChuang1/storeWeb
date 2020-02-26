@@ -1,0 +1,9 @@
+apps:
+  - script: 'npm'
+    args: 'run start'
+    cwd: './back-end'
+    name: 'server'
+  - script: 'npm'
+    args: 'run start'
+    cwd: './nuxt-front-end'
+    name: 'nuxt'
