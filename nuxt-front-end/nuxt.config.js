@@ -84,7 +84,7 @@ module.exports = {
   ],
   env: {
     devUrl: "http://localhost:8080",
-    prodUrl: "http://localhost:3000"
+    prodUrl: "http://localhost:8080"
   },
 
   /*
