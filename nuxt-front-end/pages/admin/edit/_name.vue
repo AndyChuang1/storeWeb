@@ -191,4 +191,11 @@ export default {
     max-height: 200px;
   }
 }
+.vuesax-app-is-ltr {
+  .con-input-upload {
+    float: unset;
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>
