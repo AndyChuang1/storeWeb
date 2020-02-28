@@ -92,7 +92,21 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ["nuxt-leaflet"],
+  modules: [
+    "nuxt-leaflet",
+    [
+      "@nuxtjs/google-analytics",
+      {
+        id: "UA-159321043-1",
+        autoTracking: {
+          pageviewOnLoad: false
+        },
+        debug: {
+          sendHitTask: process.env.NODE_ENV === "production"
+        }
+      }
+    ]
+  ],
   // proxy: {
   //   '/api': {
   //     target: 'https://example.com/',
