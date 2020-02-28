@@ -15,7 +15,12 @@
                 width="250px"
               />
               <p style="margin-top:15px">
-                店鋪地址：(104)台北市中山區吉林路191號
+                店鋪地址：
+                <a
+                target="_blank"
+                href="https://www.google.com/maps/place/%E6%B0%B8%E7%9B%9B%E5%A0%82%E4%B8%AD%E8%97%A5%E8%A1%8C/@25.059759,121.530395,15z/data=!4m5!3m4!1s0x0:0x546a1886519225ea!8m2!3d25.059759!4d121.530395"
+                >(104)台北市中山區吉林路191號</a
+                
               </p>
               <p>
                 連絡電話：<a

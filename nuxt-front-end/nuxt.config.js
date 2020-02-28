@@ -32,10 +32,10 @@ module.exports = {
       }
     ],
     script: [
-      {
-        src:
-          "https://maps.googleapis.com/maps/api/js?key=AIzaSyAP8uxMTg1l4APwuezlZXqYhTf0J4HeHB0"
-      }
+      // {
+      //   src:
+      //     "https://maps.googleapis.com/maps/api/js?key=AIzaSyAP8uxMTg1l4APwuezlZXqYhTf0J4HeHB0"
+      // }
     ]
   },
 
@@ -84,7 +84,8 @@ module.exports = {
   ],
   env: {
     devUrl: "http://localhost:8080",
-    prodUrl: "http://52.74.212.171:8080",
+    prodUrl:
+      "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com:8080",
     devNuxtURL: "http://localhost:3000",
     prodNuxtURL: "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com"
   },
