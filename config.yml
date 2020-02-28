@@ -6,4 +6,5 @@ apps:
   - script: 'npm'
     args: 'run start'
     cwd: './nuxt-front-end'
+    max_memory_restart: '200M'
     name: 'nuxt'
