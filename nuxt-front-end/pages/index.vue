@@ -1,6 +1,11 @@
 <template>
   <div class="hello" style="font-family:'Microsoft JhengHei'">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="600000">
+    <div
+      id="myCarousel"
+      class="carousel slide"
+      data-ride="carousel"
+      data-interval="600000"
+    >
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -8,16 +13,22 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="first-slide full" :src="require('@/assets/bannerH2.jpg')" alt="First slide">
+          <img
+            class="first-slide full"
+            :src="require('@/assets/bannerH2.jpg')"
+            alt="First slide"
+          />
           <img
             class="first-slide mobile"
             :src="require('@/assets/bannerMobile.jpg')"
             alt="First slide"
-          >
+          />
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>因為堅持，才有好品質</h1>
-              <p>我們在於產品上的選擇相當謹慎，在於產品上的選材是否純正道地？是否有無添加硫磺？產品上炮製是否有無依照炮製。很多消費者可能不知道，品質、產地、炮製等，都會大大影響其效能。我們嚴選，給您最天然，最安心的品質，讓您買的放心，用的安心。</p>
+              <p>
+                我們在於產品上的選擇相當謹慎，在於產品上的選材是否純正道地？是否有無添加硫磺？產品上炮製是否有無依照炮製。很多消費者可能不知道，品質、產地、炮製等，都會大大影響其效能。我們嚴選，給您最天然，最安心的品質，讓您買的放心，用的安心。
+              </p>
               <!-- <p><a class="btn btn-lg btn-primary"
                   href="#"
                   role="button"
@@ -26,17 +37,23 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="second-slide" :src="require('@/assets/bannerH2.jpg')" alt="Second slide">
+          <img
+            class="second-slide"
+            :src="require('@/assets/bannerH2.jpg')"
+            alt="Second slide"
+          />
           <img
             class="second-slide mobile"
             :src="require('@/assets/bannerMobile.jpg')"
             alt="Second slide"
-          >
+          />
 
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>開放式陳列、價格透明</h1>
-              <p>很多顧客走進店裡，眼前明亮的空間，開放式陳列，透明化的價格，包裝上明確標示，親切的服務態度‧‧這一切也對中藥行刻板印象大大從此改變。沒有錯，我們歷經多年的時間不段的改變，軟硬體設備和裝潢陳列更新等，將帶給您不一樣的體會。</p>
+              <p>
+                很多顧客走進店裡，眼前明亮的空間，開放式陳列，透明化的價格，包裝上明確標示，親切的服務態度‧‧這一切也對中藥行刻板印象大大從此改變。沒有錯，我們歷經多年的時間不段的改變，軟硬體設備和裝潢陳列更新等，將帶給您不一樣的體會。
+              </p>
               <!-- <p><a class="btn btn-lg btn-primary"
                   href="#"
               role="button">Learn more</a></p>-->
@@ -44,12 +61,16 @@
           </div>
         </div>
         <div class="carousel-item">
-          <img class="third-slide" :src="require('@/assets/bannerH2.jpg')" alt="Third slide">
+          <img
+            class="third-slide"
+            :src="require('@/assets/bannerH2.jpg')"
+            alt="Third slide"
+          />
           <img
             class="third-slide mobile"
             :src="require('@/assets/bannerMobile.jpg')"
             alt="Third slide"
-          >
+          />
           <div class="container">
             <div class="carousel-caption text-left" style="color:black">
               <h1>優良商號及優良從業人員及台北市中藥商業公會理事</h1>
@@ -62,11 +83,21 @@
           </div>
         </div>
       </div>
-      <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <a
+        class="carousel-control-prev"
+        href="#myCarousel"
+        role="button"
+        data-slide="prev"
+      >
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <a
+        class="carousel-control-next"
+        href="#myCarousel"
+        role="button"
+        data-slide="next"
+      >
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -83,7 +114,7 @@
           Head="Line"
           Pcontents="LINE@永盛堂中藥行，歡迎立即加入。立即詢問產品與服務，價格與配送方式。提供您本行最迅速與最有品質的服務~期待您的加入!"
           :img="require('@/assets/line.png')"
-          link="https://line.me/ti/p/XXXXXX"
+          link="https://line.me/ti/p/eQrN7r7D3I"
           btnContent="加入好友"
         ></heading>
         <heading
