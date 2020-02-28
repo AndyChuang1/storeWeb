@@ -14,14 +14,16 @@
         <ul>
           <li>
             【永盛堂中藥行官方網站開幕】
-            <img :src="require('@/assets/news.gif')" height="42" width="60">
+            <img :src="require('@/assets/news.gif')" height="42" width="60" />
           </li>
           <li>~ 我們提供給您最專業諮詢服務與品質~</li>
           <li>【店鋪地址】：(104)台北市中山區吉林路191號</li>
           <li>【連絡電話】：(02)-2531-0309</li>
           <li>【傳真號碼】：(02)-2531-0278</li>
-          <li>【營業時間】：週一至週日 早上10:00~晚上23:00</li>
-          <li>【為配合政府法令，本網站僅提供保健食品或一般食品銷售，不可提供中藥材線上銷售，如有需要(請電話聯絡本店客服人員詢問)及親洽本店選購】</li>
+          <li>【營業時間】：週一至週日 早上10:00~晚上22:00</li>
+          <li>
+            【為配合政府法令，本網站僅提供保健食品或一般食品銷售，不可提供中藥材線上銷售，如有需要(請電話聯絡本店客服人員詢問)及親洽本店選購】
+          </li>
         </ul>
       </div>
       <div class="news">
@@ -56,18 +58,17 @@ export default {
   },
   head() {
     return {
-      title: "永盛堂中藥行-最新消息",
+      title: "永盛堂中藥行-最新消息"
     };
   }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .content {
   text-align: left;
   font-family: "cwTeXKai", serif;
-  font-size: 1.25rem
+  font-size: 1.25rem;
 }
 .content li {
   margin-bottom: 15px;
