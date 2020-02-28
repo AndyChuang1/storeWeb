@@ -8,7 +8,7 @@
             <h2>永盛堂中藥行官方網站全面更新</h2>
           </div>
           <div class="col-md align-self-end">
-            <h6>2018.12.30</h6>
+            <h6>2020.2.28</h6>
           </div>
         </div>
         <ul>
