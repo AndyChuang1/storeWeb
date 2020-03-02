@@ -414,4 +414,21 @@ module.exports = {
       });
     });
   },
+  getDeliverFee() {
+    const sqlStatementAll = `SELECT type,main,offshore,extra from deliver `;
+    return new Promise((resolve, reject) => {
+      db.serialize(() => {
+        db.all(sqlStatementAll, function(err, rows) {
+          if (err) {
+            reject('getOrderDetail error : ' + err);
+            return err;
+          } else {
+            console.log('getDeliverFee');
+            const deliverList = JSON.stringify(rows);
+            resolve(deliverList);
+          }
+        });
+      });
+    });
+  },
 };

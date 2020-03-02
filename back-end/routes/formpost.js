@@ -230,22 +230,17 @@ router.get('/orderdetail', function(req, res, next) {
     });
 });
 
-router
-  .route('/deliver')
-  .get(function(req, res) {
-    res.json({ msg: 1 });
-  })
-  .post(function(req, res) {
-    const { type, main, offshore, extra } = req.body;
-    sql.insertDeliverFee(type, main, offshore, extra, result => {
-      if (result.err) {
-        console.log(result.err);
-        res.status(400).json({ Success: false, Msg: 'indert deliver error' });
-      } else {
-        res.status(200).json({ Success: true });
-      }
-    });
-    // res.end(test);
+router.route('/deliver').post(function(req, res) {
+  const { type, main, offshore, extra } = req.body;
+  sql.insertDeliverFee(type, main, offshore, extra, result => {
+    if (result.err) {
+      console.log(result.err);
+      res.status(400).json({ Success: false, Msg: 'indert deliver error' });
+    } else {
+      res.status(200).json({ Success: true });
+    }
   });
+  // res.end(test);
+});
 
 module.exports = router;
