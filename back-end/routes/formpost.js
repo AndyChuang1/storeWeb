@@ -230,17 +230,35 @@ router.get('/orderdetail', function(req, res, next) {
     });
 });
 
-router.route('/deliver').post(function(req, res) {
-  const { type, main, offshore, extra } = req.body;
-  sql.insertDeliverFee(type, main, offshore, extra, result => {
-    if (result.err) {
-      console.log(result.err);
-      res.status(400).json({ Success: false, Msg: 'indert deliver error' });
-    } else {
-      res.status(200).json({ Success: true });
+router
+  .route('/deliver')
+  .post(function(req, res) {
+    const { type, main, offshore, extra } = req.body;
+    sql.insertDeliverFee(type, main, offshore, extra, result => {
+      if (result.err) {
+        console.log(result.err);
+        res.status(400).json({ Success: false, Msg: 'insert deliver Fee error' });
+      } else {
+        res.status(200).json({ Success: true });
+      }
+    });
+    // res.end(test);
+  })
+  .put(function(req, res) {
+    console.log(req.body);
+    const updateData = req.body;
+    for (const type in updateData) {
+      const typeData = updateData[type];
+      const { main, offshore, extra } = typeData;
+      sql.updateDeliverFee(type, main, offshore, extra, result => {
+        if (result.err) {
+          console.log(result.err);
+          res.status(400).json({ Success: false, Msg: 'Update deliver Fee error' });
+          return;
+        }
+      });
     }
+    res.status(200).json({ Success: true });
   });
-  // res.end(test);
-});
 
 module.exports = router;

@@ -431,4 +431,17 @@ module.exports = {
       });
     });
   },
+  updateDeliverFee(type, main, offshore, extra, cb) {
+    const sqlStatement = `UPDATE deliver set main=?,offshore=?,extra=? WHERE type = ?`;
+    db.serialize(() => {
+      db.run(sqlStatement, [main, offshore, extra, type], function(err, rows) {
+        if (err) {
+          cb({ err: err });
+        } else {
+          console.log('Data Update' + ' Types:' + type);
+          cb({ success: true });
+        }
+      });
+    });
+  },
 };
