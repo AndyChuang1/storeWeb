@@ -63,6 +63,11 @@
             </tr>
           </tbody>
         </table>
+        <a
+          target="_blank"
+          href="https://www.t-cat.com.tw/inquire/timesheet3.aspx"
+          >［黑貓參考］</a
+        >
         <div class="update" style="float:right">
           <vs-button
             @click="openConfirm()"
