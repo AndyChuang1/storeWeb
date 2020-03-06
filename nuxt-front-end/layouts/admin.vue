@@ -52,4 +52,7 @@ body {
 .col {
   width: 0%;
 }
+.admin-sidebar {
+  height: 100vh;
+}
 </style>
