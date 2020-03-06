@@ -125,6 +125,9 @@ export default {
       }
     };
   },
+  created() {
+    this.getDeliver();
+  },
   methods: {
     openConfirm() {
       this.$vs.dialog({
@@ -134,6 +137,25 @@ export default {
         text: "確定修改郵資嗎 ？ ",
         accept: this.accepUpdate
       });
+    },
+    getDeliver() {
+      this.$axios
+        .get("/api/deliver")
+        .then(result => {
+          const { data } = result;
+          data.forEach(deliverItem => {
+            const type = deliverItem.type;
+            const main = deliverItem.main;
+            const offshore = deliverItem.offshore;
+            const extra = deliverItem.extra;
+            this.fee[type].main = main;
+            this.fee[type].offshore = offshore;
+            this.fee[type].extra = extra;
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     accepUpdate() {
       this.$axios
