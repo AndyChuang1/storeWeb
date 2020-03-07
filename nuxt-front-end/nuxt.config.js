@@ -56,7 +56,7 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    "~plugins/bootstrap.js",
+    { src: "~plugins/bootstrap.js", mode: "client" },
     { src: "~/plugins/libs/jquery.textillate.js", ssr: false },
     { src: "~/plugins/libs/jquery.lettering.js", ssr: false },
     { src: "~plugins/vue-pagination-2.js", ssr: false },

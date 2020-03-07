@@ -97,33 +97,33 @@
               <tbody>
                 <tr>
                   <th scope="row">本島</th>
-                  <td>130</td>
-                  <td>170</td>
-                  <td>210</td>
-                  <td>250</td>
-                  <td>160</td>
-                  <td>225</td>
-                  <td>290</td>
+                  <td>{{ fee.nomal60.main }}</td>
+                  <td>{{ fee.nomal90.main }}</td>
+                  <td>{{ fee.nomal120.main }}</td>
+                  <td>{{ fee.nomal150.main }}</td>
+                  <td>{{ fee.low60.main }}</td>
+                  <td>{{ fee.low90.main }}</td>
+                  <td>{{ fee.low120.main }}</td>
                 </tr>
                 <tr>
                   <th scope="row">離島</th>
-                  <td>220</td>
-                  <td>280</td>
-                  <td>320</td>
-                  <td>360</td>
-                  <td>260</td>
-                  <td>340</td>
-                  <td>400</td>
+                  <td>{{ fee.nomal60.offshore }}</td>
+                  <td>{{ fee.nomal90.offshore }}</td>
+                  <td>{{ fee.nomal120.offshore }}</td>
+                  <td>{{ fee.nomal150.offshore }}</td>
+                  <td>{{ fee.low60.offshore }}</td>
+                  <td>{{ fee.low90.offshore }}</td>
+                  <td>{{ fee.low120.offshore }}</td>
                 </tr>
                 <tr>
                   <th scope="row">當日配達加價</th>
-                  <td>+10</td>
-                  <td>+20</td>
-                  <td>+30</td>
-                  <td>+40</td>
-                  <td>+10</td>
-                  <td>+20</td>
-                  <td>+30</td>
+                  <td>+{{ fee.nomal60.extra }}</td>
+                  <td>+{{ fee.nomal90.extra }}</td>
+                  <td>+{{ fee.nomal120.extra }}</td>
+                  <td>+{{ fee.nomal150.extra }}</td>
+                  <td>+{{ fee.low60.extra }}</td>
+                  <td>+{{ fee.low90.extra }}</td>
+                  <td>+{{ fee.low120.extra }}</td>
                 </tr>
               </tbody>
             </table>
@@ -147,16 +147,16 @@
                   <td width="20%">150cm</td>
                 </tr>
                 <th scope="row">本島</th>
-                <td>130</td>
-                <td>170</td>
-                <td>210</td>
-                <td>250</td>
+                <td>{{ fee.nomal60.offshore }}</td>
+                <td>{{ fee.nomal90.offshore }}</td>
+                <td>{{ fee.nomal120.offshore }}</td>
+                <td>{{ fee.nomal150.offshore }}</td>
                 <tr>
                   <th scope="row">離島</th>
-                  <td>220</td>
-                  <td>280</td>
-                  <td>320</td>
-                  <td>360</td>
+                  <td>{{ fee.nomal60.offshore }}</td>
+                  <td>{{ fee.nomal90.offshore }}</td>
+                  <td>{{ fee.nomal120.offshore }}</td>
+                  <td>{{ fee.nomal150.offshore }}</td>
                 </tr>
               </tbody>
             </table>
@@ -177,14 +177,14 @@
                   <td width="20%">120cm</td>
                 </tr>
                 <th scope="row">本島</th>
-                <td>160</td>
-                <td>225</td>
-                <td>290</td>
+                <td>{{ fee.low60.main }}</td>
+                <td>{{ fee.low90.main }}</td>
+                <td>{{ fee.low120.main }}</td>
                 <tr>
                   <th scope="row">離島</th>
-                  <td>260</td>
-                  <td>340</td>
-                  <td>400</td>
+                  <td>{{ fee.low60.offshore }}</td>
+                  <td>{{ fee.low90.offshore }}</td>
+                  <td>{{ fee.low120.offshore }}</td>
                 </tr>
               </tbody>
             </table>
@@ -246,6 +246,27 @@ export default {
   },
   components: {
     MainHeader
+  },
+  asyncData({ store, app, params }) {
+    return app.$axios
+      .get("/api/deliver")
+      .then(result => {
+        let fee = {};
+        const data = result.data;
+        data.forEach(deliverItem => {
+          const type = deliverItem.type;
+          const main = deliverItem.main;
+          const offshore = deliverItem.offshore;
+          const extra = deliverItem.extra;
+          fee[type] = {};
+          // console.log(type, main, offshore, extra);
+          Object.assign(fee[type], { main, offshore, extra });
+        });
+        return { fee };
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   },
   head() {
     return {
