@@ -6,20 +6,19 @@
   </div>
 </template>
 <script>
-    import navbar from '~/components/navbar.vue';
-    import mainfooter from '~/components/footer.vue'
+import navbar from "~/components/navbar.vue";
+import mainfooter from "~/components/footer.vue";
 
-    export default {
-        components: {
-            navbar,
-            mainfooter
-        }
-    }
+export default {
+  components: {
+    navbar,
+    mainfooter
+  }
+};
 </script>
 <style>
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: STKaiti, DFKai-sb;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -29,9 +28,7 @@ html {
   box-sizing: border-box;
   background-color: #eaebeb;
 }
-body{
-   background-color: #eaebeb;
+body {
+  background-color: #eaebeb;
 }
-
-
 </style>

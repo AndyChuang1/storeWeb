@@ -1,7 +1,7 @@
 <template>
   <div id="titleheader" class="maintop">
     <div class="title-text">
-      <h1>{{title}}</h1>
+      <h1>{{ title }}</h1>
       <slot></slot>
     </div>
   </div>
@@ -23,13 +23,13 @@ export default {
 };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .maintop {
   border-bottom: 3px solid #808080;
   .title-text {
     // display: flex;
-    font-family: "cwTeXKai", serif;
-    align-items:flex-end;
+    font-family: STKaiti, DFKai-sb, Arial;
+    align-items: flex-end;
   }
 }
 

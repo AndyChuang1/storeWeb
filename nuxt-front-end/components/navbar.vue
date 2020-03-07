@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header id="nav-bar">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a href="/" class="navbar-brand" style="font-weight:  bolder;">
         <img src="@/assets/Storelogo.png" width="34" height="34" />永盛堂中藥行
@@ -74,6 +74,12 @@ export default {
 
 <style lang="scss">
 @import "~assets/scss/RWD-variables.scss";
+#nav-bar {
+  font-family: STKaiti, DFKai-sb, Arial;
+}
+.nav-item {
+  font-size: 18px;
+}
 
 #shopping-cart a {
   color: white;

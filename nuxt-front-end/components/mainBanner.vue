@@ -28,6 +28,8 @@ export default {
 @import "~assets/scss/RWD-variables.scss";
 #main-banner {
   margin-top: 3rem;
+  font-family: STKaiti, DFKai-sb, Arial;
+  font-weight: 600;
 }
 #banner {
   overflow: hidden;
@@ -35,7 +37,6 @@ export default {
   height: 180px;
 }
 .bannerText {
-  font-family: "DFKai-sb";
   font-weight: bolder;
 }
 .title {

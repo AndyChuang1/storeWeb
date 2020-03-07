@@ -155,9 +155,8 @@ export default {
 @import "~assets/scss/RWD-variables.scss";
 
 .carousel-caption {
+  font-family: STKaiti, DFKai-sb;
   padding-left: 3rem;
-  font-family: "cwTeXKai", serif;
-
   @include phone-width {
     top: 35%;
     padding-left: 0rem;
@@ -196,7 +195,7 @@ export default {
   }
 }
 .marketing {
-  font-family: "cwTeXKai", serif;
+  font-family: STKaiti, DFKai-sb, Arial;
   font-size: 1.25rem;
 }
 </style>

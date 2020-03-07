@@ -179,7 +179,7 @@ export default {
   }
 }
 .content-main {
-  font-family: "cwTeXKai", serif;
+  font-family: STKaiti, DFKai-sb;
   font-size: 1.25rem;
 }
 </style>

@@ -67,8 +67,8 @@ export default {
 <style lang="scss" scoped>
 .content {
   text-align: left;
-  font-family: "cwTeXKai", serif;
   font-size: 1.25rem;
+  font-family: STKaiti, DFKai-sb;
 }
 .content li {
   margin-bottom: 15px;

@@ -11,26 +11,41 @@
                 <ul class="nav nav-pills">
                   <li class="nav-item">
                     <router-link
-                      :class="[{active:path=='/products'||path=='/products/'},'nav-link']"
+                      :class="[
+                        { active: path == '/products' || path == '/products/' },
+                        'nav-link'
+                      ]"
                       :to="'/products/'"
-                    >所有產品區</router-link>
+                      >所有產品區</router-link
+                    >
                   </li>
                   <li class="nav-item">
                     <router-link
-                      :class="[{active:path=='/products/特價商品區'},'nav-link']"
+                      :class="[
+                        { active: path == '/products/特價商品區' },
+                        'nav-link'
+                      ]"
                       :to="'/products/特價商品區'"
-                    >特價商品區</router-link>
+                      >特價商品區</router-link
+                    >
                   </li>
-                  <li class="nav-item" v-for="(category,index) in catalogList" :key="index">
+                  <li
+                    class="nav-item"
+                    v-for="(category, index) in catalogList"
+                    :key="index"
+                  >
                     <router-link
-                      :class="[{active:path=='/products/'+category.name},'nav-link']"
-                      :to="'/products/'+category.name"
-                    >{{category.name}}</router-link>
+                      :class="[
+                        { active: path == '/products/' + category.name },
+                        'nav-link'
+                      ]"
+                      :to="'/products/' + category.name"
+                      >{{ category.name }}</router-link
+                    >
                   </li>
                 </ul>
               </main-header>
-              <nuxt/>
-              
+              <nuxt />
             </div>
           </div>
         </div>
@@ -44,7 +59,6 @@ import navbar from "~/components/navbar.vue";
 import mainfooter from "~/components/footer.vue";
 import mainbanner from "~/components/mainBanner.vue";
 import MainHeader from "@/components/mainheader";
-
 
 export default {
   components: {
@@ -77,22 +91,22 @@ export default {
     this.path = this.$route.path;
     this.initTypes();
   },
-  methods:{
-     initTypes() {
+  methods: {
+    initTypes() {
       this.$axios
         .get("/api/productTypes", {
           params: {
             types: "all"
           }
         })
-        .then((response)=> {
+        .then(response => {
           const data = response.data;
           this.catalogList = data;
         })
         .catch(function(error) {
           console.log(error);
         });
-    },
+    }
   },
   watch: {
     $route(to, from) {
@@ -109,20 +123,18 @@ body {
   background-color: #eaebeb;
   position: relative;
   min-height: 100%;
+  font-family: STKaiti, DFKai-sb;
   /* padding-bottom: 3rem; */
 }
-.content-statement{
+.content-statement {
   border: 2px solid #eac100;
-    margin-bottom: 3rem;
-
+  margin-bottom: 3rem;
 }
 .title-text {
-  @include phone-width{
-    .nav{
-      justify-content: center
+  @include phone-width {
+    .nav {
+      justify-content: center;
     }
   }
 }
-
 </style>
-

@@ -3,23 +3,32 @@
     <div class="row">
       <div
         class="col-lg-3 col-md-6 mb-4 mt-2"
-        v-for="(product,index) in productList.slice(pageStart,pageStart+countOfPage)"
+        v-for="(product, index) in productList.slice(
+          pageStart,
+          pageStart + countOfPage
+        )"
         :key="index"
       >
         <div class="card h-100">
           <div class="hover">
-            <img class="card-img-top" :src="urlConvert(product.path)" alt>
+            <img class="card-img-top" :src="urlConvert(product.path)" alt />
             <div class="overlay">
-              <button type="button" class="btn btn-primary" @click="addCart(product.name)">加到購物車</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="addCart(product.name)"
+              >
+                加到購物車
+              </button>
             </div>
           </div>
           <div class="card-body">
             <h4 class="card-title d-flex justify-content-between">
-              <span>{{product.name}}</span>
-              <span>{{product.unit}}</span>
+              <span>{{ product.name }}</span>
+              <span>{{ product.unit }}</span>
             </h4>
-            <h5>NT{{product.price}}元</h5>
-            <p class="card-text">{{product.detail}}</p>
+            <h5>NT{{ product.price }}元</h5>
+            <p class="card-text">{{ product.detail }}</p>
           </div>
         </div>
       </div>
@@ -143,11 +152,9 @@ export default {
     }
   }
 }
-
 </style>
 <style>
-.product-content{
-  font-family: "cwTeXKai", serif;
+.product-content {
+  font-family: STKaiti, DFKai-sb;
 }
 </style>
-

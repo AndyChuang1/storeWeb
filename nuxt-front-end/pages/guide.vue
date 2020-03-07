@@ -286,7 +286,7 @@ export default {
 @import "~assets/scss/RWD-variables.scss";
 
 #guide {
-  font-family: "cwTeXKai", serif;
+  font-family: STKaiti, DFKai-sb;
   font-size: 1.25rem;
 }
 .deliveryTable-mobile {
