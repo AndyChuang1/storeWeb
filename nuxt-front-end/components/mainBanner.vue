@@ -33,7 +33,7 @@ export default {
 }
 #banner {
   overflow: hidden;
-  background-image: url("~assets/bannerM.png");
+  background-image: url("~assets/bannerM.webp");
   height: 180px;
 }
 .bannerText {

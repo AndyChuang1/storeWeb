@@ -2,7 +2,7 @@
   <header id="nav-bar">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <a href="/" class="navbar-brand" style="font-weight:  bolder;">
-        <img src="@/assets/Storelogo.png" width="34" height="34" />永盛堂中藥行
+        <img src="@/assets/Storelogo.webp" width="34" height="34" />永盛堂中藥行
       </a>
       <div id="shopping-cart">
         <router-link class="nav-link" to="/cart">

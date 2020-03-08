@@ -80,7 +80,7 @@ module.exports = {
     devUrl: "http://localhost:8080",
     prodUrl:
       "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com:8080",
-    devNuxtURL: "http://localhost:3000",
+    devNuxtURL: "http://localhost:3333",
     prodNuxtURL: "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com"
   },
 
