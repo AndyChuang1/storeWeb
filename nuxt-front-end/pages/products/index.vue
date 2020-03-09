@@ -155,6 +155,6 @@ export default {
 </style>
 <style>
 .product-content {
-  font-family: STKaiti, DFKai-sb;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
 }
 </style>

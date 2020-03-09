@@ -68,7 +68,7 @@ export default {
 .content {
   text-align: left;
   font-size: 1.25rem;
-  font-family: STKaiti, DFKai-sb;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
 }
 .content li {
   margin-bottom: 15px;

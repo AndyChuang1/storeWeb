@@ -35,8 +35,7 @@ export default {
 </script>
 <style lang="scss">
 html {
-  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

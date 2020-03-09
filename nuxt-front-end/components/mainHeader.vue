@@ -28,7 +28,7 @@ export default {
   border-bottom: 3px solid #808080;
   .title-text {
     // display: flex;
-    font-family: STKaiti, DFKai-sb, Arial;
+    font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
     align-items: flex-end;
   }
 }

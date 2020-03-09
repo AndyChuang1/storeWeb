@@ -28,7 +28,7 @@ export default {
 @import "~assets/scss/RWD-variables.scss";
 #main-banner {
   margin-top: 3rem;
-  font-family: STKaiti, DFKai-sb, Arial;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   font-weight: 600;
 }
 #banner {

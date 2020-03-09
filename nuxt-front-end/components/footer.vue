@@ -28,7 +28,7 @@ $break-mobile: 480px;
   padding: 1rem;
   text-align: center;
   font-size: 18px;
-  font-family: STKaiti, DFKai-sb, Arial;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   @media screen and(max-width: $break-mobile) {
     position: relative;
   }

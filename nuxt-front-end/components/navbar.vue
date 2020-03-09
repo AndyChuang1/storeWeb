@@ -75,7 +75,7 @@ export default {
 <style lang="scss">
 @import "~assets/scss/RWD-variables.scss";
 #nav-bar {
-  font-family: STKaiti, DFKai-sb, Arial;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
 }
 .nav-item {
   font-size: 18px;

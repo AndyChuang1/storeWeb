@@ -146,7 +146,7 @@ export default {
   height: 180px;
 }
 .bannerText {
-  font-family: "DFKai-sb";
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   font-weight: bolder;
 }
 .title {
@@ -179,7 +179,7 @@ export default {
   }
 }
 .content-main {
-  font-family: STKaiti, DFKai-sb;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   font-size: 1.25rem;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="hello" style="font-family:'Microsoft JhengHei'">
+  <div class="hello">
     <div
       id="myCarousel"
       class="carousel slide"
@@ -155,7 +155,7 @@ export default {
 @import "~assets/scss/RWD-variables.scss";
 
 .carousel-caption {
-  font-family: STKaiti, DFKai-sb;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   padding-left: 3rem;
   @include phone-width {
     top: 35%;
@@ -195,7 +195,7 @@ export default {
   }
 }
 .marketing {
-  font-family: STKaiti, DFKai-sb, Arial;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   font-size: 1.25rem;
 }
 </style>

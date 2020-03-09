@@ -29,7 +29,7 @@ export default {
 </script>
 <style>
 html {
-  font-family: STKaiti, DFKai-sb;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;

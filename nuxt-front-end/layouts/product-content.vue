@@ -123,7 +123,7 @@ body {
   background-color: #eaebeb;
   position: relative;
   min-height: 100%;
-  font-family: STKaiti, DFKai-sb;
+  font-family: "Times New Roman", KaiTi, STKaiti, DFKai-sb;
   /* padding-bottom: 3rem; */
 }
 .content-statement {
