@@ -109,6 +109,7 @@
           Pcontents="想知道更多?我們也有Facebook粉絲團，不定期也會在上面公布最新活動與消息，近期期待!!也別忘了幫我們粉絲團按個讚，搶先知道最新消息唷!"
           :img="require('@/assets/fb.png')"
           link="https://www.facebook.com/%E6%B0%B8%E7%9B%9B%E5%A0%82%E4%B8%AD%E8%97%A5%E8%A1%8C-255181264557655/"
+          size="140"
         ></heading>
         <heading
           Head="Line"
@@ -116,12 +117,14 @@
           :img="require('@/assets/line.png')"
           link="https://line.me/ti/p/eQrN7r7D3I"
           btnContent="加入好友"
+          size="175"
         ></heading>
         <heading
           Head="Maps"
           Pcontents="想要親訪店裡來購買您所需的中藥材或保健食品嗎?請點擊詳細資訊，就可得知店裡所在位置哦!我們誠摯的歡迎你的光臨，不吝指教!也歡迎來電詢問~"
           :img="require('@/assets/maps.png')"
           link="/about"
+          size="140"
         ></heading>
       </div>
     </div>
