@@ -10,6 +10,11 @@ services:
     environment:
       PORT: 8080
       NODE_ENV: production
+    logging:
+      driver: "json-file"
+      options:
+       max-file: "3"
+       max-size: "10m"
   nuxt-server:
     container_name: nuxt-server
     restart: always
@@ -19,6 +24,11 @@ services:
     environment:
       PORT: 3000
       NODE_ENV: production
+    logging:
+      driver: "json-file"
+      options:
+       max-file: "3"
+       max-size: "10m"
   reverse-proxy:
     container_name: reverse-proxy
     restart: always
@@ -30,6 +40,11 @@ services:
     environment:
       - NGINX_HOST=127.0.0.1
       - NGINX_PORT=80
+    logging:
+      driver: "json-file"
+      options:
+       max-file: "3"
+       max-size: "10m"
     depends_on:
       - api-server
       - nuxt-server
