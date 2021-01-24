@@ -4,7 +4,7 @@ services:
   api-server:
     container_name: api-server
     restart: always
-    image: bboy81905/storeweb_api-server
+    build: ./back-end
     volumes:
       - ../backup/public:/api-server/public
       - ../backup/db:/api-server/db
@@ -12,7 +12,7 @@ services:
       - '8080:8080'
     environment:
       PORT: 8080
-      NODE_ENV: production
+      NODE_ENV: development
     logging:
       driver: 'json-file'
       options:
@@ -21,12 +21,12 @@ services:
   nuxt-server:
     container_name: nuxt-server
     restart: always
-    image: bboy81905/storeweb_nuxt-server
+    build: ./nuxt-front-end
     ports:
       - '3000:3000'
     environment:
       PORT: 3000
-      NODE_ENV: production
+      NODE_ENV: development
     logging:
       driver: 'json-file'
       options:
