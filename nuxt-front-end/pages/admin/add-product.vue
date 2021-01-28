@@ -154,6 +154,7 @@ export default {
         })
         .catch(err => {
           const { status } = err.response;
+          console.log(err);
           if (status == 401) {
             this.$vs.notify({
               title: "新增失敗",
@@ -161,7 +162,11 @@ export default {
               color: "danger"
             });
           } else {
-            this.$vs.notify({ title: "新增失敗", text: err, color: "danger" });
+            this.$vs.notify({
+              title: "新增失敗",
+              text: err.response.data.message,
+              color: "danger"
+            });
           }
         });
     }
