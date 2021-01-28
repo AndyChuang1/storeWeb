@@ -4,7 +4,8 @@ var router = express.Router();
 var multer = require('multer');
 var sql = require('../lib/sqlHelper');
 var auth = require('../lib/auth');
-
+const fs = require('fs');
+const path = require('path');
 const uploadFolder = './public/product';
 
 const storage = multer.diskStorage({
@@ -40,11 +41,11 @@ router.use((req, res, next) => {
   if (token) {
     auth
       .verifyToken(token)
-      .then(decoded => {
+      .then((decoded) => {
         req.decoded = decoded;
         next();
       })
-      .catch(verifyErr => {
+      .catch((verifyErr) => {
         console.log(verifyErr);
         res.status(401).send({
           msg: 'Invalid Token',
@@ -59,9 +60,9 @@ router.use((req, res, next) => {
   }
 });
 /* GET home page. */
-router.post('/product', function(req, res, next) {
+router.post('/product', function (req, res, next) {
   //console.log(req)
-  upload(req, res, function(err) {
+  upload(req, res, function (err) {
     const { name, unit, types, price, detail, sales } = req.body;
 
     if (req.fileValidationError) {
@@ -74,16 +75,17 @@ router.post('/product', function(req, res, next) {
       if (req.file) {
         const path = '/product/' + req.file.filename;
         sql.insertData(name, unit, types, price, detail, path, sales);
-        res.status(200).json({ Success: true });
+        return res.status(200).json({ Success: true });
       }
+      return res.status(400).json({ message: '請新增圖片' });
     }
   });
 
   //res.status(200).json({ Success: true })
   // res.status(200).end('Success!!')
 });
-router.put('/product/:id', function(req, res, next) {
-  upload(req, res, function(err) {
+router.put('/product/:id', function (req, res, next) {
+  upload(req, res, function (err) {
     const { name, unit, types, price, detail, sales } = req.body;
     const { id } = req.params;
     if (req.fileValidationError) {
@@ -110,28 +112,35 @@ router.put('/product/:id', function(req, res, next) {
   // res.status(200).end('Success!!')
 });
 
-router.delete('/product/:id', function(req, res, next) {
+router.delete('/product/:id', async function (req, res, next) {
   const { id } = req.params;
   const { name } = req.query;
-
-  sql.delProduct(name, id, result => {
-    if (result.err) {
-      console.log(result.err);
-      res.status(400).json({ Success: false, Msg: 'Delete error' });
-    } else {
-      res.status(200).json({ Success: true });
-    }
-  });
+  try {
+    const { path: ImagePath } = await sql.getProductPathById(id);
+    const realPath = path.join(process.cwd(), 'public', ImagePath);
+    fs.unlinkSync(realPath);
+    sql.delProduct(name, id, (result) => {
+      if (result.err) {
+        console.log(result.err);
+        res.status(400).json({ Success: false, Msg: 'Delete error' });
+      } else {
+        res.status(200).json({ Success: true });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ Success: false, Msg: 'Delete error' });
+  }
 
   // res.status(200).json({ Success: true })
-  // res.status(200).end('Success!!')
+  // res.status(200).json({ realPath });
 });
 
-router.post('/types', function(req, res, next) {
+router.post('/types', function (req, res, next) {
   //console.log(req)
   const { name } = req.body;
   try {
-    sql.insertTypes(name, result => {
+    sql.insertTypes(name, (result) => {
       if (result.err) {
         res.status(400).json({ Success: false, Msg: 'Same types exist' });
       } else {
@@ -142,12 +151,12 @@ router.post('/types', function(req, res, next) {
     console.log(e);
   }
 });
-router.put('/types/:id', function(req, res, next) {
+router.put('/types/:id', function (req, res, next) {
   //console.log(req)
   const { id } = req.params;
   const { name } = req.body;
   try {
-    sql.updateType(name, id, result => {
+    sql.updateType(name, id, (result) => {
       if (result.err) {
         res.status(400).json({ Success: false, Msg: 'Same types exist' });
       } else {
@@ -159,11 +168,11 @@ router.put('/types/:id', function(req, res, next) {
   }
 });
 
-router.delete('/types/:id', function(req, res, next) {
+router.delete('/types/:id', function (req, res, next) {
   const { id } = req.params;
   const { name } = req.query;
 
-  sql.delType(name, id, result => {
+  sql.delType(name, id, (result) => {
     if (result.err) {
       console.log(result.err);
       res.status(400).json({ Success: false, Msg: 'Delete error' });
@@ -176,9 +185,9 @@ router.delete('/types/:id', function(req, res, next) {
   // res.status(200).end('Success!!')
 });
 
-router.delete('/order/:id', function(req, res, next) {
+router.delete('/order/:id', function (req, res, next) {
   const { id } = req.params;
-  sql.delOrder(id, result => {
+  sql.delOrder(id, (result) => {
     if (result.err) {
       console.log(result.err);
       res.status(400).json({ Success: false, Msg: 'Delete error' });
@@ -190,11 +199,11 @@ router.delete('/order/:id', function(req, res, next) {
   // res.status(200).json({ Success: true })
   // res.status(200).end('Success!!')
 });
-router.put('/order/:id', function(req, res, next) {
+router.put('/order/:id', function (req, res, next) {
   const { id } = req.params;
   const { status } = req.body;
 
-  sql.updateOrderStatus(status, id, result => {
+  sql.updateOrderStatus(status, id, (result) => {
     if (result.err) {
       console.log(result.err);
       res.status(400).json({ Success: false, Msg: 'Delete error' });
@@ -207,34 +216,34 @@ router.put('/order/:id', function(req, res, next) {
   // res.status(200).end('Success!!')
 });
 
-router.get('/order', function(req, res, next) {
+router.get('/order', function (req, res, next) {
   const { orderId } = req.query;
   sql
     .getOrderList(orderId)
-    .then(result => {
+    .then((result) => {
       res.status(200).end(result);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(400).end(err);
     });
 });
-router.get('/orderdetail', function(req, res, next) {
+router.get('/orderdetail', function (req, res, next) {
   const { orderId } = req.query;
   sql
     .getOrderDetail(orderId)
-    .then(result => {
+    .then((result) => {
       res.status(200).end(result);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(400).end(err);
     });
 });
 
 router
   .route('/deliver')
-  .post(function(req, res) {
+  .post(function (req, res) {
     const { type, main, offshore, extra } = req.body;
-    sql.insertDeliverFee(type, main, offshore, extra, result => {
+    sql.insertDeliverFee(type, main, offshore, extra, (result) => {
       if (result.err) {
         console.log(result.err);
         res.status(400).json({ Success: false, Msg: 'insert deliver Fee error' });
@@ -244,13 +253,13 @@ router
     });
     // res.end(test);
   })
-  .put(function(req, res) {
+  .put(function (req, res) {
     console.log(req.body);
     const updateData = req.body;
     for (const type in updateData) {
       const typeData = updateData[type];
       const { main, offshore, extra } = typeData;
-      sql.updateDeliverFee(type, main, offshore, extra, result => {
+      sql.updateDeliverFee(type, main, offshore, extra, (result) => {
         if (result.err) {
           console.log(result.err);
           res.status(400).json({ Success: false, Msg: 'Update deliver Fee error' });
