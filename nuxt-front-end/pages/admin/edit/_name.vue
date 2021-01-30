@@ -14,19 +14,19 @@
       </div>
     </div>
     <div class="product-form row mt-3">
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <p>商品名稱 :</p>
         <vs-input icon="search" placeholder="商品名稱" v-model="name" />
       </div>
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <p>價錢 :</p>
         <vs-input icon="search" placeholder="價錢" v-model="price" />
       </div>
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <p>商品單位 :</p>
         <vs-input icon="search" placeholder="商品單位" v-model="unit" />
       </div>
-      <div class="col-3">
+      <div class="col-12 col-lg-3">
         <p>商品分類 :</p>
         <vs-select :color="colorx" class="selectExample" v-model="types">
           <vs-select-item
@@ -37,7 +37,7 @@
           />
         </vs-select>
       </div>
-      <div class="col-3 d-flex align-items-center">
+      <div class="col-12 col-lg-3 d-flex align-items-center">
         <span class="mr-3">特價 :</span>
         <span class="mt-3 mb-3">
           <vs-radio v-model="sales" vs-value="1">是</vs-radio>

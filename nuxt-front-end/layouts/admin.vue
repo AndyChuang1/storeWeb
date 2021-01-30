@@ -3,10 +3,19 @@
     <div id="admin">
       <div class="container-fluid">
         <div class="row">
-          <div class="admin-sidebar col-lg-2">
-            <sidebar></sidebar>
+          <div class="admin-sidebar">
+            <sidebar :sidebarActive="active"></sidebar>
           </div>
-          <div class="admin-content col-lg-10 ">
+          <div class="admin-content col-12 col-lg-12">
+            <div class="row justify-content-end">
+              <vs-button
+                color="dark"
+                type="line"
+                icon="menu"
+                @click="sideBarToggle"
+                >菜單</vs-button
+              >
+            </div>
             <div class="container">
               <nuxt></nuxt>
             </div>
@@ -26,15 +35,28 @@ export default {
     mainfooter,
     sidebar
   },
+  watch: {
+    $route(to) {
+      this.active = false;
+    }
+  },
   data() {
     return {
-      active: true
+      active: false
     };
+  },
+  methods: {
+    sideBarToggle() {
+      this.active = !this.active;
+    }
   },
   head() {
     return {
       meta: [
-        { name: "viewport", content: "width=device-width, initial-scale=0" }
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1"
+        }
       ]
     };
   }
