@@ -7,7 +7,7 @@
         color="primary"
         class="sidebarx"
         spacer
-        v-model="active"
+        v-model="sidebarActive"
         hidden-background
       >
         <div class="header-sidebar" slot="header">
@@ -53,6 +53,7 @@
 const Cookie = process.client ? require("js-cookie") : undefined;
 export default {
   name: "sidebar",
+  props: ["sidebarActive"],
   data() {
     return {
       active: true,
