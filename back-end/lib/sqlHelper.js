@@ -53,7 +53,7 @@ module.exports = {
           '5d1a10a0fe1f8ee3b01ecac9ea632f2d',
           '2baf28cb80b45541ef7fcb4d7cddf343ded86372961a58b402e158a102e3c755',
         ],
-        function(err, rows) {
+        function (err, rows) {
           if (err) {
             throw err;
           } else {
@@ -73,7 +73,7 @@ module.exports = {
           '32db617abaffd2a49f0a929492616d7d',
           'fd694438dec7f3d4e0045427126296b343c5df8751a05ff58787df2c64261290',
         ],
-        function(err, rows) {
+        function (err, rows) {
           if (err) {
             throw err;
           } else {
@@ -87,7 +87,7 @@ module.exports = {
     const sqlStatement = `SELECT name,salt,hashPawd from user where name =?`;
 
     db.serialize(() => {
-      db.all(sqlStatement, name, function(err, rows) {
+      db.all(sqlStatement, name, function (err, rows) {
         if (err) {
           console.log('getUser error all');
           throw err;
@@ -108,7 +108,7 @@ module.exports = {
     const sqlStatement = `INSERT INTO product (name, unit, types, price, detail, path, sales)VALUES(?,?,?,?,?,?,?) ON CONFLICT(name)
         DO UPDATE SET unit=excluded.unit,price=excluded.price,detail=excluded.detail,path=excluded.path,types=excluded.types, sales=excluded.sales`;
     db.serialize(() => {
-      db.run(sqlStatement, [name, unit, types, price, detail, path, sales], function(err, rows) {
+      db.run(sqlStatement, [name, unit, types, price, detail, path, sales], function (err, rows) {
         if (err) {
           throw err;
         } else {
@@ -121,7 +121,7 @@ module.exports = {
   insertTypes(name, cb) {
     const sqlStatement = `INSERT INTO prodTypes (name)VALUES(?)`;
     db.serialize(() => {
-      db.run(sqlStatement, [name], function(err, rows) {
+      db.run(sqlStatement, [name], function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
@@ -137,7 +137,7 @@ module.exports = {
       db.run(
         sqlStatement,
         [name, idCard, phone, Mphone, address, zip, payment, status, deliverTime, total],
-        function(err, rows) {
+        function (err, rows) {
           if (err) {
             cb({ err: err });
           } else {
@@ -151,7 +151,7 @@ module.exports = {
   insertOrderDetail(name, qun, price, orderId, cb) {
     const sqlStatement = `INSERT INTO orderDetail (name,qun,price,orderId) VALUES(?,?,?,?)`;
     db.serialize(() => {
-      db.run(sqlStatement, [name, qun, price, orderId], function(err, rows) {
+      db.run(sqlStatement, [name, qun, price, orderId], function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
@@ -166,7 +166,7 @@ module.exports = {
     const sqlStatementImageSame = `UPDATE product set name=?,unit=?,types=?,price=?,detail=?,sales=? WHERE rowid = ?`;
     db.serialize(() => {
       if (path) {
-        db.run(sqlStatement, [name, unit, types, price, detail, path, sales, id], function(
+        db.run(sqlStatement, [name, unit, types, price, detail, path, sales, id], function (
           err,
           rows
         ) {
@@ -177,7 +177,7 @@ module.exports = {
           }
         });
       } else {
-        db.run(sqlStatementImageSame, [name, unit, types, price, detail, sales, id], function(
+        db.run(sqlStatementImageSame, [name, unit, types, price, detail, sales, id], function (
           err,
           rows
         ) {
@@ -193,7 +193,7 @@ module.exports = {
   updateType(name, id, cb) {
     const sqlStatement = `UPDATE prodTypes set name=? WHERE rowid = ?`;
     db.serialize(() => {
-      db.run(sqlStatement, [name, id], function(err, rows) {
+      db.run(sqlStatement, [name, id], function (err, rows) {
         if (err) {
           cb({ err: err });
           throw err;
@@ -207,7 +207,7 @@ module.exports = {
   updateOrderStatus(status, id, cb) {
     const sqlStatement = `UPDATE productOrder set status=? WHERE orderId = ?`;
     db.serialize(() => {
-      db.run(sqlStatement, [status, id], function(err, rows) {
+      db.run(sqlStatement, [status, id], function (err, rows) {
         if (err) {
           cb({ err: err });
           throw err;
@@ -226,7 +226,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       db.serialize(() => {
         if (types === 'all') {
-          db.all(sqlStatementAll, function(err, rows) {
+          db.all(sqlStatementAll, function (err, rows) {
             if (err) {
               reject('getProductList error all');
               return err;
@@ -237,7 +237,7 @@ module.exports = {
             }
           });
         } else if (types === '特價商品區') {
-          db.all(sqlStatementSales, function(err, rows) {
+          db.all(sqlStatementSales, function (err, rows) {
             if (err) {
               reject('getProductSales error all');
               return err;
@@ -248,7 +248,7 @@ module.exports = {
             }
           });
         } else if (name) {
-          db.all(sqlStatementName, name, function(err, rows) {
+          db.all(sqlStatementName, name, function (err, rows) {
             if (err) {
               reject('getProductList error types');
               return err;
@@ -259,7 +259,7 @@ module.exports = {
             }
           });
         } else {
-          db.all(sqlStatementTypes, types, function(err, rows) {
+          db.all(sqlStatementTypes, types, function (err, rows) {
             if (err) {
               reject('getProductList error types');
               return err;
@@ -278,7 +278,7 @@ module.exports = {
     const sqlStatementAll = `SELECT rowid,name from prodTypes`;
     return new Promise((resolve, reject) => {
       db.serialize(() => {
-        db.all(sqlStatementAll, function(err, rows) {
+        db.all(sqlStatementAll, function (err, rows) {
           if (err) {
             reject('getProductTypes error types');
             return err;
@@ -291,13 +291,25 @@ module.exports = {
       });
     });
   },
+  getProductPathById(id) {
+    const sqlStatement = `SELECT path FROM product where rowid=${id}`;
+    return new Promise((resolve, reject) => {
+      db.serialize(() => {
+        db.get(sqlStatement, (err, row) => {
+          if (err) return reject(err);
+          const productImagePath = row;
+          resolve(productImagePath);
+        });
+      });
+    });
+  },
   getOrderList(orderId) {
     const sqlStatementOverView = `SELECT orderId,name,Mphone,status,total,updateTime from productOrder`;
     const sqlStatementDetail = `SELECT * from productOrder where orderId=${orderId}`;
     return new Promise((resolve, reject) => {
       db.serialize(() => {
         if (!orderId) {
-          db.all(sqlStatementOverView, function(err, rows) {
+          db.all(sqlStatementOverView, function (err, rows) {
             if (err) {
               reject('getOrderList error');
               return err;
@@ -308,7 +320,7 @@ module.exports = {
             }
           });
         } else {
-          db.all(sqlStatementDetail, function(err, rows) {
+          db.all(sqlStatementDetail, function (err, rows) {
             if (err) {
               reject('getOrderList error');
               return err;
@@ -326,7 +338,7 @@ module.exports = {
     const sqlStatementAll = `SELECT name,qun,price,price*qun as total from orderDetail where orderId=${orderId}`;
     return new Promise((resolve, reject) => {
       db.serialize(() => {
-        db.all(sqlStatementAll, function(err, rows) {
+        db.all(sqlStatementAll, function (err, rows) {
           if (err) {
             reject('getOrderDetail error');
             return err;
@@ -343,7 +355,7 @@ module.exports = {
   delProduct(name, id, cb) {
     const sqlStatement = `DELETE FROM product WHERE name=? AND rowid=?  `;
     db.serialize(() => {
-      db.run(sqlStatement, [name, id], function(err, rows) {
+      db.run(sqlStatement, [name, id], function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
@@ -351,7 +363,7 @@ module.exports = {
           console.log(`Delete ${name}`);
         }
       });
-      db.exec('VACUUM', function(err, rows) {
+      db.exec('VACUUM', function (err, rows) {
         if (err) {
           console.log(err);
         } else {
@@ -363,7 +375,7 @@ module.exports = {
   delType(name, id, cb) {
     const sqlStatement = `DELETE FROM prodTypes WHERE name=? AND rowid=?  `;
     db.serialize(() => {
-      db.run(sqlStatement, [name, id], function(err, rows) {
+      db.run(sqlStatement, [name, id], function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
@@ -371,7 +383,7 @@ module.exports = {
           console.log(`Delete ${name}  ${id}`);
         }
       });
-      db.exec('VACUUM', function(err, rows) {
+      db.exec('VACUUM', function (err, rows) {
         if (err) {
           console.log(err);
         } else {
@@ -384,14 +396,14 @@ module.exports = {
     const sqlStatement = `DELETE FROM orderDetail WHERE orderId=${id} `;
     const sqlStatementProduct = `DELETE FROM productOrder WHERE orderId=${id} `;
     db.serialize(() => {
-      db.run(sqlStatement, function(err, rows) {
+      db.run(sqlStatement, function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
           console.log(`Delete OrderDetail : ${id}`);
         }
       });
-      db.run(sqlStatementProduct, function(err, rows) {
+      db.run(sqlStatementProduct, function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
@@ -404,7 +416,7 @@ module.exports = {
   insertDeliverFee(type, main, offshore, extra, cb) {
     const sqlStatement = `INSERT INTO deliver (type,main,offshore,extra) VALUES(?,?,?,?)`;
     db.serialize(() => {
-      db.run(sqlStatement, [type, main, offshore, extra], function(err, rows) {
+      db.run(sqlStatement, [type, main, offshore, extra], function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
@@ -418,7 +430,7 @@ module.exports = {
     const sqlStatementAll = `SELECT type,main,offshore,extra from deliver `;
     return new Promise((resolve, reject) => {
       db.serialize(() => {
-        db.all(sqlStatementAll, function(err, rows) {
+        db.all(sqlStatementAll, function (err, rows) {
           if (err) {
             reject('getOrderDetail error : ' + err);
             return err;
@@ -434,7 +446,7 @@ module.exports = {
   updateDeliverFee(type, main, offshore, extra, cb) {
     const sqlStatement = `UPDATE deliver set main=?,offshore=?,extra=? WHERE type = ?`;
     db.serialize(() => {
-      db.run(sqlStatement, [main, offshore, extra, type], function(err, rows) {
+      db.run(sqlStatement, [main, offshore, extra, type], function (err, rows) {
         if (err) {
           cb({ err: err });
         } else {
