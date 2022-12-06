@@ -28,7 +28,7 @@
     "nuxt": "^2.4.0",
     "nuxt-leaflet": "0.0.19",
     "popper.js": "^1.14.7",
-    "qs": "^6.6.0",
+    "qs": "^6.9.7",
     "vue-pagination-2": "^2.0.3",
     "vuesax": "^3.8.24",
     "sass-loader": "^7.1.0",
