@@ -6,7 +6,6 @@ on:
 
 jobs:
   deploy-prod:
-    needs: build
     runs-on: [aws-ec2-prod]
     environment: prod
     steps:
