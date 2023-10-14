@@ -2,7 +2,7 @@ name: CICD
 
 on:
   push:
-    branches: [feature/cicd]
+    branches: [dev]
 
 jobs:
   build:
@@ -18,7 +18,7 @@ jobs:
         run: cd ./back-end && docker build -t bboy81905/storeweb_api-server .
       - name: Publish image to docker hub
         run: docker push bboy81905/storeweb_nuxt-server:latest&& docker push bboy81905/storeweb_api-server:latest
-  deploy:
+  deploy-dev:
     needs: build
     runs-on: [aws-ec2]
     environment: dev
