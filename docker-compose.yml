@@ -27,6 +27,8 @@ services:
     environment:
       PORT: 3000
       NODE_ENV: production
+      prodUrl: ${prodUrl}
+      prodNuxtURL: ${prodUrl}
     logging:
       driver: 'json-file'
       options:

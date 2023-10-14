@@ -18,13 +18,11 @@ jobs:
         run: cd ./back-end && docker build -t bboy81905/storeweb_api-server .
       - name: Publish image to docker hub
         run: docker push bboy81905/storeweb_nuxt-server:latest&& docker push bboy81905/storeweb_api-server:latest
-  # deploy:
-  #   needs: build
-  #   runs-on: [aws-ec2]
-  #   steps:
-  #     - name: Pull image from docker hub
-  #       run: docker pull bboy81905/nodejs-app:latest
-  #     - name: Delete old container
-  #       run: docker rm -f nodejs-app
-  #     - name: Run docker container
-  #       run: docker run -d -p 3000:3000 --name nodejs-app bboy81905/nodejs-app
+  deploy:
+    needs: build
+    runs-on: [aws-ec2]
+    steps:
+      - name: Pull new Script
+        run: cd /home/ubuntu/storeWeb/ && git checkout feature/cicd && git pull
+      - name: Run deploy script
+        run: cd /home/ubuntu/storeWeb && . ./deploy.sh
