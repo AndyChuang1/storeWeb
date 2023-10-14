@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Build docker image
+      - name: Build nuxt-front-end docker image
         run: cd ./nuxt-front-end && docker build -t bboy81905/storeweb_nuxt-server .
+      - name: Build back-end  docker image
         run: cd ./back-end && docker build -t bboy81905/storeweb_api-server .
       - name: Publish image to docker hub
-        run: docker push bboy81905/storeweb_nuxt-server:latest
-        run: docker push bboy81905/storeweb_api-server:latest
+        run: docker push bboy81905/storeweb_nuxt-server:latest&& docker push bboy81905/storeweb_api-server:latest
   # deploy:
   #   needs: build
   #   runs-on: [aws-ec2]
