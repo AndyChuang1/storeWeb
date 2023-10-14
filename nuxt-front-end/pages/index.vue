@@ -115,7 +115,7 @@
           Head="Line"
           Pcontents="LINE@永盛堂中藥行，歡迎立即加入。立即詢問產品與服務，價格與配送方式。提供您本行最迅速與最有品質的服務~期待您的加入!"
           :img="require('@/assets/line.png')"
-          link="https://line.me/ti/p/eQrN7r7D3I"
+          link="https://line.me/ti/p/zX4D5mPn3u"
           btnContent="加入好友"
           size="175"
         ></heading>
