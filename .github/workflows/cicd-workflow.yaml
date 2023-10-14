@@ -1,0 +1,30 @@
+name: CICD
+
+on:
+  push:
+    branches: [featrue/cicd]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+      - name: Build docker image
+        run: cd ./nuxt-front-end && docker build -t bboy81905/storeweb_nuxt-server .
+        run: cd ./back-end && docker build -t bboy81905/storeweb_api-server .
+      - name: Publish image to docker hub
+        run: docker push bboy81905/storeweb_nuxt-server:latest
+        run: docker push bboy81905/storeweb_api-server:latest
+  # deploy:
+  #   needs: build
+  #   runs-on: [aws-ec2]
+  #   steps:
+  #     - name: Pull image from docker hub
+  #       run: docker pull bboy81905/nodejs-app:latest
+  #     - name: Delete old container
+  #       run: docker rm -f nodejs-app
+  #     - name: Run docker container
+  #       run: docker run -d -p 3000:3000 --name nodejs-app bboy81905/nodejs-app
