@@ -79,11 +79,11 @@ module.exports = {
   env: {
     devUrl: "http://localhost:8080",
     prodUrl:
-      process.env.prodUrl ||
+      process.env.PROD_URL ||
       "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com",
     devNuxtURL: "http://localhost:3333",
     prodNuxtURL:
-      process.env.prodNuxtURL ||
+      process.env.PROD_URL ||
       "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com"
   },
 
