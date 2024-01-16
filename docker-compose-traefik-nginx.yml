@@ -1,0 +1,79 @@
+version: '3.1'
+
+services:
+  api-server:
+    container_name: api-server
+    restart: always
+    image: bboy81905/storeweb_api-server
+    volumes:
+      - ../backup/public:/api-server/public
+      - ../backup/db:/api-server/db
+    environment:
+      PORT: 8080
+      NODE_ENV: production
+    networks:
+      - traefik_default
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '3'
+        max-size: '10m'
+  nuxt-server:
+    container_name: nuxt-server
+    restart: always
+    image: bboy81905/storeweb_nuxt-server
+    environment:
+      PORT: 3000
+      NODE_ENV: production
+      prodUrl: localhost
+      prodNuxtURL: localhost
+    networks:
+      - traefik_default
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '3'
+        max-size: '10m'
+  reverse-proxy:
+    container_name: reverse-proxy
+    restart: always
+    image: nginx:1.14
+    volumes:
+      - ./reverse-proxy/default.conf:/etc/nginx/conf.d/default.conf:ro
+    # environment:
+    #   NGINX_HOST: 127.0.0.1
+    #   NGINX_PORT: 80
+    labels:
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.reverse-proxy.rule=Host(`localhost`)'
+      - 'traefik.http.services.reverse-proxy.loadbalancer.server.port=80'
+      # - 'traefik.http.services.reverse-proxy.loadbalancer.server.passhostheader=true'
+    logging:
+      driver: 'json-file'
+      options:
+        max-file: '3'
+        max-size: '10m'
+    networks:
+      - traefik_default
+    depends_on:
+      - api-server
+      - nuxt-server
+  traefik:
+    image: traefik:v2.5
+    container_name: traefik
+    restart: always
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command:
+      - '--api.insecure=true'
+      - '--providers.docker=true'
+      - '--providers.docker.exposedbydefault=false'
+      - '--entrypoints.web.address=:80'
+    networks:
+      - traefik_default
+networks:
+  traefik_default:
+    external: true

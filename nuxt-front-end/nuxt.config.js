@@ -78,10 +78,9 @@ module.exports = {
   ],
   env: {
     devUrl: "http://localhost:8080",
-    prodUrl:
-      "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com",
+    prodUrl: "https://www.yongsn.com.tw",
     devNuxtURL: "http://localhost:3333",
-    prodNuxtURL: "http://ec2-52-74-212-171.ap-southeast-1.compute.amazonaws.com"
+    prodNuxtURL: "https://www.yongsn.com.tw"
   },
 
   /*
