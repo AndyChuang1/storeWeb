@@ -24,8 +24,8 @@ jobs:
     environment: dev
     steps:
       - name: Pull new Script
-        run: cd /home/ubuntu/storeWeb/ && git checkout feature/cicd && git pull
+        run: cd /home/ubuntu/storeWeb/ && git checkout dev && git pull
       - name: Run shut down script
         run: cd /home/ubuntu/storeWeb && . ./deploy.sh
       - name: Run docker-compose
-        run: cd /home/ubuntu/storeWeb && sudo prodUrl=${{ secrets.PROD_URL }} docker-compose up -d
+        run: cd /home/ubuntu/storeWeb && sudo prodUrl=${{ variables.PROD_URL }} docker-compose up -d
