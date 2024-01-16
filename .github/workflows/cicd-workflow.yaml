@@ -28,4 +28,4 @@ jobs:
       - name: Run shut down script
         run: cd /home/ubuntu/storeWeb && . ./deploy.sh
       - name: Run docker-compose
-        run: cd /home/ubuntu/storeWeb && sudo prodUrl=${{ variables.PROD_URL }} docker-compose up -d
+        run: cd /home/ubuntu/storeWeb && sudo prodUrl=${{ env.PROD_URL }} docker-compose up -d
